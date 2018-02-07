@@ -28,7 +28,6 @@ class DirectoryContentView @JvmOverloads constructor(
 
     init {
         layoutManager = LinearLayoutManager(context)
-        isLongClickable = true
 
         this.adapter = contentAdapter
         contentAdapter.itemClickListener = { file -> fileClicked(file) }
