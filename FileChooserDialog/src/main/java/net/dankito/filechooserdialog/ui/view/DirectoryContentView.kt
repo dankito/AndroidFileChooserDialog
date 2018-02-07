@@ -5,6 +5,8 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.AttributeSet
 import net.dankito.filechooserdialog.service.FilesService
+import net.dankito.filechooserdialog.service.MimeTypeService
+import net.dankito.filechooserdialog.service.ThumbnailService
 import net.dankito.filechooserdialog.ui.adapter.DirectoryContentAdapter
 import java.io.File
 
@@ -21,9 +23,13 @@ class DirectoryContentView @JvmOverloads constructor(
     val selectedFiles: List<File> = mutableListOf()
 
 
-    private val contentAdapter = DirectoryContentAdapter(selectedFiles)
+    private val mimeTypeService = MimeTypeService()
+
+    private val thumbnailService = ThumbnailService(context, mimeTypeService)
 
     private val fileService = FilesService()
+
+    private val contentAdapter = DirectoryContentAdapter(thumbnailService, selectedFiles)
 
 
     init {
