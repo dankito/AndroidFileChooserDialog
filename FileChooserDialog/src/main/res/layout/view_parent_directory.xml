@@ -4,8 +4,6 @@
     android:orientation="horizontal"
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
-    android:layout_gravity="center_vertical"
-    android:gravity="center_vertical"
 >
 
     <TextView
@@ -27,7 +25,6 @@
         android:layout_marginEnd="@dimen/view_parent_directory_directory_name_margin_right"
         android:gravity="center"
         android:textAlignment="gravity"
-        android:maxLines="1"
         android:lines="1"
     />
 
