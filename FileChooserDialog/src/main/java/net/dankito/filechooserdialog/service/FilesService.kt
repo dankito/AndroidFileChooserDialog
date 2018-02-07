@@ -32,7 +32,7 @@ class FilesService {
             return@Comparator 1
         }
 
-        return@Comparator file0.name.compareTo(file1.name)
+        return@Comparator file0.name.compareTo(file1.name, true)
     }
 
 }
