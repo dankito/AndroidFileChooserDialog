@@ -33,15 +33,13 @@
     </android.support.v7.widget.Toolbar>
 
 
-    <android.support.v7.widget.RecyclerView
+    <net.dankito.filechooserdialog.ui.view.DirectoryContentView
         android:id="@+id/rcyCurrentDirectoryContent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/toolbar"
         android:layout_alignParentBottom="true"
-        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
         android:scrollbars="vertical"
-        android:longClickable="true"
     />
 
 </RelativeLayout>

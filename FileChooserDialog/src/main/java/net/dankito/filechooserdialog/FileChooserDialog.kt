@@ -9,7 +9,6 @@ import android.widget.LinearLayout
 import android.widget.ScrollView
 import kotlinx.android.synthetic.main.dialog_file_chooser.view.*
 import kotlinx.android.synthetic.main.view_parent_directory.view.*
-import net.dankito.filechooserdialog.ui.adapter.DirectoryContentAdapter
 import net.dankito.filechooserdialog.ui.dialog.FullscreenDialogFragment
 import java.io.File
 
@@ -21,8 +20,6 @@ class FileChooserDialog : FullscreenDialogFragment() {
     override fun getLayoutId() = R.layout.dialog_file_chooser
 
 
-    private val adapter = DirectoryContentAdapter()
-
     private lateinit var parentDirectoriesScrollView: HorizontalScrollView
 
     private lateinit var parentDirectoriesLayout: LinearLayout
@@ -32,18 +29,13 @@ class FileChooserDialog : FullscreenDialogFragment() {
         parentDirectoriesScrollView = rootView.scrParentDirectoriesView
         parentDirectoriesLayout = rootView.lytParentDirectoriesView
 
-        rootView.scrParentDirectoriesView.isHorizontalScrollBarEnabled = true
-
-        rootView.rcyCurrentDirectoryContent.adapter = adapter
-        adapter.itemClickListener = { file -> fileClicked(file) }
-
-        currentDirectoryChanged(Environment.getExternalStorageDirectory())
+        rootView.rcyCurrentDirectoryContent.currentDirectoryChangedListener = { currentDirectoryChanged(it) }
+        rootView.rcyCurrentDirectoryContent.setCurrentDirectory(Environment.getExternalStorageDirectory())
     }
 
 
     private fun currentDirectoryChanged(directory: File) {
         showParentDirectories(directory)
-        showContentForDirectory(directory)
     }
 
     private fun showParentDirectories(directory: File) {
@@ -72,16 +64,6 @@ class FileChooserDialog : FullscreenDialogFragment() {
         parentDirectoryView.layoutParams?.height = ViewGroup.LayoutParams.MATCH_PARENT
 
         parentDirectoryView.setOnClickListener { currentDirectoryChanged(parent) }
-    }
-
-    private fun showContentForDirectory(directory: File) {
-        adapter.items = directory.listFiles().toList()
-    }
-
-    private fun fileClicked(file: File) {
-        if(file.isDirectory) {
-            currentDirectoryChanged(file)
-        }
     }
 
 
