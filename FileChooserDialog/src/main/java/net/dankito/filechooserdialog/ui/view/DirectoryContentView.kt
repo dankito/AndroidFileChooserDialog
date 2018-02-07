@@ -28,13 +28,19 @@ class DirectoryContentView @JvmOverloads constructor(
 
 
     fun setCurrentDirectory(directory: File) {
-        showContentForDirectory(directory)
-
-        currentDirectoryChangedListener?.invoke(directory)
+        if(showContentForDirectory(directory)) {
+            currentDirectoryChangedListener?.invoke(directory)
+        }
     }
 
-    private fun showContentForDirectory(directory: File) {
-        contentAdapter.items = directory.listFiles().toList()
+    private fun showContentForDirectory(directory: File): Boolean {
+        directory.listFiles()?.let { files -> // listFiles() can return null, e.g when not having rights to read this directory
+            contentAdapter.items = files.toList()
+
+            return true
+        }
+
+        return false
     }
 
     private fun fileClicked(file: File) {
