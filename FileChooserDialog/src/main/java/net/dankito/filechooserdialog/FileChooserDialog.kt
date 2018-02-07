@@ -23,9 +23,13 @@ class FileChooserDialog : FullscreenDialogFragment() {
         rootView.rcyCurrentDirectoryContent.adapter = adapter
         adapter.itemClickListener = { file -> fileClicked(file) }
 
-        showContentForDirectory(Environment.getExternalStorageDirectory())
+        currentDirectoryChanged(Environment.getExternalStorageDirectory())
     }
 
+
+    private fun currentDirectoryChanged(directory: File) {
+        showContentForDirectory(directory)
+    }
 
     private fun showContentForDirectory(directory: File) {
         adapter.items = directory.listFiles().toList()
@@ -33,7 +37,7 @@ class FileChooserDialog : FullscreenDialogFragment() {
 
     private fun fileClicked(file: File) {
         if(file.isDirectory) {
-            showContentForDirectory(file)
+            currentDirectoryChanged(file)
         }
     }
 
