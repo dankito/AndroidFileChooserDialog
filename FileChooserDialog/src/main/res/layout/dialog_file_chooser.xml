@@ -13,28 +13,17 @@
         style="@style/ToolbarStyle"
     >
 
-        <HorizontalScrollView
-            android:id="@+id/scrParentDirectoriesView"
+        <net.dankito.filechooserdialog.ui.view.ParentDirectoriesView
+            android:id="@+id/parentDirectoriesView"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/toolbar_height"
-        >
-
-            <LinearLayout
-                android:id="@+id/lytParentDirectoriesView"
-                android:orientation="horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-            >
-
-            </LinearLayout>
-
-        </HorizontalScrollView>
+            android:layout_height="match_parent"
+        />
 
     </android.support.v7.widget.Toolbar>
 
 
     <net.dankito.filechooserdialog.ui.view.DirectoryContentView
-        android:id="@+id/rcyCurrentDirectoryContent"
+        android:id="@+id/directoryContentView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/toolbar"
