@@ -1,0 +1,5 @@
+<resources>
+
+    <string name="view_parent_directory_path_separator">/</string>
+
+</resources>

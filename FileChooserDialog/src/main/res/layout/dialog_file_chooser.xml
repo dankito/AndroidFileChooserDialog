@@ -7,24 +7,37 @@
     android:background="@color/dialog_background"
 >
 
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/appBarLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_alignParentTop="true"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        style="@style/ToolbarStyle"
+    >
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            style="@style/ToolbarStyle"/>
+        <HorizontalScrollView
+            android:id="@+id/scrParentDirectoriesView"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/toolbar_height"
+        >
 
-    </android.support.design.widget.AppBarLayout>
+            <LinearLayout
+                android:id="@+id/lytParentDirectoriesView"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+            >
+
+            </LinearLayout>
+
+        </HorizontalScrollView>
+
+    </android.support.v7.widget.Toolbar>
+
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rcyCurrentDirectoryContent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/appBarLayout"
+        android:layout_below="@+id/toolbar"
         android:layout_alignParentBottom="true"
         app:layoutManager="android.support.v7.widget.LinearLayoutManager"
         android:scrollbars="vertical"
