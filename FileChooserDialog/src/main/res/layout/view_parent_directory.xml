@@ -11,8 +11,7 @@
         android:layout_height="match_parent"
         android:layout_marginRight="@dimen/view_parent_directory_path_separator_margin_right"
         android:layout_marginEnd="@dimen/view_parent_directory_path_separator_margin_right"
-        android:gravity="center"
-        android:textAlignment="gravity"
+        style="@style/parent_directory_text_style"
         android:text="@string/view_parent_directory_path_separator"
     />
 
@@ -23,9 +22,7 @@
         android:minWidth="@dimen/view_parent_directory_min_width"
         android:layout_marginRight="@dimen/view_parent_directory_directory_name_margin_right"
         android:layout_marginEnd="@dimen/view_parent_directory_directory_name_margin_right"
-        android:gravity="center"
-        android:textAlignment="gravity"
-        android:lines="1"
+        style="@style/parent_directory_text_style"
     />
 
 </LinearLayout>
