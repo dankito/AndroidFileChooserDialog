@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/list_item_file_height">
+                android:layout_height="@dimen/list_item_file_height"
+                android:background="@drawable/list_item_background"
+>
 
     <TextView
         android:id="@+id/txtFilename"

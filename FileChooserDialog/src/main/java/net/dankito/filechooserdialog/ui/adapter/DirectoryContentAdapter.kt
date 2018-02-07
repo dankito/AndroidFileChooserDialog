@@ -6,7 +6,7 @@ import net.dankito.filechooserdialog.ui.adapter.viewholder.DirectoryContentViewH
 import java.io.File
 
 
-class DirectoryContentAdapter : ListRecyclerAdapter<File, DirectoryContentViewHolder>() {
+class DirectoryContentAdapter(private val selectedFiles: List<File>) : ListRecyclerAdapter<File, DirectoryContentViewHolder>() {
 
     override fun getListItemLayoutId() = R.layout.list_item_file
 
@@ -16,6 +16,8 @@ class DirectoryContentAdapter : ListRecyclerAdapter<File, DirectoryContentViewHo
 
     override fun bindItemToView(viewHolder: DirectoryContentViewHolder, item: File) {
         viewHolder.txtFilename.text = item.name
+
+        viewHolder.itemView.isActivated = selectedFiles.contains(item)
     }
 
 }

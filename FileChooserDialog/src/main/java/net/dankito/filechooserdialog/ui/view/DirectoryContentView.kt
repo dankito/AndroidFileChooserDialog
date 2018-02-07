@@ -15,7 +15,12 @@ class DirectoryContentView @JvmOverloads constructor(
 
     var currentDirectoryChangedListener: ((currentDirectory: File) -> Unit)? = null
 
-    private val contentAdapter = DirectoryContentAdapter()
+    var selectedFilesChangedListener: ((List<File>) -> Unit)? = null
+
+    val selectedFiles: List<File> = mutableListOf()
+
+
+    private val contentAdapter = DirectoryContentAdapter(selectedFiles)
 
 
     init {
@@ -47,6 +52,22 @@ class DirectoryContentView @JvmOverloads constructor(
         if(file.isDirectory) {
             setCurrentDirectory(file)
         }
+        else {
+            toggleFileIsSelected(file)
+        }
+    }
+
+    private fun toggleFileIsSelected(file: File) {
+        if(selectedFiles.contains(file)) {
+            (selectedFiles as MutableList).remove(file)
+        }
+        else {
+            (selectedFiles as MutableList).add(file)
+        }
+
+        adapter.notifyDataSetChanged()
+
+        selectedFilesChangedListener?.invoke(selectedFiles)
     }
 
 }
