@@ -35,19 +35,11 @@ class DirectoryContentView @JvmOverloads constructor(
 
 
     fun setCurrentDirectory(directory: File) {
-        if(showContentForDirectory(directory)) {
-            currentDirectoryChangedListener?.invoke(directory)
-        }
-    }
-
-    private fun showContentForDirectory(directory: File): Boolean {
         fileService.getFilesOfDirectorySorted(directory)?.let { files ->
             contentAdapter.items = files
 
-            return true
+            currentDirectoryChangedListener?.invoke(directory)
         }
-
-        return false
     }
 
     private fun fileClicked(file: File) {
