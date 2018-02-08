@@ -10,7 +10,7 @@ import java.io.File
 class LoadPreviewImageTask(private val viewHolder: DirectoryContentViewHolder, private val file: File, private val thumbnailService: ThumbnailService,
                            private val previewImageCache: PreviewImageCache) : AsyncTask<Void, Void, Bitmap?>() {
 
-    private val itemId = viewHolder.itemId
+    private val adapterPosition = viewHolder.adapterPosition
 
 
     override fun doInBackground(vararg p0: Void?): Bitmap? {
@@ -20,7 +20,7 @@ class LoadPreviewImageTask(private val viewHolder: DirectoryContentViewHolder, p
     override fun onPostExecute(result: Bitmap?) {
         super.onPostExecute(result)
 
-        if(viewHolder.itemId == itemId) { // viewHolder still holds the same file
+        if(viewHolder.adapterPosition == adapterPosition) { // viewHolder still holds the same file
             viewHolder.imgThumbnail.setImageBitmap(result)
         }
 
