@@ -1,5 +1,6 @@
 package net.dankito.filechooserdialog.ui.dialog
 
+import android.support.v4.app.FragmentActivity
 import android.view.View
 import net.dankito.filechooserdialog.R
 import net.dankito.filechooserdialog.model.FileChooserDialogType
@@ -24,6 +25,9 @@ interface IFileChooserDialog {
     var selectSingleFileCallback: ((didUserSelectFile: Boolean, File?) -> Unit)?
 
     var selectMultipleFilesCallback: ((didUserSelectFiles: Boolean, List<File>?) -> Unit)?
+
+
+    fun showDialog(activity: FragmentActivity)
 
     fun closeDialogOnUiThread()
 
@@ -50,4 +54,24 @@ interface IFileChooserDialog {
 
         closeDialogOnUiThread()
     }
+
+
+    fun showOpenSingleFileDialog(activity: FragmentActivity, selectSingleFileCallback: (didUserSelectFile: Boolean, File?) -> Unit) {
+        showDialog(activity, FileChooserDialogType.SelectSingleFile, selectSingleFileCallback, null)
+    }
+
+    fun showOpenMultipleFilesDialog(activity: FragmentActivity, selectMultipleFilesCallback: (didUserSelectFiles: Boolean, List<File>?) -> Unit) {
+        showDialog(activity, FileChooserDialogType.SelectMultipleFiles, null, selectMultipleFilesCallback)
+    }
+
+    private fun showDialog(activity: FragmentActivity, dialogType: FileChooserDialogType, selectSingleFileCallback: ((didUserSelectFile: Boolean, File?) -> Unit)?,
+                           selectMultipleFilesCallback: ((didUserSelectFiles: Boolean, List<File>?) -> Unit)?) {
+        this.dialogType = dialogType
+
+        this.selectSingleFileCallback = selectSingleFileCallback
+        this.selectMultipleFilesCallback = selectMultipleFilesCallback
+
+        showDialog(activity)
+    }
+
 }

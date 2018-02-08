@@ -1,6 +1,6 @@
 package net.dankito.filechooserdialog.ui.dialog
 
-import android.support.v4.app.FragmentManager
+import android.support.v4.app.FragmentActivity
 import android.view.View
 import net.dankito.filechooserdialog.model.FileChooserDialogType
 import net.dankito.filechooserdialog.ui.view.FileChooserView
@@ -28,23 +28,12 @@ class FullscreenFileChooserDialog : FullscreenDialogFragment(), IFileChooserDial
     }
 
 
+    override fun showDialog(activity: FragmentActivity) {
+        showInFullscreen(activity.supportFragmentManager)
+    }
+
     override fun closeDialogOnUiThread() {
         super.closeDialogOnUiThread()
-    }
-
-
-    fun showOpenSingleFileDialog(fragmentManager: FragmentManager, selectSingleFileCallback: (didUserSelectFile: Boolean, File?) -> Unit) {
-        this.dialogType = FileChooserDialogType.SelectSingleFile
-        this.selectSingleFileCallback = selectSingleFileCallback
-
-        showInFullscreen(fragmentManager)
-    }
-
-    fun showOpenMultipleFilesDialog(fragmentManager: FragmentManager, selectMultipleFilesCallback: (didUserSelectFiles: Boolean, List<File>?) -> Unit) {
-        this.dialogType = FileChooserDialogType.SelectMultipleFiles
-        this.selectMultipleFilesCallback = selectMultipleFilesCallback
-
-        showInFullscreen(fragmentManager)
     }
 
 }
