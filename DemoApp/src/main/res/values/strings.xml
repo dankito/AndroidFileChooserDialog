@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">FileChooserDialog Demo</string>
+
+    <string name="select_single_file">Select single file</string>
+    <string name="select_multiple_files">Select multiple files</string>
+
+</resources>
