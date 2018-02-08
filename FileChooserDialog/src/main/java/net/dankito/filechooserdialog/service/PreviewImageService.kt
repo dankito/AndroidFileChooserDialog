@@ -39,12 +39,16 @@ class PreviewImageService(private val thumbnailService: ThumbnailService, privat
             }
         }
         else {
-            if(canLoadThumbnailForFile(mimeType)) {
-                LoadThumbnailTask(viewHolder, file, mimeType, thumbnailService, previewImageCache).execute()
-            }
-            else {
-                setPreviewImageToResource(viewHolder, R.drawable.ic_insert_drive_file_white_48dp)
-            }
+            setPreviewImageForFile(viewHolder, file, mimeType)
+        }
+    }
+
+    private fun setPreviewImageForFile(viewHolder: DirectoryContentViewHolder, file: File, mimeType: String) {
+        if(canLoadThumbnailForFile(mimeType)) {
+            LoadThumbnailTask(viewHolder, file, mimeType, thumbnailService, previewImageCache).execute()
+        }
+        else {
+            setPreviewImageToResource(viewHolder, R.drawable.ic_insert_drive_file_white_48dp)
         }
     }
 
