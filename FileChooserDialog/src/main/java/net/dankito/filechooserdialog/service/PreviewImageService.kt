@@ -2,6 +2,7 @@ package net.dankito.filechooserdialog.service
 
 import net.dankito.filechooserdialog.R
 import net.dankito.filechooserdialog.ui.adapter.viewholder.DirectoryContentViewHolder
+import net.dankito.filechooserdialog.ui.extensions.setTintColor
 import net.dankito.filechooserdialog.ui.util.LoadThumbnailTask
 import net.dankito.filechooserdialog.ui.util.PreviewImageCache
 import java.io.File
@@ -20,6 +21,7 @@ class PreviewImageService(private val thumbnailService: ThumbnailService, privat
         }
         else {
             viewHolder.imgThumbnail.setImageBitmap(null) // reset preview image (don't wait till preview image is calculated to show it, as otherwise it may show previous file's preview image
+            viewHolder.imgThumbnail.clearColorFilter()
 
             getPreviewImageForFile(viewHolder, file)
         }
@@ -48,6 +50,8 @@ class PreviewImageService(private val thumbnailService: ThumbnailService, privat
 
     private fun setPreviewImageToResource(viewHolder: DirectoryContentViewHolder, imageResourceId: Int) {
         viewHolder.imgThumbnail.setImageResource(imageResourceId)
+
+        viewHolder.imgThumbnail.setTintColor(R.color.file_icon_tint_color)
     }
 
     private fun canLoadThumbnailForFile(mimeType: String): Boolean {
