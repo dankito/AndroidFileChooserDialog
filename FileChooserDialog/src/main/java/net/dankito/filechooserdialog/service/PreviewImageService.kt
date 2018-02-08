@@ -14,6 +14,7 @@ class PreviewImageService(private val thumbnailService: ThumbnailService, privat
 
 
     fun setPreviewImage(viewHolder: DirectoryContentViewHolder, file: File) {
+        viewHolder.imgPreviewImage.clearColorFilter()
         val cachedPreviewImage = previewImageCache.getCachedPreviewImage(file)
 
         if(cachedPreviewImage != null) {
@@ -21,7 +22,6 @@ class PreviewImageService(private val thumbnailService: ThumbnailService, privat
         }
         else {
             viewHolder.imgPreviewImage.setImageBitmap(null) // reset preview image (don't wait till preview image is calculated to show it, as otherwise it may show previous file's preview image
-            viewHolder.imgPreviewImage.clearColorFilter()
 
             getPreviewImageForFile(viewHolder, file)
         }
@@ -29,6 +29,7 @@ class PreviewImageService(private val thumbnailService: ThumbnailService, privat
 
     private fun getPreviewImageForFile(viewHolder: DirectoryContentViewHolder, file: File) {
         val mimeType = mimeTypeService.getMimeType(file)
+//        println("Mime type for ${file.name} is $mimeType")
 
         if(mimeType == null) {
             if(file.isDirectory) {
