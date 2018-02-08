@@ -4,6 +4,7 @@ import android.view.View
 import net.dankito.filechooserdialog.R
 import net.dankito.filechooserdialog.service.ThumbnailService
 import net.dankito.filechooserdialog.ui.adapter.viewholder.DirectoryContentViewHolder
+import net.dankito.filechooserdialog.ui.util.LoadPreviewImageTask
 import java.io.File
 
 
@@ -19,7 +20,8 @@ class DirectoryContentAdapter(private val thumbnailService: ThumbnailService, pr
     override fun bindItemToView(viewHolder: DirectoryContentViewHolder, item: File) {
         viewHolder.txtFilename.text = item.name
 
-        viewHolder.imgThumbnail.setImageBitmap(thumbnailService.getThumbnail(item, 71, 40))
+        viewHolder.imgThumbnail.setImageBitmap(null) // reset preview image (don't wait till preview image is calculated to show it, as otherwise it may show previous file's preview image
+        LoadPreviewImageTask(viewHolder, item, thumbnailService).execute()
 
         viewHolder.itemView.isActivated = selectedFiles.contains(item)
     }
