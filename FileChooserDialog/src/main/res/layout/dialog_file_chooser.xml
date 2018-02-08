@@ -27,8 +27,38 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/toolbar"
-        android:layout_alignParentBottom="true"
+        android:layout_above="@+id/lytButtonBar"
         android:scrollbars="vertical"
     />
+
+    <RelativeLayout
+        android:id="@+id/lytButtonBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+    >
+
+        <Button
+            android:id="@+id/btnSelect"
+            android:layout_width="@dimen/dialog_buttons_width"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            style="?android:attr/buttonBarButtonStyle"
+            android:text="@string/select"
+            android:enabled="false"
+        />
+
+        <Button
+            android:id="@+id/btnCancel"
+            android:layout_width="@dimen/dialog_buttons_width"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/btnSelect"
+            android:layout_toStartOf="@+id/btnSelect"
+            style="?android:attr/buttonBarButtonStyle"
+            android:text="@android:string/cancel"
+        />
+
+    </RelativeLayout>
 
 </RelativeLayout>
