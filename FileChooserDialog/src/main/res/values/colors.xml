@@ -14,5 +14,6 @@
     <color name="list_item_selected_background">#d2e8e5</color>
 
     <color name="file_icon_tint_color">@color/colorAccent</color>
+    <color name="navigation_menu_items_icon_tint_color">@color/colorAccent</color>
 
 </resources>

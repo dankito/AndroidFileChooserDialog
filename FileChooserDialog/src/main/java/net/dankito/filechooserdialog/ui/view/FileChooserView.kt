@@ -17,6 +17,7 @@ import net.dankito.filechooserdialog.model.FileChooserDialogType
 import net.dankito.filechooserdialog.model.Options
 import net.dankito.filechooserdialog.service.BackStack
 import net.dankito.filechooserdialog.service.SelectedFilesManager
+import net.dankito.filechooserdialog.ui.extensions.setItemsTintColor
 import java.io.File
 
 
@@ -71,6 +72,8 @@ class FileChooserView {
     }
 
     private fun setupNavigationMenu(navigationView: NavigationView) {
+        navigationView.menu.setItemsTintColor(navigationView.context, R.color.navigation_menu_items_icon_tint_color)
+
         navigationView.menu?.findItem(R.id.navFolderShortcutDocuments)?.isVisible = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT // Documents folder is only available on KitKat and newer
         // TODO: check SD card and USB stick state
 
