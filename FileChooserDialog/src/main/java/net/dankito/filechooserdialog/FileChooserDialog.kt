@@ -28,9 +28,9 @@ class FileChooserDialog : FullscreenDialogFragment() {
 
     private lateinit var dialogType: FileChooserDialogType
 
-    private var selectSingleFileCallback: ((File) -> Unit)? = null
+    private var selectSingleFileCallback: ((didUserSelectFile: Boolean, File?) -> Unit)? = null
 
-    private var selectMultipleFilesCallback: ((List<File>) -> Unit)? = null
+    private var selectMultipleFilesCallback: ((didUserSelectFiles: Boolean, List<File>?) -> Unit)? = null
 
 
     override fun setupUI(rootView: View) {
@@ -42,7 +42,7 @@ class FileChooserDialog : FullscreenDialogFragment() {
         directoryContentView.currentDirectoryChangedListener = { currentDirectoryChanged(it) }
         directoryContentView.selectedFilesChangedListener = { selectedFilesChanged(it) }
 
-        rootView.btnCancel.setOnClickListener { closeDialogOnUiThread() }
+        rootView.btnCancel.setOnClickListener { cancelSelectingFilesAndCloseDialog() }
 
         btnSelect = rootView.btnSelect
         btnSelect.setOnClickListener { selectingFilesDone() }
@@ -55,6 +55,7 @@ class FileChooserDialog : FullscreenDialogFragment() {
         val parent = directoryContentView.currentDirectory.parentFile
 
         if(parent == null || parent.absolutePath == "/") {
+            cancelSelectingFiles()
             return false
         }
         else { // navigate up one level
@@ -63,6 +64,13 @@ class FileChooserDialog : FullscreenDialogFragment() {
             return true
         }
     }
+
+    override fun navigationButtonClicked() {
+        cancelSelectingFiles()
+
+        super.navigationButtonClicked()
+    }
+
 
     private fun setCurrentDirectory(directory: File, isNavigatingBack: Boolean = false) {
         directoryContentView.showContentOfDirectory(directory, isNavigatingBack)
@@ -81,26 +89,38 @@ class FileChooserDialog : FullscreenDialogFragment() {
         if(dialogType == FileChooserDialogType.SelectSingleFile) {
             selectSingleFileCallback?.let {callback ->
                 if(directoryContentView.selectedFiles.size == 1) {
-                    callback(directoryContentView.selectedFiles[0])
+                    callback(true, directoryContentView.selectedFiles[0])
                 }
             }
         }
         else if(dialogType == FileChooserDialogType.SelectMultipleFiles) {
-            selectMultipleFilesCallback?.invoke(directoryContentView.selectedFiles)
+            selectMultipleFilesCallback?.invoke(true, directoryContentView.selectedFiles)
         }
 
         closeDialogOnUiThread()
     }
 
+    private fun cancelSelectingFilesAndCloseDialog() {
+        cancelSelectingFiles()
 
-    fun showOpenSingleFileDialog(fragmentManager: FragmentManager, selectSingleFileCallback: (File) -> Unit) {
+        closeDialogOnUiThread()
+    }
+
+    private fun cancelSelectingFiles() {
+        selectSingleFileCallback?.invoke(false, null)
+
+        selectMultipleFilesCallback?.invoke(false, null)
+    }
+
+
+    fun showOpenSingleFileDialog(fragmentManager: FragmentManager, selectSingleFileCallback: (didUserSelectFile: Boolean, File?) -> Unit) {
         this.dialogType = FileChooserDialogType.SelectSingleFile
         this.selectSingleFileCallback = selectSingleFileCallback
 
         showInFullscreen(fragmentManager)
     }
 
-    fun showOpenMultipleFilesDialog(fragmentManager: FragmentManager, selectMultipleFilesCallback: (List<File>) -> Unit) {
+    fun showOpenMultipleFilesDialog(fragmentManager: FragmentManager, selectMultipleFilesCallback: (didUserSelectFiles: Boolean, List<File>?) -> Unit) {
         this.dialogType = FileChooserDialogType.SelectMultipleFiles
         this.selectMultipleFilesCallback = selectMultipleFilesCallback
 

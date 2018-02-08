@@ -68,7 +68,7 @@ abstract class FullscreenDialogFragment : DialogFragment() {
     private fun setupToolbar(rootView: View) {
         (rootView.findViewById(R.id.toolbar) as? Toolbar)?.let { toolbar ->
             toolbar.setNavigationIcon(android.R.drawable.ic_menu_close_clear_cancel)
-            toolbar.setNavigationOnClickListener { closeDialogOnUiThread() }
+            toolbar.setNavigationOnClickListener { navigationButtonClicked() }
 
             customizeToolbar(rootView, toolbar)
         }
@@ -81,6 +81,10 @@ abstract class FullscreenDialogFragment : DialogFragment() {
 
     open fun handlesBackButtonPress(): Boolean {
         return false
+    }
+
+    protected open fun navigationButtonClicked() {
+        closeDialogOnUiThread()
     }
 
     protected open fun closeDialogOnUiThread() {
