@@ -4,11 +4,7 @@ import android.content.Context
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.AttributeSet
-import net.dankito.filechooserdialog.model.FileChooserDialogType
-import net.dankito.filechooserdialog.service.FilesService
-import net.dankito.filechooserdialog.service.MimeTypeService
-import net.dankito.filechooserdialog.service.PreviewImageService
-import net.dankito.filechooserdialog.service.ThumbnailService
+import net.dankito.filechooserdialog.service.*
 import net.dankito.filechooserdialog.ui.adapter.DirectoryContentAdapter
 import java.io.File
 
@@ -21,14 +17,8 @@ class DirectoryContentView @JvmOverloads constructor(
     var currentDirectory: File = File("/")
         private set
 
-    val selectedFiles: List<File> = mutableListOf()
-
-    var dialogType = FileChooserDialogType.SelectSingleFile
-
 
     var currentDirectoryChangedListener: ((currentDirectory: File) -> Unit)? = null
-
-    var selectedFilesChangedListener: ((List<File>) -> Unit)? = null
 
 
     private val mimeTypeService = MimeTypeService()
@@ -39,11 +29,19 @@ class DirectoryContentView @JvmOverloads constructor(
 
     private val fileService = FilesService()
 
-    private val contentAdapter = DirectoryContentAdapter(previewImageService, selectedFiles)
+    private lateinit var selectedFilesManager: SelectedFilesManager
+
+    private lateinit var contentAdapter: DirectoryContentAdapter
 
 
     init {
         layoutManager = LinearLayoutManager(context)
+    }
+
+    fun setupDialog(selectedFilesManager: SelectedFilesManager) {
+        this.selectedFilesManager = selectedFilesManager
+
+        contentAdapter = DirectoryContentAdapter(previewImageService, selectedFilesManager)
 
         this.adapter = contentAdapter
         contentAdapter.itemClickListener = { file -> fileClicked(file) }
@@ -65,29 +63,8 @@ class DirectoryContentView @JvmOverloads constructor(
             showContentOfDirectory(file)
         }
         else {
-            toggleFileIsSelected(file)
+            selectedFilesManager.toggleFileIsSelected(file)
         }
-    }
-
-    private fun toggleFileIsSelected(file: File) {
-        if(dialogType != FileChooserDialogType.SelectMultipleFiles) {
-            clearSelectedFiles()
-        }
-
-        if(selectedFiles.contains(file)) {
-            (selectedFiles as MutableList).remove(file)
-        }
-        else {
-            (selectedFiles as MutableList).add(file)
-        }
-
-        adapter.notifyDataSetChanged()
-
-        selectedFilesChangedListener?.invoke(selectedFiles)
-    }
-
-    private fun clearSelectedFiles() {
-        (selectedFiles as MutableList).clear()
     }
 
 }

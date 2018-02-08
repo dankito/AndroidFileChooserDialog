@@ -3,12 +3,20 @@ package net.dankito.filechooserdialog.ui.adapter
 import android.view.View
 import net.dankito.filechooserdialog.R
 import net.dankito.filechooserdialog.service.PreviewImageService
+import net.dankito.filechooserdialog.service.SelectedFilesManager
 import net.dankito.filechooserdialog.ui.adapter.viewholder.DirectoryContentViewHolder
 import java.io.File
 
 
-class DirectoryContentAdapter(private val previewImageService: PreviewImageService, private val selectedFiles: List<File>)
+class DirectoryContentAdapter(private val previewImageService: PreviewImageService, private val selectedFilesManager: SelectedFilesManager)
     : ListRecyclerAdapter<File, DirectoryContentViewHolder>() {
+
+
+    init {
+        selectedFilesManager.addSelectedFilesChangedListeners {
+            notifyDataSetChanged()
+        }
+    }
 
 
     override fun getListItemLayoutId() = R.layout.list_item_file
@@ -22,7 +30,7 @@ class DirectoryContentAdapter(private val previewImageService: PreviewImageServi
 
         previewImageService.setPreviewImage(viewHolder, item)
 
-        viewHolder.itemView.isActivated = selectedFiles.contains(item)
+        viewHolder.itemView.isActivated = selectedFilesManager.isFileSelected(item)
     }
 
 }

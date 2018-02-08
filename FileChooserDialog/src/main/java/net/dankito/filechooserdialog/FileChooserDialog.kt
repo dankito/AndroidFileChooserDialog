@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.Button
 import kotlinx.android.synthetic.main.dialog_file_chooser.view.*
 import net.dankito.filechooserdialog.model.FileChooserDialogType
+import net.dankito.filechooserdialog.service.SelectedFilesManager
 import net.dankito.filechooserdialog.ui.dialog.FullscreenDialogFragment
 import net.dankito.filechooserdialog.ui.view.DirectoryContentView
 import net.dankito.filechooserdialog.ui.view.ParentDirectoriesView
@@ -28,19 +29,23 @@ class FileChooserDialog : FullscreenDialogFragment() {
 
     private lateinit var dialogType: FileChooserDialogType
 
+    private lateinit var selectedFilesManager: SelectedFilesManager
+
     private var selectSingleFileCallback: ((didUserSelectFile: Boolean, File?) -> Unit)? = null
 
     private var selectMultipleFilesCallback: ((didUserSelectFiles: Boolean, List<File>?) -> Unit)? = null
 
 
     override fun setupUI(rootView: View) {
+        selectedFilesManager = SelectedFilesManager(dialogType)
+        selectedFilesManager.addSelectedFilesChangedListeners { selectedFilesChanged(it) }
+
         parentDirectoriesView = rootView.parentDirectoriesView
         parentDirectoriesView.parentDirectorySelectedListener = { setCurrentDirectory(it) }
 
         directoryContentView = rootView.directoryContentView
-        directoryContentView.dialogType = dialogType
+        directoryContentView.setupDialog(selectedFilesManager)
         directoryContentView.currentDirectoryChangedListener = { currentDirectoryChanged(it) }
-        directoryContentView.selectedFilesChangedListener = { selectedFilesChanged(it) }
 
         rootView.btnCancel.setOnClickListener { cancelSelectingFilesAndCloseDialog() }
 
@@ -88,13 +93,13 @@ class FileChooserDialog : FullscreenDialogFragment() {
     private fun selectingFilesDone() {
         if(dialogType == FileChooserDialogType.SelectSingleFile) {
             selectSingleFileCallback?.let {callback ->
-                if(directoryContentView.selectedFiles.size == 1) {
-                    callback(true, directoryContentView.selectedFiles[0])
+                if(selectedFilesManager.selectedFiles.size == 1) {
+                    callback(true, selectedFilesManager.selectedFiles[0])
                 }
             }
         }
         else if(dialogType == FileChooserDialogType.SelectMultipleFiles) {
-            selectMultipleFilesCallback?.invoke(true, directoryContentView.selectedFiles)
+            selectMultipleFilesCallback?.invoke(true, selectedFilesManager.selectedFiles)
         }
 
         closeDialogOnUiThread()
