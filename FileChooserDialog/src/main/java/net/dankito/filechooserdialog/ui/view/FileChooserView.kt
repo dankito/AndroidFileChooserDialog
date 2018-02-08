@@ -86,19 +86,15 @@ class FileChooserView {
 
         if(drawerLayout.isDrawerOpen(GravityCompat.START)) {
             closeDrawerLayout()
-
-            return true
         }
         else if(parent == null || parent.absolutePath == "/") {
             cancelSelectingFiles()
-
-            return true
         }
         else { // navigate up one level
             setCurrentDirectory(parent, true)
-
-            return true
         }
+
+        return true
     }
 
     private fun closeDrawerLayout() {
