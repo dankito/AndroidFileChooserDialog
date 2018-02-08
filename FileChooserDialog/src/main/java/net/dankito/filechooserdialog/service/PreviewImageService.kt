@@ -30,7 +30,6 @@ class PreviewImageService(private val thumbnailService: ThumbnailService, privat
 
     private fun getPreviewImageForFile(viewHolder: DirectoryContentViewHolder, file: File) {
         val mimeType = mimeTypeService.getMimeType(file)
-//        println("Mime type for ${file.name} is $mimeType")
 
         if(mimeType == null) {
             if(file.isDirectory) {
@@ -62,7 +61,25 @@ class PreviewImageService(private val thumbnailService: ThumbnailService, privat
             LoadThumbnailTask(viewHolder, file, mimeType, thumbnailService, previewImageCache).execute()
         }
         else {
-            setPreviewImageToResource(viewHolder, R.drawable.ic_insert_drive_file_white_48dp)
+            setPreviewImageToResource(viewHolder, getIconForFile(mimeType))
+        }
+    }
+
+    private fun getIconForFile(mimeType: String): Int {
+        return when {
+            mimeTypeService.isImageFile(mimeType) -> R.drawable.ic_file_image_white_48dp
+            mimeTypeService.isAudioFile(mimeType) -> R.drawable.ic_file_music_white_48dp
+            mimeTypeService.isVideoFile(mimeType) -> R.drawable.ic_file_video_white_48dp
+            mimeTypeService.isPdfFile(mimeType) -> R.drawable.ic_file_pdf_white_48dp
+            mimeTypeService.isMicrosoftWordFile(mimeType) || mimeTypeService.isOpenOfficeWriterFile(mimeType)
+                -> R.drawable.ic_file_word_white_48dp
+            mimeTypeService.isMicrosoftExcelFile(mimeType) || mimeTypeService.isOpenOfficeCalcFile(mimeType)
+                -> R.drawable.ic_file_excel_white_48dp
+            mimeTypeService.isMicrosoftPowerPointFile(mimeType) || mimeTypeService.isOpenOfficeImpressFile(mimeType)
+                -> R.drawable.ic_file_powerpoint_white_48dp
+            mimeTypeService.isMarkUpFile(mimeType) -> R.drawable.ic_file_xml_white_48dp
+            mimeTypeService.isDocument(mimeType) -> R.drawable.ic_file_document_white_48dp
+            else -> R.drawable.ic_insert_drive_file_white_48dp
         }
     }
 
@@ -73,7 +90,7 @@ class PreviewImageService(private val thumbnailService: ThumbnailService, privat
     }
 
     private fun canLoadThumbnailForFile(mimeType: String): Boolean {
-        return mimeTypeService.isImageType(mimeType) || mimeTypeService.isVideoType(mimeType)
+        return mimeTypeService.isImageFile(mimeType) || mimeTypeService.isVideoFile(mimeType)
     }
 
 }

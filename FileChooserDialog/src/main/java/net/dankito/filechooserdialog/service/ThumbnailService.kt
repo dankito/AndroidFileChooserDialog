@@ -18,10 +18,10 @@ class ThumbnailService(private val mimeTypeService: MimeTypeService) {
     }
 
     fun getThumbnail(file: File, mimeType: String, width: Int = 40, height: Int = 30): Bitmap? {
-        if(mimeTypeService.isImageType(mimeType)) {
+        if(mimeTypeService.isImageFile(mimeType)) {
             return ThumbnailUtils.extractThumbnail(BitmapFactory.decodeFile(file.absolutePath), width, height, ThumbnailUtils.OPTIONS_RECYCLE_INPUT)
         }
-        else if(mimeTypeService.isVideoType(mimeType)) {
+        else if(mimeTypeService.isVideoFile(mimeType)) {
             return ThumbnailUtils.createVideoThumbnail(file.absolutePath, MediaStore.Video.Thumbnails.MINI_KIND)
         }
 
