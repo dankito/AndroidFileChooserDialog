@@ -6,7 +6,9 @@
     <color name="colorAccent">#FF9100</color> <!-- Material Design Color Code: Orange A400 -->
 
     <color name="dialog_background">#FFFFFF</color>
+
     <color name="toolbar_background">@color/colorPrimary</color>
+    <color name="toolbar_text_color">#FFFFFF</color>
 
     <color name="list_item_default_background">@android:color/background_light</color>
     <color name="list_item_selected_background">#d2e8e5</color>

@@ -42,7 +42,7 @@
 
 
     <style name="parent_directory_text_style">
-        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textColor">@color/toolbar_text_color</item>
         <item name="android:gravity">center</item>
         <item name="android:layout_gravity">center</item>
         <item name="android:lines">1</item>
