@@ -2,51 +2,34 @@ package net.dankito.filechooserdialog.ui.dialog
 
 import android.support.v4.app.FragmentManager
 import android.view.View
-import net.dankito.filechooserdialog.R
 import net.dankito.filechooserdialog.model.FileChooserDialogType
 import net.dankito.filechooserdialog.ui.view.FileChooserView
 import java.io.File
 
 
-class FullscreenFileChooserDialog : FullscreenDialogFragment() {
+class FullscreenFileChooserDialog : FullscreenDialogFragment(), IFileChooserDialog {
 
-    override fun getDialogTag() = "FileChooserDialog"
+    override val fileChooserView = FileChooserView()
 
-    override fun getLayoutId() = R.layout.dialog_file_chooser
+    override var dialogType = FileChooserDialogType.SelectSingleFile
+
+    override var selectSingleFileCallback: ((didUserSelectFile: Boolean, File?) -> Unit)? = null
+
+    override var selectMultipleFilesCallback: ((didUserSelectFiles: Boolean, List<File>?) -> Unit)? = null
 
 
-    private val fileChooserView = FileChooserView()
+    override fun getDialogTag() = IFileChooserDialog.DialogTag
 
-
-    private lateinit var dialogType: FileChooserDialogType
-
-    private var selectSingleFileCallback: ((didUserSelectFile: Boolean, File?) -> Unit)? = null
-
-    private var selectMultipleFilesCallback: ((didUserSelectFiles: Boolean, List<File>?) -> Unit)? = null
+    override fun getLayoutId() = IFileChooserDialog.DialogLayoutResourceId
 
 
     override fun setupUI(rootView: View) {
-        fileChooserView.setup(rootView, dialogType) { didUserSelectFiles, selectedFiles ->
-            selectingFilesDone(didUserSelectFiles, selectedFiles)
-        }
+        setup(rootView)
     }
 
 
-    override fun handlesBackButtonPress(): Boolean {
-        return fileChooserView.handlesBackButtonPress()
-    }
-
-
-    private fun selectingFilesDone(didUserSelectFiles: Boolean, selectedFiles: List<File>?) {
-        if(dialogType == FileChooserDialogType.SelectSingleFile) {
-            val selectedFile = if(selectedFiles?.isNotEmpty() == true) selectedFiles[0] else null
-            selectSingleFileCallback?.invoke(didUserSelectFiles, selectedFile)
-        }
-        else {
-            selectMultipleFilesCallback?.invoke(didUserSelectFiles, selectedFiles)
-        }
-
-        closeDialogOnUiThread()
+    override fun closeDialogOnUiThread() {
+        super.closeDialogOnUiThread()
     }
 
 

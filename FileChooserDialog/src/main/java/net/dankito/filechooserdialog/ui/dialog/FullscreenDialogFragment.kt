@@ -79,10 +79,6 @@ abstract class FullscreenDialogFragment : DialogFragment() {
     }
 
 
-    open fun handlesBackButtonPress(): Boolean {
-        return false
-    }
-
     protected open fun navigationButtonClicked() {
         closeDialogOnUiThread()
     }
