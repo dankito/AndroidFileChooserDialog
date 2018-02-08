@@ -11,6 +11,7 @@ import net.dankito.filechooserdialog.service.PreviewImageService
 import net.dankito.filechooserdialog.service.SelectedFilesManager
 import net.dankito.filechooserdialog.service.ThumbnailService
 import net.dankito.filechooserdialog.ui.adapter.DirectoryContentAdapter
+import net.dankito.filechooserdialog.ui.dialog.FullscreenFileChooserDialog
 
 
 class MainActivity : AppCompatActivity() {
@@ -25,7 +26,7 @@ class MainActivity : AppCompatActivity() {
 
     private var selectedMultipleFilesAdapter = DirectoryContentAdapter(previewImageService, SelectedFilesManager(FileChooserDialogType.SelectMultipleFiles))
 
-    private var fileChooserDialog: FileChooserDialog? = null
+    private var fileChooserDialog: FullscreenFileChooserDialog? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,16 +39,14 @@ class MainActivity : AppCompatActivity() {
         rcySelectedMultipleFiles.adapter = selectedMultipleFilesAdapter
 
         btnSelectSingleFile.setOnClickListener {
-            fileChooserDialog = FileChooserDialog()
-            fileChooserDialog?.showOpenSingleFileDialog(this.supportFragmentManager) { didUserSelectFile, selectedFile ->
+            fileChooserDialog = FileChooserDialog.showOpenSingleFileDialog(this.supportFragmentManager) { didUserSelectFile, selectedFile ->
                 selectedSingleFileAdapter.items = if(selectedFile != null) listOf(selectedFile) else listOf()
                 fileChooserDialog = null
             }
         }
 
         btnSelectMultipleFiles.setOnClickListener {
-            fileChooserDialog = FileChooserDialog()
-            fileChooserDialog?.showOpenMultipleFilesDialog(this.supportFragmentManager) { didUserSelectFiles, selectedFiles ->
+            fileChooserDialog = FileChooserDialog.showOpenMultipleFilesDialog(this.supportFragmentManager) { didUserSelectFiles, selectedFiles ->
                 selectedMultipleFilesAdapter.items = selectedFiles ?: listOf()
                 fileChooserDialog = null
             }
