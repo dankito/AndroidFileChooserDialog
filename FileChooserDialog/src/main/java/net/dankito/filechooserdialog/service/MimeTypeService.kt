@@ -16,11 +16,11 @@ class MimeTypeService {
 
 
     fun isImageType(mimeType: String): Boolean {
-        return mimeType.startsWith("image")
+        return mimeType.startsWith("image/")
     }
 
     fun isVideoType(mimeType: String): Boolean {
-        return mimeType.startsWith("video")
+        return mimeType.startsWith("video/")
     }
 
 }
