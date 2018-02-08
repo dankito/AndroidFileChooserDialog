@@ -17,11 +17,15 @@ class DirectoryContentView @JvmOverloads constructor(
 ) : RecyclerView(context, attrs, defStyleAttr) {
 
 
+    var currentDirectory: File = File("/")
+        private set
+
+    val selectedFiles: List<File> = mutableListOf()
+
+
     var currentDirectoryChangedListener: ((currentDirectory: File) -> Unit)? = null
 
     var selectedFilesChangedListener: ((List<File>) -> Unit)? = null
-
-    val selectedFiles: List<File> = mutableListOf()
 
 
     private val mimeTypeService = MimeTypeService()
@@ -43,19 +47,19 @@ class DirectoryContentView @JvmOverloads constructor(
     }
 
 
-    fun setCurrentDirectory(directory: File) {
-        val directoryToUse = fileService.avoidDirectoriesWeAreNotAllowedToList(directory)
+    fun showContentOfDirectory(directory: File, isNavigatingBack: Boolean = false) {
+        this.currentDirectory = fileService.avoidDirectoriesWeAreNotAllowedToList(directory, isNavigatingBack)
 
-        fileService.getFilesOfDirectorySorted(directoryToUse)?.let { files ->
+        fileService.getFilesOfDirectorySorted(currentDirectory)?.let { files ->
             contentAdapter.items = files
 
-            currentDirectoryChangedListener?.invoke(directoryToUse)
+            currentDirectoryChangedListener?.invoke(currentDirectory)
         }
     }
 
     private fun fileClicked(file: File) {
         if(file.isDirectory) {
-            setCurrentDirectory(file)
+            showContentOfDirectory(file)
         }
         else {
             toggleFileIsSelected(file)

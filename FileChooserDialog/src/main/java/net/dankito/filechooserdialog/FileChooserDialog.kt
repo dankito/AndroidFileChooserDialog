@@ -33,8 +33,21 @@ class FileChooserDialog : FullscreenDialogFragment() {
     }
 
 
-    private fun setCurrentDirectory(directory: File) {
-        directoryContentView.setCurrentDirectory(directory)
+    override fun handlesBackButtonPress(): Boolean {
+        val parent = directoryContentView.currentDirectory.parentFile
+
+        if(parent == null || parent.absolutePath == "/") {
+            return false
+        }
+        else { // navigate up one level
+            setCurrentDirectory(parent, true)
+
+            return true
+        }
+    }
+
+    private fun setCurrentDirectory(directory: File, isNavigatingBack: Boolean = false) {
+        directoryContentView.showContentOfDirectory(directory, isNavigatingBack)
     }
 
     private fun currentDirectoryChanged(directory: File) {
