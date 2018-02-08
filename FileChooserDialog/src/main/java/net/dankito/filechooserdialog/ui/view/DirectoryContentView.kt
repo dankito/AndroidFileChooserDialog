@@ -26,7 +26,7 @@ class DirectoryContentView @JvmOverloads constructor(
 
     private val mimeTypeService = MimeTypeService()
 
-    private val thumbnailService = ThumbnailService(context, mimeTypeService)
+    private val thumbnailService = ThumbnailService(mimeTypeService)
 
     private val previewImageService = PreviewImageService(thumbnailService)
 
