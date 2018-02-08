@@ -5,23 +5,13 @@ import java.io.File
 
 class FilesService {
 
-    fun avoidDirectoriesWeAreNotAllowedToList(directory: File, isNavigatingBack: Boolean): File {
+    fun avoidDirectoriesWeAreNotAllowedToList(directory: File): File {
         if(directory.absolutePath == "/storage/emulated") { // we're allowed to list /storage/emulated -> list /storage/emulated/0 instead
-            if(isNavigatingBack) {
-                return directory.parentFile
-            }
-            else {
-                return File(directory, "0")
-            }
+            return File(directory, "0")
         }
 
         if(directory.absolutePath == "/storage/self") { // we're allowed to list /storage/self -> list /storage/self/primary instead
-            if(isNavigatingBack) {
-                return directory.parentFile
-            }
-            else {
-                return File(directory, "primary")
-            }
+            return File(directory, "primary")
         }
 
         return directory

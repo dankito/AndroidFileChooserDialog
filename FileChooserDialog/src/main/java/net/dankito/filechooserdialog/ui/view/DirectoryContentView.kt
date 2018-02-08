@@ -52,8 +52,8 @@ class DirectoryContentView @JvmOverloads constructor(
     }
 
 
-    fun showContentOfDirectory(directory: File, isNavigatingBack: Boolean = false) {
-        this.currentDirectory = fileService.avoidDirectoriesWeAreNotAllowedToList(directory, isNavigatingBack)
+    fun showContentOfDirectory(directory: File) {
+        this.currentDirectory = fileService.avoidDirectoriesWeAreNotAllowedToList(directory)
 
         fileService.getFilesOfDirectorySorted(currentDirectory, options.extensionsFilters)?.let { files ->
             contentAdapter.items = files
