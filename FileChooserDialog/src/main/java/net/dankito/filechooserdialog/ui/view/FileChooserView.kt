@@ -15,6 +15,7 @@ import kotlinx.android.synthetic.main.dialog_file_chooser.view.*
 import net.dankito.filechooserdialog.R
 import net.dankito.filechooserdialog.model.FileChooserDialogType
 import net.dankito.filechooserdialog.model.Options
+import net.dankito.filechooserdialog.service.BackStack
 import net.dankito.filechooserdialog.service.SelectedFilesManager
 import java.io.File
 
@@ -36,6 +37,9 @@ class FileChooserView {
     private lateinit var options: Options
 
     private lateinit var selectFilesCallback: (didUserSelectFiles: Boolean, List<File>?) -> Unit
+
+
+    private val backStack = BackStack()
 
 
     fun setup(rootView: View, dialogType: FileChooserDialogType, options: Options, selectFilesCallback: (didUserSelectFiles: Boolean, List<File>?) -> Unit) {
@@ -86,16 +90,14 @@ class FileChooserView {
 
 
     fun handlesBackButtonPress(): Boolean {
-        val parent = directoryContentView.currentDirectory.parentFile
-
         if(drawerLayout.isDrawerOpen(GravityCompat.START)) {
             closeDrawerLayout()
         }
-        else if(parent == null || parent.absolutePath == "/") {
-            cancelSelectingFiles()
+        else if(backStack.canNavigateBack()) {
+            backStack.pop()?.let { setCurrentDirectory(it) }
         }
-        else { // navigate up one level
-            setCurrentDirectory(parent, true)
+        else {
+            cancelSelectingFiles()
         }
 
         return true
@@ -123,11 +125,13 @@ class FileChooserView {
     }
 
 
-    private fun setCurrentDirectory(directory: File, isNavigatingBack: Boolean = false) {
-        directoryContentView.showContentOfDirectory(directory, isNavigatingBack)
+    private fun setCurrentDirectory(directory: File) {
+        directoryContentView.showContentOfDirectory(directory)
     }
 
     private fun currentDirectoryChanged(directory: File) {
+        backStack.add(directory)
+
         parentDirectoriesView.showParentDirectories(directory)
     }
 
