@@ -3,6 +3,7 @@ package net.dankito.filechooserdialog.ui.dialog
 import android.support.v4.app.FragmentActivity
 import android.view.View
 import net.dankito.filechooserdialog.model.FileChooserDialogType
+import net.dankito.filechooserdialog.model.Options
 import net.dankito.filechooserdialog.ui.view.FileChooserView
 import java.io.File
 
@@ -12,6 +13,8 @@ class FullscreenFileChooserDialog : FullscreenDialogFragment(), IFileChooserDial
     override val fileChooserView = FileChooserView()
 
     override var dialogType = FileChooserDialogType.SelectSingleFile
+
+    override var options = Options()
 
     override var selectSingleFileCallback: ((didUserSelectFile: Boolean, File?) -> Unit)? = null
 

@@ -28,12 +28,47 @@ class FilesService {
     }
 
 
-    fun getFilesOfDirectorySorted(directory: File): List<File>? {
-        directory.listFiles()?.let { files -> // listFiles() can return null, e.g when not having rights to read this directory
+    fun getFilesOfDirectorySorted(directory: File, extensionsFilters: List<String> = emptyList()): List<File>? {
+        getFilesOfDirectory(directory, extensionsFilters)?.let { files ->
             return files.sortedWith(fileComparator)
         }
 
         return null
+    }
+
+    fun getFilesOfDirectory(directory: File, extensionsFilters: List<String> = emptyList()): List<File>? {
+        if(extensionsFilters.isEmpty()) {
+            return directory.listFiles()?.toList() // listFiles() can return null, e.g when not having rights to read this directory
+        }
+
+        return directory.listFiles { file ->
+            val normalizedExtensionsFilters = normalizeExtensionFilters(extensionsFilters)
+
+            file?.let {
+                return@listFiles file.isDirectory || normalizedExtensionsFilters.contains(it.extension.toLowerCase())
+            }
+
+            false
+        }?.toList()
+    }
+
+    /**
+     * Removes '*.' at start of extension filter on lower cases extension
+     */
+    fun normalizeExtensionFilters(extensionsFilters: List<String>): List<String> {
+        return extensionsFilters.map {
+            var normalizedFilter = it
+
+            if(normalizedFilter.startsWith('*')) {
+                normalizedFilter = normalizedFilter.substring(1)
+            }
+
+            if(normalizedFilter.startsWith('.')) {
+                normalizedFilter = normalizedFilter.substring(1)
+            }
+
+            normalizedFilter.toLowerCase()
+        }
     }
 
 

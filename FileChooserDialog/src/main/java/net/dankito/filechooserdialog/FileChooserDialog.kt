@@ -1,6 +1,7 @@
 package net.dankito.filechooserdialog
 
 import android.support.v4.app.FragmentActivity
+import net.dankito.filechooserdialog.model.Options
 import net.dankito.filechooserdialog.ui.dialog.AlertFileChooserDialog
 import net.dankito.filechooserdialog.ui.dialog.FullscreenFileChooserDialog
 import net.dankito.filechooserdialog.ui.dialog.IFileChooserDialog
@@ -11,34 +12,39 @@ class FileChooserDialog {
 
     companion object {
 
-        fun showOpenSingleFileDialog(activity: FragmentActivity, selectSingleFileCallback: (didUserSelectFile: Boolean, File?) -> Unit): IFileChooserDialog {
+        @JvmOverloads
+        fun showOpenSingleFileDialog(activity: FragmentActivity, options: Options = Options(), selectSingleFileCallback: (didUserSelectFile: Boolean, File?) -> Unit):
+                IFileChooserDialog {
             val dialog = AlertFileChooserDialog()
 
-            dialog.showOpenSingleFileDialog(activity, selectSingleFileCallback)
+            dialog.showOpenSingleFileDialog(activity, options, selectSingleFileCallback)
 
             return dialog
         }
 
-        fun showOpenMultipleFilesDialog(activity: FragmentActivity, selectMultipleFilesCallback: (didUserSelectFiles: Boolean, List<File>?) -> Unit): IFileChooserDialog {
+        @JvmOverloads
+        fun showOpenMultipleFilesDialog(activity: FragmentActivity, options: Options = Options(), selectMultipleFilesCallback: (didUserSelectFiles: Boolean, List<File>?) -> Unit): IFileChooserDialog {
             val dialog = AlertFileChooserDialog()
 
-            dialog.showOpenMultipleFilesDialog(activity, selectMultipleFilesCallback)
+            dialog.showOpenMultipleFilesDialog(activity, options, selectMultipleFilesCallback)
 
             return dialog
         }
 
-        fun showOpenSingleFileDialogInFullscreen(activity: FragmentActivity, selectSingleFileCallback: (didUserSelectFile: Boolean, File?) -> Unit): IFileChooserDialog {
+        @JvmOverloads
+        fun showOpenSingleFileDialogInFullscreen(activity: FragmentActivity, options: Options = Options(), selectSingleFileCallback: (didUserSelectFile: Boolean, File?) -> Unit): IFileChooserDialog {
             val dialog = FullscreenFileChooserDialog()
 
-            dialog.showOpenSingleFileDialog(activity, selectSingleFileCallback)
+            dialog.showOpenSingleFileDialog(activity, options, selectSingleFileCallback)
 
             return dialog
         }
 
-        fun showOpenMultipleFilesDialogInFullscreen(activity: FragmentActivity, selectMultipleFilesCallback: (didUserSelectFiles: Boolean, List<File>?) -> Unit): IFileChooserDialog {
+        @JvmOverloads
+        fun showOpenMultipleFilesDialogInFullscreen(activity: FragmentActivity, options: Options = Options(), selectMultipleFilesCallback: (didUserSelectFiles: Boolean, List<File>?) -> Unit): IFileChooserDialog {
             val dialog = FullscreenFileChooserDialog()
 
-            dialog.showOpenMultipleFilesDialog(activity, selectMultipleFilesCallback)
+            dialog.showOpenMultipleFilesDialog(activity, options, selectMultipleFilesCallback)
 
             return dialog
         }

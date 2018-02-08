@@ -14,6 +14,7 @@ import android.widget.Button
 import kotlinx.android.synthetic.main.dialog_file_chooser.view.*
 import net.dankito.filechooserdialog.R
 import net.dankito.filechooserdialog.model.FileChooserDialogType
+import net.dankito.filechooserdialog.model.Options
 import net.dankito.filechooserdialog.service.SelectedFilesManager
 import java.io.File
 
@@ -32,10 +33,13 @@ class FileChooserView {
 
     private lateinit var selectedFilesManager: SelectedFilesManager
 
+    private lateinit var options: Options
+
     private lateinit var selectFilesCallback: (didUserSelectFiles: Boolean, List<File>?) -> Unit
 
 
-    fun setup(rootView: View, dialogType: FileChooserDialogType, selectFilesCallback: (didUserSelectFiles: Boolean, List<File>?) -> Unit) {
+    fun setup(rootView: View, dialogType: FileChooserDialogType, options: Options, selectFilesCallback: (didUserSelectFiles: Boolean, List<File>?) -> Unit) {
+        this.options = options
         this.selectFilesCallback = selectFilesCallback
 
         selectedFilesManager = SelectedFilesManager(dialogType)
@@ -45,7 +49,7 @@ class FileChooserView {
         parentDirectoriesView.parentDirectorySelectedListener = { setCurrentDirectory(it) }
 
         directoryContentView = rootView.directoryContentView
-        directoryContentView.setupDialog(selectedFilesManager)
+        directoryContentView.setupView(selectedFilesManager, options)
         directoryContentView.currentDirectoryChangedListener = { currentDirectoryChanged(it) }
 
         rootView.btnCancel.setOnClickListener { cancelSelectingFiles() }
