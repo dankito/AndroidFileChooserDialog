@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -9,58 +9,111 @@
     tools:context="net.dankito.filechooserdialog.demo.MainActivity"
     >
 
-    <Button
-        android:id="@+id/btnSelectSingleFile"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/activity_main_show_file_chooser_buttons_height"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="@dimen/activity_main_show_file_chooser_buttons_margin_top"
-        android:layout_marginLeft="@dimen/activity_main_show_file_chooser_buttons_margin_left_right"
-        android:layout_marginStart="@dimen/activity_main_show_file_chooser_buttons_margin_left_right"
-        android:layout_marginRight="@dimen/activity_main_show_file_chooser_buttons_margin_left_right"
-        android:layout_marginEnd="@dimen/activity_main_show_file_chooser_buttons_margin_left_right"
-        android:layout_marginBottom="@dimen/activity_main_show_file_chooser_buttons_margin_bottom"
-        android:text="@string/select_single_file"
-    />
+        android:layout_height="wrap_content">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rcySelectedSingleFile"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/activity_main_recycler_view_select_single_file_height"
-        android:layout_below="@+id/btnSelectSingleFile"
-        android:layout_marginLeft="@dimen/activity_main_recycler_views_margin_left_right"
-        android:layout_marginStart="@dimen/activity_main_recycler_views_margin_left_right"
-        android:layout_marginRight="@dimen/activity_main_recycler_views_margin_left_right"
-        android:layout_marginEnd="@dimen/activity_main_recycler_views_margin_left_right"
-        android:layout_marginBottom="@dimen/activity_main_recycler_view_select_single_file_margin_bottom"
-        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
-        android:scrollbars="vertical"
-    />
+        <Button
+            android:id="@+id/btnSelectSingleFile"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/activity_main_show_file_chooser_buttons_height"
+            android:layout_marginTop="@dimen/activity_main_show_file_chooser_buttons_margin_top"
+            android:layout_marginLeft="@dimen/activity_main_show_file_chooser_buttons_margin_left_right"
+            android:layout_marginStart="@dimen/activity_main_show_file_chooser_buttons_margin_left_right"
+            android:layout_marginRight="@dimen/activity_main_show_file_chooser_buttons_margin_left_right"
+            android:layout_marginEnd="@dimen/activity_main_show_file_chooser_buttons_margin_left_right"
+            android:layout_marginBottom="@dimen/activity_main_show_file_chooser_buttons_margin_bottom"
+            android:text="@string/select_single_file"
+        />
 
-    <Button
-        android:id="@+id/btnSelectMultipleFiles"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/activity_main_show_file_chooser_buttons_height"
-        android:layout_below="@+id/rcySelectedSingleFile"
-        android:layout_marginLeft="@dimen/activity_main_show_file_chooser_buttons_margin_left_right"
-        android:layout_marginStart="@dimen/activity_main_show_file_chooser_buttons_margin_left_right"
-        android:layout_marginRight="@dimen/activity_main_show_file_chooser_buttons_margin_left_right"
-        android:layout_marginEnd="@dimen/activity_main_show_file_chooser_buttons_margin_left_right"
-        android:layout_marginBottom="@dimen/activity_main_show_file_chooser_buttons_margin_bottom"
-        android:text="@string/select_multiple_files"
-    />
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rcySelectedSingleFile"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/activity_main_recycler_view_select_single_file_height"
+            android:layout_marginLeft="@dimen/activity_main_recycler_views_margin_left_right"
+            android:layout_marginStart="@dimen/activity_main_recycler_views_margin_left_right"
+            android:layout_marginRight="@dimen/activity_main_recycler_views_margin_left_right"
+            android:layout_marginEnd="@dimen/activity_main_recycler_views_margin_left_right"
+            android:layout_marginBottom="@dimen/activity_main_recycler_view_select_single_file_margin_bottom"
+            app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+            android:scrollbars="vertical"
+        />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rcySelectedMultipleFiles"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/activity_main_recycler_view_select_multiple_files_height"
-        android:layout_below="@+id/btnSelectMultipleFiles"
-        android:layout_marginLeft="@dimen/activity_main_recycler_views_margin_left_right"
-        android:layout_marginStart="@dimen/activity_main_recycler_views_margin_left_right"
-        android:layout_marginRight="@dimen/activity_main_recycler_views_margin_left_right"
-        android:layout_marginEnd="@dimen/activity_main_recycler_views_margin_left_right"
-        android:layout_marginBottom="@dimen/activity_main_recycler_view_select_multiple_files_margin_bottom"
-        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
-    />
+        <Button
+            android:id="@+id/btnSelectMultipleFiles"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/activity_main_show_file_chooser_buttons_height"
+            android:layout_marginLeft="@dimen/activity_main_show_file_chooser_buttons_margin_left_right"
+            android:layout_marginStart="@dimen/activity_main_show_file_chooser_buttons_margin_left_right"
+            android:layout_marginRight="@dimen/activity_main_show_file_chooser_buttons_margin_left_right"
+            android:layout_marginEnd="@dimen/activity_main_show_file_chooser_buttons_margin_left_right"
+            android:layout_marginBottom="@dimen/activity_main_show_file_chooser_buttons_margin_bottom"
+            android:text="@string/select_multiple_files"
+        />
 
-</RelativeLayout>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rcySelectedMultipleFiles"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/activity_main_recycler_view_select_multiple_files_height"
+            android:layout_marginLeft="@dimen/activity_main_recycler_views_margin_left_right"
+            android:layout_marginStart="@dimen/activity_main_recycler_views_margin_left_right"
+            android:layout_marginRight="@dimen/activity_main_recycler_views_margin_left_right"
+            android:layout_marginEnd="@dimen/activity_main_recycler_views_margin_left_right"
+            android:layout_marginBottom="@dimen/activity_main_recycler_view_select_multiple_files_margin_bottom"
+            app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+        />
+
+        <Button
+            android:id="@+id/btnSelectSingleFileInFullscreenDialog"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/activity_main_show_file_chooser_buttons_height"
+            android:layout_marginTop="@dimen/activity_main_show_file_chooser_buttons_margin_top"
+            android:layout_marginLeft="@dimen/activity_main_show_file_chooser_buttons_margin_left_right"
+            android:layout_marginStart="@dimen/activity_main_show_file_chooser_buttons_margin_left_right"
+            android:layout_marginRight="@dimen/activity_main_show_file_chooser_buttons_margin_left_right"
+            android:layout_marginEnd="@dimen/activity_main_show_file_chooser_buttons_margin_left_right"
+            android:layout_marginBottom="@dimen/activity_main_show_file_chooser_buttons_margin_bottom"
+            android:text="@string/select_single_file_in_fullscreen"
+        />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rcySelectedSingleFileInFullscreenDialog"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/activity_main_recycler_view_select_single_file_height"
+            android:layout_marginLeft="@dimen/activity_main_recycler_views_margin_left_right"
+            android:layout_marginStart="@dimen/activity_main_recycler_views_margin_left_right"
+            android:layout_marginRight="@dimen/activity_main_recycler_views_margin_left_right"
+            android:layout_marginEnd="@dimen/activity_main_recycler_views_margin_left_right"
+            android:layout_marginBottom="@dimen/activity_main_recycler_view_select_single_file_margin_bottom"
+            app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+            android:scrollbars="vertical"
+        />
+
+        <Button
+            android:id="@+id/btnSelectMultipleFilesInFullscreenDialog"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/activity_main_show_file_chooser_buttons_height"
+            android:layout_marginLeft="@dimen/activity_main_show_file_chooser_buttons_margin_left_right"
+            android:layout_marginStart="@dimen/activity_main_show_file_chooser_buttons_margin_left_right"
+            android:layout_marginRight="@dimen/activity_main_show_file_chooser_buttons_margin_left_right"
+            android:layout_marginEnd="@dimen/activity_main_show_file_chooser_buttons_margin_left_right"
+            android:layout_marginBottom="@dimen/activity_main_show_file_chooser_buttons_margin_bottom"
+            android:text="@string/select_multiple_files_in_fullscreen"
+        />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rcySelectedMultipleFilesInFullscreenDialog"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/activity_main_recycler_view_select_multiple_files_height"
+            android:layout_marginLeft="@dimen/activity_main_recycler_views_margin_left_right"
+            android:layout_marginStart="@dimen/activity_main_recycler_views_margin_left_right"
+            android:layout_marginRight="@dimen/activity_main_recycler_views_margin_left_right"
+            android:layout_marginEnd="@dimen/activity_main_recycler_views_margin_left_right"
+            android:layout_marginBottom="@dimen/activity_main_recycler_view_select_multiple_files_margin_bottom"
+            app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+        />
+
+    </LinearLayout>
+
+</ScrollView>

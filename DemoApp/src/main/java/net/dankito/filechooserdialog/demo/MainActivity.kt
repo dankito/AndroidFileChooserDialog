@@ -26,6 +26,10 @@ class MainActivity : AppCompatActivity() {
 
     private var selectedMultipleFilesAdapter = DirectoryContentAdapter(previewImageService, SelectedFilesManager(FileChooserDialogType.SelectMultipleFiles))
 
+    private var selectedSingleFileInFullscreenDialogAdapter = DirectoryContentAdapter(previewImageService, SelectedFilesManager(FileChooserDialogType.SelectSingleFile))
+
+    private var selectedMultipleFilesInFullscreenDialogAdapter = DirectoryContentAdapter(previewImageService, SelectedFilesManager(FileChooserDialogType.SelectMultipleFiles))
+
     private var fileChooserDialog: IFileChooserDialog? = null
 
 
@@ -34,9 +38,13 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-        rcySelectedSingleFile.adapter = selectedSingleFileAdapter
 
+        rcySelectedSingleFile.adapter = selectedSingleFileAdapter
         rcySelectedMultipleFiles.adapter = selectedMultipleFilesAdapter
+
+        rcySelectedSingleFileInFullscreenDialog.adapter = selectedSingleFileInFullscreenDialogAdapter
+        rcySelectedMultipleFilesInFullscreenDialog.adapter = selectedMultipleFilesInFullscreenDialogAdapter
+
 
         btnSelectSingleFile.setOnClickListener {
             fileChooserDialog = FileChooserDialog.showOpenSingleFileDialog(this) { didUserSelectFile, selectedFile ->
@@ -48,6 +56,20 @@ class MainActivity : AppCompatActivity() {
         btnSelectMultipleFiles.setOnClickListener {
             fileChooserDialog = FileChooserDialog.showOpenMultipleFilesDialog(this) { didUserSelectFiles, selectedFiles ->
                 selectedMultipleFilesAdapter.items = selectedFiles ?: listOf()
+                fileChooserDialog = null
+            }
+        }
+
+        btnSelectSingleFileInFullscreenDialog.setOnClickListener {
+            fileChooserDialog = FileChooserDialog.showOpenSingleFileDialogInFullscreen(this) { didUserSelectFile, selectedFile ->
+                selectedSingleFileInFullscreenDialogAdapter.items = if(selectedFile != null) listOf(selectedFile) else listOf()
+                fileChooserDialog = null
+            }
+        }
+
+        btnSelectMultipleFilesInFullscreenDialog.setOnClickListener {
+            fileChooserDialog = FileChooserDialog.showOpenMultipleFilesDialogInFullscreen(this) { didUserSelectFiles, selectedFiles ->
+                selectedMultipleFilesInFullscreenDialogAdapter.items = selectedFiles ?: listOf()
                 fileChooserDialog = null
             }
         }
