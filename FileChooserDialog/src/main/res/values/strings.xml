@@ -2,6 +2,18 @@
 
     <string name="select">Select</string>
 
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="folder_shortcut_internal_storage">Internal Storage</string>
+    <string name="folder_shortcut_sd_card">SD card</string>
+    <string name="folder_shortcut_downloads">Downloads</string>
+    <string name="folder_shortcut_camera_photos">Camera Photos</string>
+    <string name="folder_shortcut_pictures">Pictures</string>
+    <string name="folder_shortcut_music">Music</string>
+    <string name="folder_shortcut_movies">Movies</string>
+    <string name="folder_shortcut_documents">Documents</string>
+
     <string name="view_parent_directory_path_separator">/</string>
 
 </resources>

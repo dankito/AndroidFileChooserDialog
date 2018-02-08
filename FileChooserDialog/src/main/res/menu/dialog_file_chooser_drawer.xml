@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="none">
+
+        <item
+            android:id="@+id/navFolderShortcutInternalStorage"
+            android:icon="@drawable/ic_folder_white_48dp"
+            android:title="@string/folder_shortcut_internal_storage"
+        />
+
+        <item
+            android:id="@+id/navFolderShortcutSdCard"
+            android:icon="@drawable/ic_folder_white_48dp"
+            android:title="@string/folder_shortcut_sd_card"
+            android:visible="false"
+        />
+
+        <item
+            android:id="@+id/navFolderShortcutDownloads"
+            android:icon="@drawable/ic_folder_white_48dp"
+            android:title="@string/folder_shortcut_downloads"
+        />
+
+        <item
+            android:id="@+id/navFolderShortcutCameraPhotos"
+            android:icon="@drawable/ic_folder_white_48dp"
+            android:title="@string/folder_shortcut_camera_photos"
+        />
+
+        <item
+            android:id="@+id/navFolderShortcutPictures"
+            android:icon="@drawable/ic_folder_white_48dp"
+            android:title="@string/folder_shortcut_pictures"
+        />
+
+        <item
+            android:id="@+id/navFolderShortcutMusic"
+            android:icon="@drawable/ic_folder_white_48dp"
+            android:title="@string/folder_shortcut_music"
+        />
+
+        <item
+            android:id="@+id/navFolderShortcutMovies"
+            android:icon="@drawable/ic_folder_white_48dp"
+            android:title="@string/folder_shortcut_movies"
+        />
+
+        <item
+            android:id="@+id/navFolderShortcutDocuments"
+            android:icon="@drawable/ic_folder_white_48dp"
+            android:title="@string/folder_shortcut_documents"
+            android:visible="false"
+        />
+
+    </group>
+
+</menu>

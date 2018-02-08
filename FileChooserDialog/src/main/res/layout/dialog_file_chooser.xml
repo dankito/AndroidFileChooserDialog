@@ -1,64 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<android.support.v4.widget.DrawerLayout
+    android:id="@+id/folderShortcutsDrawerLayout"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/dialog_background"
->
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_alignParentTop="true"
-        style="@style/ToolbarStyle"
-    >
-
-        <net.dankito.filechooserdialog.ui.view.ParentDirectoriesView
-            android:id="@+id/parentDirectoriesView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-        />
-
-    </android.support.v7.widget.Toolbar>
-
-
-    <net.dankito.filechooserdialog.ui.view.DirectoryContentView
-        android:id="@+id/directoryContentView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/toolbar"
-        android:layout_above="@+id/lytButtonBar"
-        android:scrollbars="vertical"
-    />
 
     <RelativeLayout
-        android:id="@+id/lytButtonBar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_height="match_parent"
+        android:background="@color/dialog_background"
     >
 
-        <Button
-            android:id="@+id/btnSelect"
-            android:layout_width="@dimen/dialog_buttons_width"
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_alignParentTop="true"
+            style="@style/ToolbarStyle"
+        >
+
+            <net.dankito.filechooserdialog.ui.view.ParentDirectoriesView
+                android:id="@+id/parentDirectoriesView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+            />
+
+        </android.support.v7.widget.Toolbar>
+
+
+        <net.dankito.filechooserdialog.ui.view.DirectoryContentView
+            android:id="@+id/directoryContentView"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            style="?android:attr/buttonBarButtonStyle"
-            android:text="@string/select"
-            android:enabled="false"
+            android:layout_below="@+id/toolbar"
+            android:layout_above="@+id/lytButtonBar"
+            android:scrollbars="vertical"
         />
 
-        <Button
-            android:id="@+id/btnCancel"
-            android:layout_width="@dimen/dialog_buttons_width"
+        <RelativeLayout
+            android:id="@+id/lytButtonBar"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_toLeftOf="@+id/btnSelect"
-            android:layout_toStartOf="@+id/btnSelect"
-            style="?android:attr/buttonBarButtonStyle"
-            android:text="@android:string/cancel"
-        />
+            android:layout_alignParentBottom="true"
+        >
+
+            <Button
+                android:id="@+id/btnSelect"
+                android:layout_width="@dimen/dialog_buttons_width"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                style="?android:attr/buttonBarButtonStyle"
+                android:text="@string/select"
+                android:enabled="false"
+            />
+
+            <Button
+                android:id="@+id/btnCancel"
+                android:layout_width="@dimen/dialog_buttons_width"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@+id/btnSelect"
+                android:layout_toStartOf="@+id/btnSelect"
+                style="?android:attr/buttonBarButtonStyle"
+                android:text="@android:string/cancel"
+            />
+
+        </RelativeLayout>
 
     </RelativeLayout>
 
-</RelativeLayout>
+
+    <!-- place below base view, otherwise setNavigationItemSelectedListener() is not working, see https://stackoverflow.com/questions/31397792/navigationview-onnavigationitemselectedlistener-not-being-called -->
+    <android.support.design.widget.NavigationView
+        android:id="@+id/navigationView"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/dialog_file_chooser_navigation_header"
+        app:menu="@menu/dialog_file_chooser_drawer"
+    />
+
+
+</android.support.v4.widget.DrawerLayout>
