@@ -1,6 +1,7 @@
 package net.dankito.filechooserdialog.ui.view
 
 import android.content.Context
+import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.AttributeSet
@@ -38,7 +39,10 @@ class DirectoryContentView @JvmOverloads constructor(
 
 
     init {
-        layoutManager = LinearLayoutManager(context)
+        layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+
+        val dividerItemDecoration = DividerItemDecoration(context, LinearLayoutManager.VERTICAL)
+        addItemDecoration(dividerItemDecoration)
     }
 
     fun setupView(selectedFilesManager: SelectedFilesManager, options: Options) {
