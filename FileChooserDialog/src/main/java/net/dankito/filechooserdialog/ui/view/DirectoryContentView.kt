@@ -4,6 +4,7 @@ import android.content.Context
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.AttributeSet
+import net.dankito.filechooserdialog.model.FileChooserDialogType
 import net.dankito.filechooserdialog.service.FilesService
 import net.dankito.filechooserdialog.service.MimeTypeService
 import net.dankito.filechooserdialog.service.PreviewImageService
@@ -21,6 +22,8 @@ class DirectoryContentView @JvmOverloads constructor(
         private set
 
     val selectedFiles: List<File> = mutableListOf()
+
+    var dialogType = FileChooserDialogType.SelectSingleFile
 
 
     var currentDirectoryChangedListener: ((currentDirectory: File) -> Unit)? = null
@@ -67,6 +70,10 @@ class DirectoryContentView @JvmOverloads constructor(
     }
 
     private fun toggleFileIsSelected(file: File) {
+        if(dialogType != FileChooserDialogType.SelectMultipleFiles) {
+            clearSelectedFiles()
+        }
+
         if(selectedFiles.contains(file)) {
             (selectedFiles as MutableList).remove(file)
         }
@@ -77,6 +84,10 @@ class DirectoryContentView @JvmOverloads constructor(
         adapter.notifyDataSetChanged()
 
         selectedFilesChangedListener?.invoke(selectedFiles)
+    }
+
+    private fun clearSelectedFiles() {
+        (selectedFiles as MutableList).clear()
     }
 
 }

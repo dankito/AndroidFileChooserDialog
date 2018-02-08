@@ -4,6 +4,7 @@ import android.os.Environment
 import android.support.v4.app.FragmentManager
 import android.view.View
 import kotlinx.android.synthetic.main.dialog_file_chooser.view.*
+import net.dankito.filechooserdialog.model.FileChooserDialogType
 import net.dankito.filechooserdialog.ui.dialog.FullscreenDialogFragment
 import net.dankito.filechooserdialog.ui.view.DirectoryContentView
 import net.dankito.filechooserdialog.ui.view.ParentDirectoriesView
@@ -22,11 +23,15 @@ class FileChooserDialog : FullscreenDialogFragment() {
     private lateinit var directoryContentView: DirectoryContentView
 
 
+    private lateinit var dialogType: FileChooserDialogType
+
+
     override fun setupUI(rootView: View) {
         parentDirectoriesView = rootView.parentDirectoriesView
         parentDirectoriesView.parentDirectorySelectedListener = { setCurrentDirectory(it) }
 
         directoryContentView = rootView.directoryContentView
+        directoryContentView.dialogType = dialogType
         directoryContentView.currentDirectoryChangedListener = { currentDirectoryChanged(it) }
 
         setCurrentDirectory(Environment.getExternalStorageDirectory())
@@ -55,7 +60,15 @@ class FileChooserDialog : FullscreenDialogFragment() {
     }
 
 
-    fun showOpenFileDialog(fragmentManager: FragmentManager) {
+    fun showOpenSingleFileDialog(fragmentManager: FragmentManager) {
+        dialogType = FileChooserDialogType.SelectSingleFile
+
+        showInFullscreen(fragmentManager)
+    }
+
+    fun showOpenMultipleFilesDialog(fragmentManager: FragmentManager) {
+        dialogType = FileChooserDialogType.SelectMultipleFiles
+
         showInFullscreen(fragmentManager)
     }
 
