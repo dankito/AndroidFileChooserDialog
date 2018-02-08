@@ -91,7 +91,8 @@ class FileChooserView {
         }
         else if(parent == null || parent.absolutePath == "/") {
             cancelSelectingFiles()
-            return false
+
+            return true
         }
         else { // navigate up one level
             setCurrentDirectory(parent, true)
