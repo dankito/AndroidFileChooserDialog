@@ -7,8 +7,8 @@ import net.dankito.filechooserdialog.ui.adapter.viewholder.DirectoryContentViewH
 import java.io.File
 
 
-class LoadPreviewImageTask(private val viewHolder: DirectoryContentViewHolder, private val file: File, private val thumbnailService: ThumbnailService)
-    : AsyncTask<Void, Void, Bitmap?>() {
+class LoadPreviewImageTask(private val viewHolder: DirectoryContentViewHolder, private val file: File, private val thumbnailService: ThumbnailService,
+                           private val previewImageCache: PreviewImageCache) : AsyncTask<Void, Void, Bitmap?>() {
 
     private val itemId = viewHolder.itemId
 
@@ -22,6 +22,10 @@ class LoadPreviewImageTask(private val viewHolder: DirectoryContentViewHolder, p
 
         if(viewHolder.itemId == itemId) { // viewHolder still holds the same file
             viewHolder.imgThumbnail.setImageBitmap(result)
+        }
+
+        if(result != null) {
+            previewImageCache.cachePreviewImage(file, result)
         }
     }
 
