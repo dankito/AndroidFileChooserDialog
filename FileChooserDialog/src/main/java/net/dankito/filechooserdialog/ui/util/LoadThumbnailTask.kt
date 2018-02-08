@@ -14,7 +14,7 @@ class LoadThumbnailTask(private val viewHolder: DirectoryContentViewHolder, priv
 
 
     override fun doInBackground(vararg p0: Void?): Bitmap? {
-        return thumbnailService.getThumbnail(file, mimeType, 71, 40)
+        return thumbnailService.getThumbnail(file, mimeType, 71, 40) // 71 : 40 = 16 : 9
     }
 
     override fun onPostExecute(result: Bitmap?) {
