@@ -5,6 +5,19 @@ import java.io.File
 
 class FilesService {
 
+    fun avoidDirectoriesWeAreNotAllowedToList(directory: File): File {
+        if(directory.absolutePath == "/storage/emulated") { // we're allowed to list /storage/emulated -> list /storage/emulated/0 instead
+            return File(directory, "0")
+        }
+
+        if(directory.absolutePath == "/storage/self") { // we're allowed to list /storage/self -> list /storage/self/primary instead
+            return File(directory, "primary")
+        }
+
+        return directory
+    }
+
+
     fun getFilesOfDirectorySorted(directory: File): List<File>? {
         directory.listFiles()?.let { files -> // listFiles() can return null, e.g when not having rights to read this directory
             return files.sortedWith(fileComparator)

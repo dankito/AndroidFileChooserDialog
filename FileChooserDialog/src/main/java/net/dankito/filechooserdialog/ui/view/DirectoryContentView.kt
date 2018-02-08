@@ -41,10 +41,12 @@ class DirectoryContentView @JvmOverloads constructor(
 
 
     fun setCurrentDirectory(directory: File) {
-        fileService.getFilesOfDirectorySorted(directory)?.let { files ->
+        val directoryToUse = fileService.avoidDirectoriesWeAreNotAllowedToList(directory)
+
+        fileService.getFilesOfDirectorySorted(directoryToUse)?.let { files ->
             contentAdapter.items = files
 
-            currentDirectoryChangedListener?.invoke(directory)
+            currentDirectoryChangedListener?.invoke(directoryToUse)
         }
     }
 
