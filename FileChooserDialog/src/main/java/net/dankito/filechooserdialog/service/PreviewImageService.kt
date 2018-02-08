@@ -1,5 +1,6 @@
 package net.dankito.filechooserdialog.service
 
+import android.os.Environment
 import net.dankito.filechooserdialog.R
 import net.dankito.filechooserdialog.ui.adapter.viewholder.DirectoryContentViewHolder
 import net.dankito.filechooserdialog.ui.extensions.setTintColor
@@ -33,14 +34,26 @@ class PreviewImageService(private val thumbnailService: ThumbnailService, privat
 
         if(mimeType == null) {
             if(file.isDirectory) {
-                setPreviewImageToResource(viewHolder, R.drawable.ic_folder_white_48dp)
+                setPreviewImageForFolder(viewHolder, file)
             }
-            else {
+            else { // fallback
                 setPreviewImageToResource(viewHolder, R.drawable.ic_insert_drive_file_white_48dp)
             }
         }
         else {
             setPreviewImageForFile(viewHolder, file, mimeType)
+        }
+    }
+
+    private fun setPreviewImageForFolder(viewHolder: DirectoryContentViewHolder, folder: File) {
+        when(folder) {
+            Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) ->
+                    setPreviewImageToResource(viewHolder, R.drawable.ic_folder_download_white_48dp)
+            Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM),
+            Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)->
+                setPreviewImageToResource(viewHolder, R.drawable.ic_folder_image_white_48dp)
+            else ->
+                setPreviewImageToResource(viewHolder, R.drawable.ic_folder_white_48dp)
         }
     }
 
