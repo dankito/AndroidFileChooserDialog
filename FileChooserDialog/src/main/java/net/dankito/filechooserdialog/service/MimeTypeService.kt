@@ -16,19 +16,19 @@ class MimeTypeService {
 
 
     fun isImageFile(mimeType: String): Boolean {
-        return mimeType.startsWith("image/")
+        return mimeType.startsWith("image/", true)
     }
 
     fun isAudioFile(mimeType: String): Boolean {
-        return mimeType.startsWith("audio/")
+        return mimeType.startsWith("audio/", true)
     }
 
     fun isVideoFile(mimeType: String): Boolean {
-        return mimeType.startsWith("video/")
+        return mimeType.startsWith("video/", true)
     }
 
     fun isTextFile(mimeType: String): Boolean {
-        return mimeType.startsWith("text/")
+        return mimeType.startsWith("text/", true)
     }
 
 
