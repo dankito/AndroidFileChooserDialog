@@ -9,7 +9,7 @@ import kotlinx.android.synthetic.main.list_item_file.view.*
 
 class DirectoryContentViewHolder(fileListItemView: View) : RecyclerView.ViewHolder(fileListItemView) {
 
-    val imgThumbnail: ImageView = fileListItemView.imgThumbnail
+    val imgPreviewImage: ImageView = fileListItemView.imgPreviewImage
 
     val txtFilename: TextView = fileListItemView.txtFilename
 

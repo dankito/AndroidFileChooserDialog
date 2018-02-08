@@ -17,11 +17,11 @@ class PreviewImageService(private val thumbnailService: ThumbnailService, privat
         val cachedPreviewImage = previewImageCache.getCachedPreviewImage(file)
 
         if(cachedPreviewImage != null) {
-            viewHolder.imgThumbnail.setImageBitmap(cachedPreviewImage)
+            viewHolder.imgPreviewImage.setImageBitmap(cachedPreviewImage)
         }
         else {
-            viewHolder.imgThumbnail.setImageBitmap(null) // reset preview image (don't wait till preview image is calculated to show it, as otherwise it may show previous file's preview image
-            viewHolder.imgThumbnail.clearColorFilter()
+            viewHolder.imgPreviewImage.setImageBitmap(null) // reset preview image (don't wait till preview image is calculated to show it, as otherwise it may show previous file's preview image
+            viewHolder.imgPreviewImage.clearColorFilter()
 
             getPreviewImageForFile(viewHolder, file)
         }
@@ -49,9 +49,9 @@ class PreviewImageService(private val thumbnailService: ThumbnailService, privat
     }
 
     private fun setPreviewImageToResource(viewHolder: DirectoryContentViewHolder, imageResourceId: Int) {
-        viewHolder.imgThumbnail.setImageResource(imageResourceId)
+        viewHolder.imgPreviewImage.setImageResource(imageResourceId)
 
-        viewHolder.imgThumbnail.setTintColor(R.color.file_icon_tint_color)
+        viewHolder.imgPreviewImage.setTintColor(R.color.file_icon_tint_color)
     }
 
     private fun canLoadThumbnailForFile(mimeType: String): Boolean {
