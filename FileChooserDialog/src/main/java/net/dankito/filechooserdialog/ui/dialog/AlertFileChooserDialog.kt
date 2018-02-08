@@ -1,7 +1,9 @@
 package net.dankito.filechooserdialog.ui.dialog
 
+import android.content.DialogInterface
 import android.support.v4.app.FragmentActivity
 import android.support.v7.app.AlertDialog
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import net.dankito.filechooserdialog.R
 import net.dankito.filechooserdialog.model.FileChooserDialogType
@@ -36,6 +38,20 @@ class AlertFileChooserDialog : IFileChooserDialog {
 
         this.dialog = builder.create()
         dialog.show()
+
+
+        dialog.setOnKeyListener(keyEventListener)
+    }
+
+    private val keyEventListener = object : DialogInterface.OnKeyListener {
+        override fun onKey(dialog: DialogInterface?, keyCode: Int, keyEvent: KeyEvent?): Boolean {
+            if(keyEvent?.keyCode == KeyEvent.KEYCODE_BACK && keyEvent.action == KeyEvent.ACTION_UP) {
+                return handlesBackButtonPress()
+            }
+
+            return false
+        }
+
     }
 
     override fun closeDialogOnUiThread() {
