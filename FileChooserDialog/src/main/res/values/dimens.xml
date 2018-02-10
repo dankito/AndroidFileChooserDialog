@@ -14,6 +14,9 @@
     <dimen name="list_item_file_thumbnail_width">56dp</dimen>
     <dimen name="list_item_file_thumbnail_margin_left">6dp</dimen>
     <dimen name="list_item_file_thumbnail_margin_right">6dp</dimen>
+    <dimen name="list_item_file_is_selected_icon_size">25dp</dimen>
+    <dimen name="list_item_file_is_selected_icon_margin_left">6dp</dimen>
+    <dimen name="list_item_file_is_selected_icon_margin_right">12dp</dimen>
 
     <dimen name="view_parent_directory_min_width">30dp</dimen>
     <dimen name="view_parent_directory_path_separator_margin_right">6dp</dimen>

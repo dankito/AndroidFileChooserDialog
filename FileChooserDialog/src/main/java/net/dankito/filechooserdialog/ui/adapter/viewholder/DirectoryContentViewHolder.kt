@@ -13,4 +13,6 @@ class DirectoryContentViewHolder(fileListItemView: View) : RecyclerView.ViewHold
 
     val txtFilename: TextView = fileListItemView.txtFilename
 
+    val imgIsSelected: ImageView = fileListItemView.imgIsSelected
+
 }

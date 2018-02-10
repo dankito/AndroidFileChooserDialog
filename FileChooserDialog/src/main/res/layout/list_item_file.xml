@@ -23,14 +23,30 @@
         android:id="@+id/txtFilename"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/imgPreviewImage"
         android:layout_toEndOf="@+id/imgPreviewImage"
-        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/imgIsSelected"
+        android:layout_toStartOf="@+id/imgIsSelected"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
         android:gravity="center_vertical"
         android:textAlignment="gravity"
+    />
+
+    <ImageView
+        android:id="@+id/imgIsSelected"
+        android:layout_width="@dimen/list_item_file_is_selected_icon_size"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginLeft="@dimen/list_item_file_is_selected_icon_margin_left"
+        android:layout_marginStart="@dimen/list_item_file_is_selected_icon_margin_left"
+        android:layout_marginRight="@dimen/list_item_file_is_selected_icon_margin_right"
+        android:layout_marginEnd="@dimen/list_item_file_is_selected_icon_margin_right"
+        android:tint="@color/file_is_selected_tint_color"
+        android:scaleType="center"
+        android:src="@drawable/ic_check_white_48dp"
+        android:visibility="invisible"
     />
 
 </RelativeLayout>

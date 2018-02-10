@@ -30,7 +30,9 @@ class DirectoryContentAdapter(private val previewImageService: PreviewImageServi
 
         previewImageService.setPreviewImage(viewHolder, item)
 
-        viewHolder.itemView.isActivated = selectedFilesManager.isFileSelected(item)
+        val isSelected = selectedFilesManager.isFileSelected(item)
+        viewHolder.itemView.isActivated = isSelected
+        viewHolder.imgIsSelected.visibility = if(isSelected) View.VISIBLE else View.INVISIBLE
     }
 
 }
