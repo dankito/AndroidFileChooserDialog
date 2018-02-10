@@ -1,7 +1,10 @@
 package net.dankito.filechooserdialog.demo
 
+import android.os.Build
 import android.os.Bundle
+import android.support.v4.content.res.ResourcesCompat
 import android.support.v7.app.AppCompatActivity
+import android.view.WindowManager
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 import net.dankito.filechooserdialog.FileChooserDialog
@@ -37,6 +40,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+            window.statusBarColor = ResourcesCompat.getColor(resources, R.color.colorPrimaryDark, theme) // don't know why, after removing fitsSystemWindows status bar color had to be set manually
+        }
 
 
         rcySelectedSingleFile.adapter = selectedSingleFileAdapter
