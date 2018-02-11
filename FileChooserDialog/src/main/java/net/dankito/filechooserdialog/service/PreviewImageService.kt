@@ -62,6 +62,10 @@ class PreviewImageService(private val thumbnailService: ThumbnailService, privat
         }
         else {
             setPreviewImageToResource(viewHolder, getIconForFile(mimeType))
+
+            if(mimeTypeService.isAudioFile(mimeType)) { // set default icon for audio files above as fallback
+                LoadThumbnailTask(viewHolder, file, mimeType, thumbnailService, previewImageCache).execute() // then check if audio file's album art can be loaded from MediaStore
+            }
         }
     }
 
