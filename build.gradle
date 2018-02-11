@@ -6,7 +6,7 @@ buildscript {
         VersionName = '1.0'
 
         CompileSdkVersion = 26
-        MinSdkVersion = 15
+        MinSdkVersion = 16
         TargetSdkVersion = 26
 
         kotlinVersion = '1.2.21'

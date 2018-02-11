@@ -31,6 +31,8 @@ android {
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlinVersion"
 
+    implementation "com.github.mjdev:libaums:0.5.5" // to access USB devices
+
     implementation "com.android.support:appcompat-v7:$appCompatVersion"
     implementation "com.android.support:design:$appCompatVersion"
     implementation "com.android.support.constraint:constraint-layout:$constraintLayoutVersion"

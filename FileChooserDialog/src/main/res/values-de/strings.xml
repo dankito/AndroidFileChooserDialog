@@ -13,6 +13,10 @@
     <string name="folder_shortcut_music">Musik</string>
     <string name="folder_shortcut_movies">Filme</string>
     <string name="folder_shortcut_documents">Dokumente</string>
+    <string name="folder_shortcut_usb_device_menu_item_title">USB %d</string>
+    <string name="folder_shortcut_usb_device_with_product_name_menu_item_title">USB %d (%s)</string>
+
+    <string name="mount_usb_mass_storage_error">USB Stick konnte nicht gemountet werden. Gegenwärtig wird nur Fat32 unterstützt.</string>
 
     <string name="view_parent_directory_path_separator">/</string>
 
