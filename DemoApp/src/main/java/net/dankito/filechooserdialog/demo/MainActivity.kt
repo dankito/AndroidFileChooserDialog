@@ -84,6 +84,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
+        // only needed for FullscreenDialog variant
         if(fileChooserDialog == null || fileChooserDialog?.handlesBackButtonPress() == false) {
             super.onBackPressed()
         }
