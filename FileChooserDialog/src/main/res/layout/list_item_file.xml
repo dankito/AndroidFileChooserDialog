@@ -31,7 +31,7 @@
         android:layout_alignParentBottom="true"
         android:gravity="center_vertical"
         android:textAlignment="gravity"
-        android:maxLines="@dimen/list_item_file_file_name_max_lines"
+        android:maxLines="2"
         android:textSize="@dimen/list_item_file_file_name_text_size"
     />
 
