@@ -7,7 +7,7 @@ import android.view.KeyEvent
 import android.view.LayoutInflater
 import net.dankito.filechooserdialog.R
 import net.dankito.filechooserdialog.model.FileChooserDialogType
-import net.dankito.filechooserdialog.model.Options
+import net.dankito.filechooserdialog.model.FileChooserDialogConfig
 import net.dankito.filechooserdialog.ui.view.FileChooserView
 import java.io.File
 
@@ -18,7 +18,7 @@ class AlertFileChooserDialog : IFileChooserDialog {
 
     override var dialogType = FileChooserDialogType.SelectSingleFile
 
-    override var options = Options()
+    override var config = FileChooserDialogConfig()
 
     override var selectSingleFileCallback: ((didUserSelectFile: Boolean, File?) -> Unit)? = null
 

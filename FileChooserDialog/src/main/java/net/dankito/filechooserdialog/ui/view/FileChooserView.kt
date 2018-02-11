@@ -13,8 +13,8 @@ import android.view.View
 import android.widget.Button
 import kotlinx.android.synthetic.main.dialog_file_chooser.view.*
 import net.dankito.filechooserdialog.R
+import net.dankito.filechooserdialog.model.FileChooserDialogConfig
 import net.dankito.filechooserdialog.model.FileChooserDialogType
-import net.dankito.filechooserdialog.model.Options
 import net.dankito.filechooserdialog.service.BackStack
 import net.dankito.filechooserdialog.service.SelectedFilesManager
 import net.dankito.filechooserdialog.ui.extensions.setItemsTintColor
@@ -35,7 +35,7 @@ class FileChooserView {
 
     private lateinit var selectedFilesManager: SelectedFilesManager
 
-    private lateinit var options: Options
+    private lateinit var config: FileChooserDialogConfig
 
     private lateinit var selectFilesCallback: (didUserSelectFiles: Boolean, List<File>?) -> Unit
 
@@ -43,8 +43,8 @@ class FileChooserView {
     private val backStack = BackStack()
 
 
-    fun setup(rootView: View, dialogType: FileChooserDialogType, options: Options, selectFilesCallback: (didUserSelectFiles: Boolean, List<File>?) -> Unit) {
-        this.options = options
+    fun setup(rootView: View, dialogType: FileChooserDialogType, config: FileChooserDialogConfig, selectFilesCallback: (didUserSelectFiles: Boolean, List<File>?) -> Unit) {
+        this.config = config
         this.selectFilesCallback = selectFilesCallback
 
         selectedFilesManager = SelectedFilesManager(dialogType)
@@ -54,7 +54,7 @@ class FileChooserView {
         parentDirectoriesView.parentDirectorySelectedListener = { setCurrentDirectory(it) }
 
         directoryContentView = rootView.directoryContentView
-        directoryContentView.setupView(selectedFilesManager, options)
+        directoryContentView.setupView(selectedFilesManager, config)
         directoryContentView.currentDirectoryChangedListener = { currentDirectoryChanged(it) }
 
         rootView.btnCancel.setOnClickListener { cancelSelectingFiles() }

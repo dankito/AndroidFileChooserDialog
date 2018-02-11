@@ -5,7 +5,7 @@ import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.AttributeSet
-import net.dankito.filechooserdialog.model.Options
+import net.dankito.filechooserdialog.model.FileChooserDialogConfig
 import net.dankito.filechooserdialog.service.*
 import net.dankito.filechooserdialog.ui.adapter.DirectoryContentAdapter
 import java.io.File
@@ -33,7 +33,7 @@ class DirectoryContentView @JvmOverloads constructor(
 
     private lateinit var selectedFilesManager: SelectedFilesManager
 
-    private lateinit var options: Options
+    private lateinit var config: FileChooserDialogConfig
 
     private lateinit var contentAdapter: DirectoryContentAdapter
 
@@ -45,9 +45,9 @@ class DirectoryContentView @JvmOverloads constructor(
         addItemDecoration(dividerItemDecoration)
     }
 
-    fun setupView(selectedFilesManager: SelectedFilesManager, options: Options) {
+    fun setupView(selectedFilesManager: SelectedFilesManager, config: FileChooserDialogConfig) {
         this.selectedFilesManager = selectedFilesManager
-        this.options = options
+        this.config = config
 
         contentAdapter = DirectoryContentAdapter(previewImageService, selectedFilesManager)
 
@@ -59,7 +59,7 @@ class DirectoryContentView @JvmOverloads constructor(
     fun showContentOfDirectory(directory: File) {
         this.currentDirectory = fileService.avoidDirectoriesWeAreNotAllowedToList(directory)
 
-        fileService.getFilesOfDirectorySorted(currentDirectory, options.extensionsFilters)?.let { files ->
+        fileService.getFilesOfDirectorySorted(currentDirectory, config.extensionsFilters)?.let { files ->
             contentAdapter.items = files
 
             currentDirectoryChangedListener?.invoke(currentDirectory)
