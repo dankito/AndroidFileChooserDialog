@@ -54,9 +54,13 @@ class MainActivity : AppCompatActivity() {
         rcySelectedMultipleFilesInFullscreenDialog.adapter = selectedMultipleFilesInFullscreenDialogAdapter
 
 
+        setupShowFileChooserDialogButtons()
+    }
+
+    private fun setupShowFileChooserDialogButtons() {
         btnSelectSingleFile.setOnClickListener {
             fileChooserDialog = FileChooserDialog.showOpenSingleFileDialog(this) { didUserSelectFile, selectedFile ->
-                selectedSingleFileAdapter.items = if(selectedFile != null) listOf(selectedFile) else listOf()
+                selectedSingleFileAdapter.items = if (selectedFile != null) listOf(selectedFile) else listOf()
                 fileChooserDialog = null
             }
         }
@@ -70,7 +74,7 @@ class MainActivity : AppCompatActivity() {
 
         btnSelectSingleFileInFullscreenDialog.setOnClickListener {
             fileChooserDialog = FileChooserDialog.showOpenSingleFileDialogInFullscreen(this) { didUserSelectFile, selectedFile ->
-                selectedSingleFileInFullscreenDialogAdapter.items = if(selectedFile != null) listOf(selectedFile) else listOf()
+                selectedSingleFileInFullscreenDialogAdapter.items = if (selectedFile != null) listOf(selectedFile) else listOf()
                 fileChooserDialog = null
             }
         }
@@ -82,6 +86,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
 
     override fun onBackPressed() {
         // only needed for FullscreenDialog variant
