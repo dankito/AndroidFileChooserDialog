@@ -13,20 +13,28 @@ import java.io.File
 
 class ThumbnailService(private val context: Context, private val mimeTypeService: MimeTypeService) {
 
-    fun getThumbnail(file: File, width: Int, height: Int): Bitmap? {
+    /**
+     * Parameters prefWidth and prefHeight will only be used if there's no system thumbnail from MediaStorage and
+     *  a thumbnail therefore gets created.
+     */
+    fun getThumbnail(file: File, prefWidth: Int, prefHeight: Int): Bitmap? {
         mimeTypeService.getMimeType(file)?.let { mimeType ->
-            return getThumbnail(file, mimeType, width, height)
+            return getThumbnail(file, mimeType, prefWidth, prefHeight)
         }
 
         return null
     }
 
-    fun getThumbnail(file: File, mimeType: String, width: Int, height: Int): Bitmap? {
+    /**
+     * Parameters prefWidth and prefHeight will only be used if there's no system thumbnail from MediaStorage and
+     *  a thumbnail therefore gets created.
+     */
+    fun getThumbnail(file: File, mimeType: String, prefWidth: Int, prefHeight: Int): Bitmap? {
         if(mimeTypeService.isImageFile(mimeType)) {
             getImageThumbnailFromMediaStore(file)?.let { return it }
 
             // then create one ...
-            return ThumbnailUtils.extractThumbnail(BitmapFactory.decodeFile(file.absolutePath), width, height, ThumbnailUtils.OPTIONS_RECYCLE_INPUT)
+            return ThumbnailUtils.extractThumbnail(BitmapFactory.decodeFile(file.absolutePath), prefWidth, prefHeight, ThumbnailUtils.OPTIONS_RECYCLE_INPUT)
         }
         else if(mimeTypeService.isVideoFile(mimeType)) {
             getVideoThumbnailFromMediaStore(file)?.let { return it }
