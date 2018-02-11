@@ -67,12 +67,14 @@ class FolderShortcutsNavigationView @JvmOverloads constructor(
         val externalStorageDirectories = externalStorages.map { getRootOfDirectory(it) }.filterNotNull().toMutableSet() // to set to avoid duplicates
 
         // for older Android devices
-        val secondaryStoragePaths = System.getenv("SECONDARY_STORAGE").split(':').map { it.replace(":", "") }
+        System.getenv("SECONDARY_STORAGE")?.let { secondaryStorageValue ->
+            val secondaryStoragePaths = secondaryStorageValue.split(':').map { it.replace(":", "") }
 
-        secondaryStoragePaths.forEach { secondaryStoragePath ->
-            val file = File(secondaryStoragePath)
-            if(file.exists() && file.isDirectory && file.listFiles() != null) {
-                externalStorageDirectories.add(file)
+            secondaryStoragePaths.forEach { secondaryStoragePath ->
+                val file = File(secondaryStoragePath)
+                if(file.exists() && file.isDirectory && file.listFiles() != null) {
+                    externalStorageDirectories.add(file)
+                }
             }
         }
 
