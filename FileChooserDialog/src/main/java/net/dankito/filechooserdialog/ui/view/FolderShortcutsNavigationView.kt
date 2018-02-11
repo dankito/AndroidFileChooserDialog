@@ -61,7 +61,7 @@ class FolderShortcutsNavigationView @JvmOverloads constructor(
 
         setExternalStorageMenuItems()
 
-        setUsbDrivesMenuItems()
+//        setUsbDrivesMenuItems() // disable USB mass storage drives for now, is now well tested
     }
 
     private fun setExternalStorageMenuItems() {
