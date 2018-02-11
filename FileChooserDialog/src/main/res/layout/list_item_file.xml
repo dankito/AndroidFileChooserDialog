@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/list_item_file_height"
+                android:layout_height="@dimen/file_chooser_dialog_list_item_file_height"
                 android:background="@drawable/list_item_background"
 >
 
     <ImageView
         android:id="@+id/imgPreviewImage"
-        android:layout_width="@dimen/list_item_file_thumbnail_width"
-        android:layout_height="@dimen/list_item_file_thumbnail_height"
+        android:layout_width="@dimen/file_chooser_dialog_list_item_file_thumbnail_width"
+        android:layout_height="@dimen/file_chooser_dialog_list_item_file_thumbnail_height"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="@dimen/list_item_file_thumbnail_margin_left"
-        android:layout_marginStart="@dimen/list_item_file_thumbnail_margin_left"
-        android:layout_marginRight="@dimen/list_item_file_thumbnail_margin_right"
-        android:layout_marginEnd="@dimen/list_item_file_thumbnail_margin_right"
+        android:layout_marginLeft="@dimen/file_chooser_dialog_list_item_file_thumbnail_margin_left"
+        android:layout_marginStart="@dimen/file_chooser_dialog_list_item_file_thumbnail_margin_left"
+        android:layout_marginRight="@dimen/file_chooser_dialog_list_item_file_thumbnail_margin_right"
+        android:layout_marginEnd="@dimen/file_chooser_dialog_list_item_file_thumbnail_margin_right"
         android:scaleType="fitCenter"
     />
 
@@ -32,19 +32,19 @@
         android:gravity="center_vertical"
         android:textAlignment="gravity"
         android:maxLines="2"
-        android:textSize="@dimen/list_item_file_file_name_text_size"
+        android:textSize="@dimen/file_chooser_dialog_list_item_file_file_name_text_size"
     />
 
     <ImageView
         android:id="@+id/imgIsSelected"
-        android:layout_width="@dimen/list_item_file_is_selected_icon_size"
+        android:layout_width="@dimen/file_chooser_dialog_list_item_file_is_selected_icon_size"
         android:layout_height="match_parent"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginLeft="@dimen/list_item_file_is_selected_icon_margin_left"
-        android:layout_marginStart="@dimen/list_item_file_is_selected_icon_margin_left"
-        android:layout_marginRight="@dimen/list_item_file_is_selected_icon_margin_right"
-        android:layout_marginEnd="@dimen/list_item_file_is_selected_icon_margin_right"
+        android:layout_marginLeft="@dimen/file_chooser_dialog_list_item_file_is_selected_icon_margin_left"
+        android:layout_marginStart="@dimen/file_chooser_dialog_list_item_file_is_selected_icon_margin_left"
+        android:layout_marginRight="@dimen/file_chooser_dialog_list_item_file_is_selected_icon_margin_right"
+        android:layout_marginEnd="@dimen/file_chooser_dialog_list_item_file_is_selected_icon_margin_right"
         android:tint="@color/file_chooser_file_is_selected_check_mark_tint_color"
         android:scaleType="center"
         android:src="@drawable/ic_check_white_48dp"

@@ -48,7 +48,7 @@
 
             <Button
                 android:id="@+id/btnSelect"
-                android:layout_width="@dimen/dialog_buttons_width"
+                android:layout_width="@dimen/file_chooser_dialog_dialog_buttons_width"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
@@ -60,7 +60,7 @@
 
             <Button
                 android:id="@+id/btnCancel"
-                android:layout_width="@dimen/dialog_buttons_width"
+                android:layout_width="@dimen/file_chooser_dialog_dialog_buttons_width"
                 android:layout_height="wrap_content"
                 android:layout_toLeftOf="@+id/btnSelect"
                 android:layout_toStartOf="@+id/btnSelect"
