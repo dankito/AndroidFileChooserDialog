@@ -50,7 +50,7 @@ class DirectoryContentView @JvmOverloads constructor(
         this.selectedFilesManager = selectedFilesManager
         this.config = config
 
-        contentAdapter = DirectoryContentAdapter(previewImageService, selectedFilesManager)
+        contentAdapter = DirectoryContentAdapter(previewImageService, selectedFilesManager, config)
 
         this.adapter = contentAdapter
         contentAdapter.itemClickListener = { file -> fileClicked(file) }
