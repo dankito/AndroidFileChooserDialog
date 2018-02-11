@@ -75,7 +75,7 @@
 
 
     <!-- place below base view, otherwise setNavigationItemSelectedListener() is not working, see https://stackoverflow.com/questions/31397792/navigationview-onnavigationitemselectedlistener-not-being-called -->
-    <android.support.design.widget.NavigationView
+    <net.dankito.filechooserdialog.ui.view.FolderShortcutsNavigationView
         android:id="@+id/navigationView"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"

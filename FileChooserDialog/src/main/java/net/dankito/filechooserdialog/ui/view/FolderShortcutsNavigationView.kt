@@ -1,0 +1,105 @@
+package net.dankito.filechooserdialog.ui.view
+
+import android.app.Activity
+import android.content.Context
+import android.os.Build
+import android.os.Environment
+import android.support.design.widget.NavigationView
+import android.support.v4.content.ContextCompat
+import android.support.v4.view.GravityCompat
+import android.support.v4.widget.DrawerLayout
+import android.support.v7.app.ActionBarDrawerToggle
+import android.util.AttributeSet
+import android.view.MenuItem
+import android.view.View
+import android.widget.Toast
+import kotlinx.android.synthetic.main.dialog_file_chooser.view.*
+import net.dankito.filechooserdialog.R
+import net.dankito.filechooserdialog.ui.extensions.setItemsTintColor
+import java.io.File
+
+
+class FolderShortcutsNavigationView @JvmOverloads constructor(
+        context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
+) : NavigationView(context, attrs, defStyleAttr) {
+
+
+    var folderShortcutSelectedListener: ((File) -> Unit)? = null
+
+
+    private lateinit var drawerLayout: DrawerLayout
+
+
+    init {
+        setup()
+    }
+
+
+    private fun setup() {
+        setupNavigationMenu()
+    }
+
+    private fun setupNavigationMenu() {
+        this.menu.setItemsTintColor(context, R.color.file_chooser_dialog_navigation_menu_items_icon_tint_color)
+
+        this.menu?.findItem(R.id.navFolderShortcutDocuments)?.isVisible = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT // Documents folder is only available on KitKat and newer
+        // TODO: check SD card and USB stick state
+
+        this.setNavigationItemSelectedListener { navigationItemSelected(it) }
+    }
+
+
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+
+        setupDrawerLayout() // now parent is set
+    }
+
+    private fun setupDrawerLayout() {
+        drawerLayout = parent as DrawerLayout
+
+        val toggle = ActionBarDrawerToggle(
+                context as Activity, drawerLayout, drawerLayout.toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+        drawerLayout.addDrawerListener(toggle)
+        toggle.syncState()
+    }
+
+
+    fun handlesBackButtonPress(): Boolean {
+        if(drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            closeDrawerLayout()
+
+            return true
+        }
+
+        return false
+    }
+
+
+    private fun navigationItemSelected(item: MenuItem): Boolean {
+        when(item.itemId) {
+            R.id.navFolderShortcutInternalStorage -> folderShortcutSelected(Environment.getExternalStorageDirectory())
+            R.id.navFolderShortcutSdCard -> folderShortcutSelected(Environment.getExternalStorageDirectory()) // TODO
+            R.id.navFolderShortcutDownloads -> folderShortcutSelected(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS))
+            R.id.navFolderShortcutCameraPhotos -> folderShortcutSelected(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM))
+            R.id.navFolderShortcutPictures -> folderShortcutSelected(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES))
+            R.id.navFolderShortcutMusic -> folderShortcutSelected(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC))
+            R.id.navFolderShortcutMovies -> folderShortcutSelected(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES))
+            R.id.navFolderShortcutDocuments -> if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)
+                folderShortcutSelected(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS))
+        }
+
+        closeDrawerLayout()
+        return true
+    }
+
+    private fun folderShortcutSelected(directory: File) {
+        folderShortcutSelectedListener?.invoke(directory)
+    }
+
+
+    private fun closeDrawerLayout() {
+        drawerLayout.closeDrawer(GravityCompat.START)
+    }
+
+}
