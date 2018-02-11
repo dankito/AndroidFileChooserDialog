@@ -3,9 +3,9 @@
 
     <item
         android:state_activated="true"
-        android:drawable="@color/list_item_selected_background" />
+        android:drawable="@color/file_chooser_list_item_selected_background" />
 
     <item
-        android:drawable="@color/list_item_default_background" />
+        android:drawable="@color/file_chooser_list_item_default_background" />
 
 </selector>

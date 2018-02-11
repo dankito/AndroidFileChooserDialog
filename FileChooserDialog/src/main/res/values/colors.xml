@@ -5,17 +5,17 @@
     <color name="colorPrimaryDark">#1A237E</color> <!-- Material Design Color Code: Indigo 900 -->
     <color name="colorAccent">#FF9100</color> <!-- Material Design Color Code: Orange A400 -->
 
-    <color name="dialog_background">#FFFFFF</color>
+    <color name="file_chooser_dialog_background">#FFFFFF</color>
 
-    <color name="toolbar_background">@color/colorPrimary</color>
-    <color name="toolbar_text_color">#FFFFFF</color>
+    <color name="file_chooser_toolbar_background">@color/colorPrimary</color>
+    <color name="file_chooser_toolbar_text_color">#FFFFFF</color>
 
-    <color name="list_item_default_background">@android:color/background_light</color>
-    <color name="list_item_selected_background">#d2e8e5</color>
+    <color name="file_chooser_list_item_default_background">@android:color/background_light</color>
+    <color name="file_chooser_list_item_selected_background">#d2e8e5</color>
 
-    <color name="file_icon_tint_color">@color/colorAccent</color>
-    <color name="file_is_selected_check_mark_tint_color">@color/colorAccent</color>
-    <color name="dialog_buttons_text_color">@color/colorAccent</color>
-    <color name="navigation_menu_items_icon_tint_color">@color/colorAccent</color>
+    <color name="file_chooser_file_icon_tint_color">@color/colorAccent</color>
+    <color name="file_chooser_file_is_selected_check_mark_tint_color">@color/colorAccent</color>
+    <color name="file_chooser_dialog_buttons_text_color">@color/colorAccent</color>
+    <color name="file_chooser_navigation_menu_items_icon_tint_color">@color/colorAccent</color>
 
 </resources>
