@@ -31,11 +31,15 @@ class DirectoryContentView @JvmOverloads constructor(
 
     private val fileService = FilesService()
 
+
     private lateinit var selectedFilesManager: SelectedFilesManager
 
     private lateinit var config: FileChooserDialogConfig
 
     private lateinit var contentAdapter: DirectoryContentAdapter
+
+
+    private val directoryScrollPositions = HashMap<File, Int>()
 
 
     init {
@@ -57,12 +61,32 @@ class DirectoryContentView @JvmOverloads constructor(
 
 
     fun showContentOfDirectory(directory: File) {
+        val previousDirectory = this.currentDirectory
         this.currentDirectory = fileService.avoidDirectoriesWeAreNotAllowedToList(directory)
 
         fileService.getFilesOfDirectorySorted(currentDirectory, config.extensionsFilters)?.let { files ->
             contentAdapter.items = files
 
+            saveAndRestoreScrollPosition(currentDirectory, previousDirectory)
+
             currentDirectoryChangedListener?.invoke(currentDirectory)
+        }
+    }
+
+    private fun saveAndRestoreScrollPosition(currentDirectory: File, previousDirectory: File) {
+        (layoutManager as? LinearLayoutManager)?.let { layoutManager ->
+            directoryScrollPositions[previousDirectory] = layoutManager.findFirstVisibleItemPosition() // saves current scroll position to be restored when returning to previous directory
+
+            val previousScrollPosition = directoryScrollPositions[currentDirectory]
+            if(previousScrollPosition != null) {
+                layoutManager.scrollToPosition(previousScrollPosition)
+                postDelayed( { // wait till items are set
+                    layoutManager.scrollToPosition(previousScrollPosition)
+                }, 100)
+            }
+            else {
+                layoutManager.scrollToPosition(0) // when previous scrollY > 0, top of directory isn't displayed but right at previous scroll position
+            }
         }
     }
 
