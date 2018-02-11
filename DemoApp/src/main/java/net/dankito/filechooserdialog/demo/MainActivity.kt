@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
 
     private var mimeTypeService = MimeTypeService()
 
-    private var thumbnailService = ThumbnailService(mimeTypeService)
+    private var thumbnailService = ThumbnailService(this, mimeTypeService)
 
     private var previewImageService = PreviewImageService(thumbnailService, mimeTypeService)
 
