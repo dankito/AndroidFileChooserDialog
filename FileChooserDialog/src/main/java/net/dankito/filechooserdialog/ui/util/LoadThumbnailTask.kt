@@ -20,11 +20,11 @@ class LoadThumbnailTask(private val viewHolder: DirectoryContentViewHolder, priv
     override fun onPostExecute(result: Bitmap?) {
         super.onPostExecute(result)
 
-        if(viewHolder.adapterPosition == adapterPosition) { // viewHolder still holds the same file
-            viewHolder.imgPreviewImage.setImageBitmap(result)
-        }
-
         if(result != null) {
+            if(viewHolder.adapterPosition == adapterPosition) { // viewHolder still holds the same file
+                viewHolder.imgPreviewImage.setImageBitmap(result)
+            }
+
             previewImageCache.cachePreviewImage(file, result)
         }
     }
