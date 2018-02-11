@@ -2,8 +2,8 @@
 
     <string name="select">Select</string>
 
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="navigation_drawer_open">Open folder shortcuts</string>
+    <string name="navigation_drawer_close">Close folder shortcuts</string>
 
     <string name="folder_shortcut_internal_storage">Internal Storage</string>
     <string name="folder_shortcut_sd_card">SD card</string>
