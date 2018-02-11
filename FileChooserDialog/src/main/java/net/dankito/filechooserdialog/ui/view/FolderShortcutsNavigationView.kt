@@ -11,8 +11,6 @@ import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBarDrawerToggle
 import android.util.AttributeSet
 import android.view.MenuItem
-import android.view.View
-import android.widget.Toast
 import kotlinx.android.synthetic.main.dialog_file_chooser.view.*
 import net.dankito.filechooserdialog.R
 import net.dankito.filechooserdialog.ui.extensions.setItemsTintColor
@@ -52,8 +50,7 @@ class FolderShortcutsNavigationView @JvmOverloads constructor(
     }
 
     private fun setExternalStorageMenuItems() {
-        val externalStorages = ContextCompat.getExternalFilesDirs(context, null) // TODO: this does not detect SD cards on pre KitKat devices
-        val externalStorageDirectories = externalStorages.map { getRootOfDirectory(it) }.filterNotNull()
+        val externalStorageDirectories = getExternalStorageDirectories()
 
         externalStorageDirectories.forEach { directory ->
             if(isMounted(directory)) {
@@ -63,6 +60,23 @@ class FolderShortcutsNavigationView @JvmOverloads constructor(
                 }
             }
         }
+    }
+
+    private fun getExternalStorageDirectories(): List<File> {
+        val externalStorages = ContextCompat.getExternalFilesDirs(context, null)
+        val externalStorageDirectories = externalStorages.map { getRootOfDirectory(it) }.filterNotNull().toMutableSet() // to set to avoid duplicates
+
+        // for older Android devices
+        val secondaryStoragePaths = System.getenv("SECONDARY_STORAGE").split(':').map { it.replace(":", "") }
+
+        secondaryStoragePaths.forEach { secondaryStoragePath ->
+            val file = File(secondaryStoragePath)
+            if(file.exists() && file.isDirectory && file.listFiles() != null) {
+                externalStorageDirectories.add(file)
+            }
+        }
+
+        return externalStorageDirectories.toList()
     }
 
     private fun isMounted(directory: File): Boolean {
