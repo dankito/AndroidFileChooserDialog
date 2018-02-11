@@ -1,6 +1,8 @@
 package net.dankito.filechooserdialog.ui.view
 
 import android.content.Context
+import android.os.Build
+import android.text.Html
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -57,13 +59,23 @@ class ParentDirectoriesView @JvmOverloads constructor(
 
     private fun addParentDirectoryView(parent: File) {
         val parentDirectoryView = layoutInflater.inflate(R.layout.view_parent_directory, null)
-        parentDirectoryView.txtDirectoryName.text = parent.name
+        parentDirectoryView.txtDirectoryName.text = getFormattedFolderName(parent)
 
         parentDirectoriesLayout.addView(parentDirectoryView)
         parentDirectoryView.layoutParams?.height = ViewGroup.LayoutParams.MATCH_PARENT
 
         parentDirectoryView.setOnClickListener {
             parentDirectorySelectedListener?.invoke(parent)
+        }
+    }
+
+    private fun getFormattedFolderName(parent: File): CharSequence {
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            return Html.fromHtml("<u>${parent.name}</u>", Html.FROM_HTML_MODE_LEGACY)
+        }
+        else {
+            @Suppress("DEPRECATION")
+            return Html.fromHtml("<u>${parent.name}</u>")
         }
     }
 
