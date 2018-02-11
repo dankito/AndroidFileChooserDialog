@@ -1,0 +1,19 @@
+<resources>
+
+    <string name="select">Auswählen</string>
+
+    <string name="navigation_drawer_open">Ordnerschnellzugriff öffnen</string>
+    <string name="navigation_drawer_close">Ordnerschnellzugriff schließen</string>
+
+    <string name="folder_shortcut_internal_storage">Interner Speicher</string>
+    <string name="folder_shortcut_sd_card">SD Karte</string>
+    <string name="folder_shortcut_downloads">Downloads</string>
+    <string name="folder_shortcut_camera_photos">Kamera Photos</string>
+    <string name="folder_shortcut_pictures">Bilder</string>
+    <string name="folder_shortcut_music">Musik</string>
+    <string name="folder_shortcut_movies">Filme</string>
+    <string name="folder_shortcut_documents">Dokumente</string>
+
+    <string name="view_parent_directory_path_separator">/</string>
+
+</resources>
