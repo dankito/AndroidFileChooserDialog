@@ -22,6 +22,7 @@ class LoadThumbnailTask(private val viewHolder: DirectoryContentViewHolder, priv
 
         if(result != null) {
             if(viewHolder.adapterPosition == adapterPosition) { // viewHolder still holds the same file
+                viewHolder.imgPreviewImage.clearColorFilter()
                 viewHolder.imgPreviewImage.setImageBitmap(result)
             }
 
