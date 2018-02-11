@@ -1,10 +1,12 @@
 package net.dankito.filechooserdialog.service
 
+import android.content.ContentUris
 import android.content.Context
 import android.database.Cursor
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.media.ThumbnailUtils
+import android.net.Uri
 import android.provider.MediaStore
 import java.io.File
 
@@ -31,6 +33,9 @@ class ThumbnailService(private val context: Context, private val mimeTypeService
 
             // then create one ...
             return ThumbnailUtils.createVideoThumbnail(file.absolutePath, MediaStore.Video.Thumbnails.MICRO_KIND)
+        }
+        else if(mimeTypeService.isAudioFile(mimeType)) {
+            return getAlbumCoverFromMediaStore(file)
         }
 
         return null
@@ -71,6 +76,32 @@ class ThumbnailService(private val context: Context, private val mimeTypeService
                 val id = cursor.getInt(cursor.getColumnIndex(MediaStore.MediaColumns._ID))
 
                 return MediaStore.Video.Thumbnails.getThumbnail(contentResolver, id.toLong(), MediaStore.Video.Thumbnails.MICRO_KIND, null)
+            }
+        } catch(e: Exception) {
+            // TODO: log error
+        }
+        finally {
+            cursor?.close()
+        }
+
+        return null
+    }
+
+    private fun getAlbumCoverFromMediaStore(file: File): Bitmap? {
+        var cursor: Cursor? = null
+
+        try {
+            val contentResolver = context.contentResolver
+            cursor = contentResolver.query(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, arrayOf(MediaStore.Audio.Media.ALBUM_ID),
+                    MediaStore.MediaColumns.DATA + "=?", arrayOf(file.absolutePath), null)
+
+            if(cursor != null && cursor.moveToFirst()) {
+                val albumId = cursor.getLong(cursor.getColumnIndex(MediaStore.Audio.Media.ALBUM_ID))
+
+                val artworkUri = Uri.parse("content://media/external/audio/albumart")
+                val albumArtUri = ContentUris.withAppendedId(artworkUri, albumId)
+
+                return MediaStore.Images.Media.getBitmap(contentResolver, albumArtUri)
             }
         } catch(e: Exception) {
             // TODO: log error
