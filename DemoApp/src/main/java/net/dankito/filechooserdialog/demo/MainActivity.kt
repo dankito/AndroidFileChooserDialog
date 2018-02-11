@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.WindowManager
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
+import net.dankito.deepthought.android.service.permissions.PermissionsManager
 import net.dankito.filechooserdialog.FileChooserDialog
 import net.dankito.filechooserdialog.model.FileChooserDialogType
 import net.dankito.filechooserdialog.service.MimeTypeService
@@ -19,19 +20,21 @@ import net.dankito.filechooserdialog.ui.dialog.IFileChooserDialog
 
 class MainActivity : AppCompatActivity() {
 
-    private var mimeTypeService = MimeTypeService()
+    private val permissionsManager = PermissionsManager(this)
 
-    private var thumbnailService = ThumbnailService(this, mimeTypeService)
+    private val mimeTypeService = MimeTypeService()
 
-    private var previewImageService = PreviewImageService(thumbnailService, mimeTypeService)
+    private val thumbnailService = ThumbnailService(this, mimeTypeService)
 
-    private var selectedSingleFileAdapter = DirectoryContentAdapter(previewImageService, SelectedFilesManager(FileChooserDialogType.SelectSingleFile))
+    private val previewImageService = PreviewImageService(thumbnailService, mimeTypeService)
 
-    private var selectedMultipleFilesAdapter = DirectoryContentAdapter(previewImageService, SelectedFilesManager(FileChooserDialogType.SelectMultipleFiles))
+    private val selectedSingleFileAdapter = DirectoryContentAdapter(previewImageService, SelectedFilesManager(FileChooserDialogType.SelectSingleFile))
 
-    private var selectedSingleFileInFullscreenDialogAdapter = DirectoryContentAdapter(previewImageService, SelectedFilesManager(FileChooserDialogType.SelectSingleFile))
+    private val selectedMultipleFilesAdapter = DirectoryContentAdapter(previewImageService, SelectedFilesManager(FileChooserDialogType.SelectMultipleFiles))
 
-    private var selectedMultipleFilesInFullscreenDialogAdapter = DirectoryContentAdapter(previewImageService, SelectedFilesManager(FileChooserDialogType.SelectMultipleFiles))
+    private val selectedSingleFileInFullscreenDialogAdapter = DirectoryContentAdapter(previewImageService, SelectedFilesManager(FileChooserDialogType.SelectSingleFile))
+
+    private val selectedMultipleFilesInFullscreenDialogAdapter = DirectoryContentAdapter(previewImageService, SelectedFilesManager(FileChooserDialogType.SelectMultipleFiles))
 
     private var fileChooserDialog: IFileChooserDialog? = null
 
@@ -59,28 +62,28 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupShowFileChooserDialogButtons() {
         btnSelectSingleFile.setOnClickListener {
-            fileChooserDialog = FileChooserDialog.showOpenSingleFileDialog(this) { didUserSelectFile, selectedFile ->
+            fileChooserDialog = FileChooserDialog.showOpenSingleFileDialog(this, permissionsManager) { didUserSelectFile, selectedFile ->
                 selectedSingleFileAdapter.items = if (selectedFile != null) listOf(selectedFile) else listOf()
                 fileChooserDialog = null
             }
         }
 
         btnSelectMultipleFiles.setOnClickListener {
-            fileChooserDialog = FileChooserDialog.showOpenMultipleFilesDialog(this) { didUserSelectFiles, selectedFiles ->
+            fileChooserDialog = FileChooserDialog.showOpenMultipleFilesDialog(this, permissionsManager) { didUserSelectFiles, selectedFiles ->
                 selectedMultipleFilesAdapter.items = selectedFiles ?: listOf()
                 fileChooserDialog = null
             }
         }
 
         btnSelectSingleFileInFullscreenDialog.setOnClickListener {
-            fileChooserDialog = FileChooserDialog.showOpenSingleFileDialogInFullscreen(this) { didUserSelectFile, selectedFile ->
+            fileChooserDialog = FileChooserDialog.showOpenSingleFileDialogInFullscreen(this, permissionsManager) { didUserSelectFile, selectedFile ->
                 selectedSingleFileInFullscreenDialogAdapter.items = if (selectedFile != null) listOf(selectedFile) else listOf()
                 fileChooserDialog = null
             }
         }
 
         btnSelectMultipleFilesInFullscreenDialog.setOnClickListener {
-            fileChooserDialog = FileChooserDialog.showOpenMultipleFilesDialogInFullscreen(this) { didUserSelectFiles, selectedFiles ->
+            fileChooserDialog = FileChooserDialog.showOpenMultipleFilesDialogInFullscreen(this, permissionsManager) { didUserSelectFiles, selectedFiles ->
                 selectedMultipleFilesInFullscreenDialogAdapter.items = selectedFiles ?: listOf()
                 fileChooserDialog = null
             }
@@ -93,6 +96,12 @@ class MainActivity : AppCompatActivity() {
         if(fileChooserDialog == null || fileChooserDialog?.handlesBackButtonPress() == false) {
             super.onBackPressed()
         }
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+        permissionsManager.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
 
 }

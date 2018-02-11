@@ -5,9 +5,10 @@ import android.support.v4.app.FragmentActivity
 import android.support.v7.app.AlertDialog
 import android.view.KeyEvent
 import android.view.LayoutInflater
+import net.dankito.deepthought.android.service.permissions.IPermissionsManager
 import net.dankito.filechooserdialog.R
-import net.dankito.filechooserdialog.model.FileChooserDialogType
 import net.dankito.filechooserdialog.model.FileChooserDialogConfig
+import net.dankito.filechooserdialog.model.FileChooserDialogType
 import net.dankito.filechooserdialog.ui.view.FileChooserView
 import java.io.File
 
@@ -15,6 +16,8 @@ import java.io.File
 class AlertFileChooserDialog : IFileChooserDialog {
 
     override val fileChooserView = FileChooserView()
+
+    override var permissionsManager: IPermissionsManager? = null
 
     override var dialogType = FileChooserDialogType.SelectSingleFile
 

@@ -1,10 +1,15 @@
 package net.dankito.filechooserdialog.ui.view
 
+import android.Manifest
 import android.content.Context
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.AttributeSet
+import android.widget.Toast
+import net.dankito.deepthought.android.service.permissions.IPermissionsManager
+import net.dankito.deepthought.android.service.permissions.PermissionsManager
+import net.dankito.filechooserdialog.R
 import net.dankito.filechooserdialog.model.FileChooserDialogConfig
 import net.dankito.filechooserdialog.service.*
 import net.dankito.filechooserdialog.ui.adapter.DirectoryContentAdapter
@@ -34,6 +39,8 @@ class DirectoryContentView @JvmOverloads constructor(
 
     private lateinit var selectedFilesManager: SelectedFilesManager
 
+    private var permissionsManager: IPermissionsManager? = null
+
     private lateinit var config: FileChooserDialogConfig
 
     private lateinit var contentAdapter: DirectoryContentAdapter
@@ -46,8 +53,9 @@ class DirectoryContentView @JvmOverloads constructor(
         layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
     }
 
-    fun setupView(selectedFilesManager: SelectedFilesManager, config: FileChooserDialogConfig) {
+    fun setupView(selectedFilesManager: SelectedFilesManager, permissionsManager: IPermissionsManager?, config: FileChooserDialogConfig) {
         this.selectedFilesManager = selectedFilesManager
+        this.permissionsManager = permissionsManager
         this.config = config
 
         contentAdapter = DirectoryContentAdapter(previewImageService, selectedFilesManager, config)
@@ -70,6 +78,27 @@ class DirectoryContentView @JvmOverloads constructor(
         val previousDirectory = this.currentDirectory
         this.currentDirectory = fileService.avoidDirectoriesWeAreNotAllowedToList(directory)
 
+        if(PermissionsManager.isPermissionGranted(context, Manifest.permission.READ_EXTERNAL_STORAGE)) {
+            showContentOfDirectoryWithPermissionGranted(currentDirectory, previousDirectory)
+        }
+        else {
+            permissionsManager?.let {   permissionsManager ->
+                permissionsManager.checkPermission(Manifest.permission.READ_EXTERNAL_STORAGE, R.string.rationale_permission_to_read_external_storage_message) { _, isGranted ->
+                    if(isGranted) {
+                        showContentOfDirectoryWithPermissionGranted(currentDirectory, previousDirectory)
+                    }
+                    else {
+                        showDoNotHavePermissionToReadStorageMessage()
+                    }
+            } }
+
+            if(permissionsManager == null) {
+                showDoNotHavePermissionToReadStorageMessage()
+            }
+        }
+    }
+
+    private fun showContentOfDirectoryWithPermissionGranted(currentDirectory: File, previousDirectory: File) {
         fileService.getFilesOfDirectorySorted(currentDirectory, config.extensionsFilters)?.let { files ->
             contentAdapter.items = files
 
@@ -103,6 +132,11 @@ class DirectoryContentView @JvmOverloads constructor(
         else {
             selectedFilesManager.toggleFileIsSelected(file)
         }
+    }
+
+
+    private fun showDoNotHavePermissionToReadStorageMessage() {
+        Toast.makeText(context, R.string.does_not_have_permission_to_read_external_storage_message, Toast.LENGTH_LONG).show()
     }
 
 }
