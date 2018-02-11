@@ -30,7 +30,7 @@ class ThumbnailService(private val context: Context, private val mimeTypeService
             getVideoThumbnailFromMediaStore(file)?.let { return it }
 
             // then create one ...
-            return ThumbnailUtils.createVideoThumbnail(file.absolutePath, MediaStore.Video.Thumbnails.MINI_KIND)
+            return ThumbnailUtils.createVideoThumbnail(file.absolutePath, MediaStore.Video.Thumbnails.MICRO_KIND)
         }
 
         return null
@@ -47,7 +47,7 @@ class ThumbnailService(private val context: Context, private val mimeTypeService
             if(cursor != null && cursor.moveToFirst()) {
                 val id = cursor.getInt(cursor.getColumnIndex(MediaStore.MediaColumns._ID))
 
-                return MediaStore.Images.Thumbnails.getThumbnail(contentResolver, id.toLong(), MediaStore.Images.Thumbnails.MINI_KIND, null)
+                return MediaStore.Images.Thumbnails.getThumbnail(contentResolver, id.toLong(), MediaStore.Images.Thumbnails.MICRO_KIND, null)
             }
         } catch(e: Exception) {
             // TODO: log error
@@ -70,7 +70,7 @@ class ThumbnailService(private val context: Context, private val mimeTypeService
             if(cursor != null && cursor.moveToFirst()) {
                 val id = cursor.getInt(cursor.getColumnIndex(MediaStore.MediaColumns._ID))
 
-                return MediaStore.Video.Thumbnails.getThumbnail(contentResolver, id.toLong(), MediaStore.Images.Thumbnails.MINI_KIND, null)
+                return MediaStore.Video.Thumbnails.getThumbnail(contentResolver, id.toLong(), MediaStore.Video.Thumbnails.MICRO_KIND, null)
             }
         } catch(e: Exception) {
             // TODO: log error
