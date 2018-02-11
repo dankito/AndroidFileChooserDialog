@@ -29,6 +29,8 @@ class FolderShortcutsNavigationView @JvmOverloads constructor(
 
     private lateinit var drawerLayout: DrawerLayout
 
+    private var sdCardDirectory: File? = null
+
 
     init {
         setup()
@@ -43,9 +45,65 @@ class FolderShortcutsNavigationView @JvmOverloads constructor(
         this.menu.setItemsTintColor(context, R.color.file_chooser_dialog_navigation_menu_items_icon_tint_color)
 
         this.menu?.findItem(R.id.navFolderShortcutDocuments)?.isVisible = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT // Documents folder is only available on KitKat and newer
-        // TODO: check SD card and USB stick state
 
         this.setNavigationItemSelectedListener { navigationItemSelected(it) }
+
+        setExternalStorageMenuItems()
+    }
+
+    private fun setExternalStorageMenuItems() {
+        val externalStorages = ContextCompat.getExternalFilesDirs(context, null) // TODO: this does not detect SD cards on pre KitKat devices
+        val externalStorageDirectories = externalStorages.map { getRootOfDirectory(it) }.filterNotNull()
+
+        externalStorageDirectories.forEach { directory ->
+            if(isMounted(directory)) {
+                if(isSdCard(directory)) {
+                    sdCardDirectory = directory // TODO: can there ever be more than one SD card?
+                    this.menu?.findItem(R.id.navFolderShortcutSdCard)?.isVisible = true
+                }
+            }
+        }
+    }
+
+    private fun isMounted(directory: File): Boolean {
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT && Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            return Environment.getStorageState(directory) == Environment.MEDIA_MOUNTED
+        }
+        else if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            return Environment.getExternalStorageState(directory) == Environment.MEDIA_MOUNTED
+        }
+
+        return true // TODO: what to return as fallback value for Android versions below KitKat?
+    }
+
+    private fun isSdCard(directory: File): Boolean {
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            val isRemovable = Environment.isExternalStorageRemovable(directory)
+            val isEmulated = Environment.isExternalStorageEmulated(directory)
+
+            if(isRemovable && isEmulated == false) { // an SD card
+                return true
+            }
+
+            return false
+        }
+        else {
+            return Environment.getExternalStorageDirectory() != directory
+        }
+    }
+
+    private fun getRootOfDirectory(file: File?): File? {
+        try {
+            // Path is in format /storage.../Android....
+            // Get everything before /Android
+            if(file != null) {
+                return File(file.path.split("/Android")[0])
+            }
+        } catch(e: Exception) {
+            // TODO: log error
+        }
+
+        return null
     }
 
 
@@ -79,7 +137,7 @@ class FolderShortcutsNavigationView @JvmOverloads constructor(
     private fun navigationItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
             R.id.navFolderShortcutInternalStorage -> folderShortcutSelected(Environment.getExternalStorageDirectory())
-            R.id.navFolderShortcutSdCard -> folderShortcutSelected(Environment.getExternalStorageDirectory()) // TODO
+            R.id.navFolderShortcutSdCard -> sdCardDirectory?.let { folderShortcutSelected(it) }
             R.id.navFolderShortcutDownloads -> folderShortcutSelected(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS))
             R.id.navFolderShortcutCameraPhotos -> folderShortcutSelected(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM))
             R.id.navFolderShortcutPictures -> folderShortcutSelected(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES))
