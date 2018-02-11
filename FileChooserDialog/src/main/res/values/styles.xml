@@ -30,7 +30,7 @@
     <style name="ToolbarStyle" parent="AppTheme" >
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/file_chooser_dialog_toolbar_height</item>
-        <item name="android:background">@color/file_chooser_toolbar_background</item>
+        <item name="android:background">@color/file_chooser_dialog_toolbar_background</item>
         <!-- remove space between close button and title text view -->
         <item name="titleMarginStart">0dp</item>
         <item name="contentInsetLeft">0dp</item>
@@ -42,7 +42,7 @@
 
 
     <style name="parent_directory_text_style">
-        <item name="android:textColor">@color/file_chooser_toolbar_text_color</item>
+        <item name="android:textColor">@color/file_chooser_dialog_toolbar_text_color</item>
         <item name="android:gravity">center</item>
         <item name="android:layout_gravity">center</item>
         <item name="android:lines">1</item>

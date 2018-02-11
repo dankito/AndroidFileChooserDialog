@@ -90,7 +90,7 @@ class PreviewImageService(private val thumbnailService: ThumbnailService, privat
     private fun setPreviewImageToResource(viewHolder: DirectoryContentViewHolder, imageResourceId: Int) {
         viewHolder.imgPreviewImage.setImageResource(imageResourceId)
 
-        viewHolder.imgPreviewImage.setTintColor(R.color.file_chooser_file_icon_tint_color)
+        viewHolder.imgPreviewImage.setTintColor(R.color.file_chooser_dialog_file_icon_tint_color)
     }
 
     private fun canLoadThumbnailForFile(mimeType: String): Boolean {
