@@ -44,9 +44,6 @@ class DirectoryContentView @JvmOverloads constructor(
 
     init {
         layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-
-        val dividerItemDecoration = DividerItemDecoration(context, LinearLayoutManager.VERTICAL)
-        addItemDecoration(dividerItemDecoration)
     }
 
     fun setupView(selectedFilesManager: SelectedFilesManager, config: FileChooserDialogConfig) {
@@ -57,6 +54,15 @@ class DirectoryContentView @JvmOverloads constructor(
 
         this.adapter = contentAdapter
         contentAdapter.itemClickListener = { file -> fileClicked(file) }
+
+        applyConfiguration(config)
+    }
+
+    private fun applyConfiguration(config: FileChooserDialogConfig) {
+        if(config.showHorizontalItemDividers) {
+            val dividerItemDecoration = DividerItemDecoration(context, LinearLayoutManager.VERTICAL)
+            addItemDecoration(dividerItemDecoration)
+        }
     }
 
 
