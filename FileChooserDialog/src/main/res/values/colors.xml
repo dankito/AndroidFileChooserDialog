@@ -15,6 +15,7 @@
 
     <color name="file_icon_tint_color">@color/colorAccent</color>
     <color name="file_is_selected_check_mark_tint_color">@color/colorAccent</color>
+    <color name="dialog_buttons_text_color">@color/colorAccent</color>
     <color name="navigation_menu_items_icon_tint_color">@color/colorAccent</color>
 
 </resources>

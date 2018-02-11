@@ -53,6 +53,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
                 style="?android:attr/buttonBarButtonStyle"
+                android:textColor="@color/dialog_buttons_text_color"
                 android:text="@string/select"
                 android:enabled="false"
             />
@@ -64,6 +65,7 @@
                 android:layout_toLeftOf="@+id/btnSelect"
                 android:layout_toStartOf="@+id/btnSelect"
                 style="?android:attr/buttonBarButtonStyle"
+                android:textColor="@color/dialog_buttons_text_color"
                 android:text="@android:string/cancel"
             />
 
