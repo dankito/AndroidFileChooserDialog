@@ -15,7 +15,7 @@ import android.view.MenuItem
 import android.view.View
 import kotlinx.android.synthetic.main.dialog_file_chooser.view.*
 import net.dankito.filechooserdialog.R
-import net.dankito.filechooserdialog.ui.extensions.setItemsTintColor
+import net.dankito.filechooserdialog.ui.extensions.createColorStateList
 import java.io.File
 
 
@@ -41,7 +41,7 @@ class FolderShortcutsNavigationView @JvmOverloads constructor(
     }
 
     private fun setupNavigationMenu() {
-        this.menu.setItemsTintColor(context, R.color.file_chooser_dialog_navigation_menu_items_icon_tint_color)
+        this.itemIconTintList = context.createColorStateList(R.color.file_chooser_dialog_navigation_menu_items_icon_tint_color)
 
         this.menu?.findItem(R.id.navFolderShortcutDocuments)?.isVisible = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT // Documents folder is only available on KitKat and newer
 
