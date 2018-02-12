@@ -1,6 +1,8 @@
 package net.dankito.filechooserdialog.ui.dialog
 
+import android.content.DialogInterface
 import android.support.v4.app.FragmentActivity
+import android.view.KeyEvent
 import android.view.View
 import net.dankito.deepthought.android.service.permissions.IPermissionsManager
 import net.dankito.filechooserdialog.model.FileChooserDialogConfig
@@ -31,6 +33,8 @@ class FullscreenFileChooserDialog : FullscreenDialogFragment(), IFileChooserDial
 
     override fun setupUI(rootView: View) {
         setup(rootView)
+
+        dialog.setOnKeyListener(keyEventListener)
     }
 
 
@@ -40,6 +44,18 @@ class FullscreenFileChooserDialog : FullscreenDialogFragment(), IFileChooserDial
 
     override fun closeDialogOnUiThread() {
         super.closeDialogOnUiThread()
+    }
+
+
+    private val keyEventListener = object : DialogInterface.OnKeyListener {
+        override fun onKey(dialog: DialogInterface?, keyCode: Int, keyEvent: KeyEvent?): Boolean {
+            if(keyEvent?.keyCode == KeyEvent.KEYCODE_BACK && keyEvent.action == KeyEvent.ACTION_UP) {
+                return handlesBackButtonPress()
+            }
+
+            return false
+        }
+
     }
 
 }

@@ -91,13 +91,6 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    override fun onBackPressed() {
-        // only needed for FullscreenDialog variant
-        if(fileChooserDialog == null || fileChooserDialog?.handlesBackButtonPress() == false) {
-            super.onBackPressed()
-        }
-    }
-
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
         permissionsManager.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
