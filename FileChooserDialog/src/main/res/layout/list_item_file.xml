@@ -19,7 +19,7 @@
         android:scaleType="fitCenter"
     />
 
-    <TextView
+    <net.dankito.filechooserdialog.ui.view.EllipsizingTextView
         android:id="@+id/txtFilename"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
@@ -32,6 +32,7 @@
         android:gravity="center_vertical"
         android:textAlignment="gravity"
         android:maxLines="2"
+        android:ellipsize="middle"
         android:textSize="@dimen/file_chooser_dialog_list_item_file_file_name_text_size"
     />
 
