@@ -12,11 +12,13 @@ class SelectedFilesManager(private var dialogType: FileChooserDialogType) {
 
 
     fun toggleFileIsSelected(file: File) {
+        val isFileSelected = isFileSelected(file)
+
         if(dialogType != FileChooserDialogType.SelectMultipleFiles) {
             clearSelectedFiles()
         }
 
-        if(selectedFiles.contains(file)) {
+        if(isFileSelected) {
             (selectedFiles as MutableList).remove(file)
         }
         else {
