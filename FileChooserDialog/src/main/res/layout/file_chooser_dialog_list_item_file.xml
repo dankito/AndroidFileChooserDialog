@@ -48,7 +48,7 @@
         android:layout_marginEnd="@dimen/file_chooser_dialog_list_item_file_is_selected_icon_margin_right"
         android:tint="@color/file_chooser_dialog_file_is_selected_check_mark_tint_color"
         android:scaleType="center"
-        android:src="@drawable/ic_check_white_48dp"
+        android:src="@drawable/file_chooser_dialog_ic_file_selected_check_mark"
         android:visibility="invisible"
     />
 

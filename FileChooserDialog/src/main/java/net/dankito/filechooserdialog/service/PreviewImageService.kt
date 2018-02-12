@@ -36,7 +36,7 @@ class PreviewImageService(private val thumbnailService: ThumbnailService, privat
                 setPreviewImageForFolder(viewHolder, file)
             }
             else { // fallback
-                setPreviewImageToResource(viewHolder, R.drawable.ic_insert_drive_file_white_48dp)
+                setPreviewImageToResource(viewHolder, R.drawable.file_chooser_dialog_ic_file_default)
             }
         }
         else {
@@ -47,12 +47,12 @@ class PreviewImageService(private val thumbnailService: ThumbnailService, privat
     private fun setPreviewImageForFolder(viewHolder: DirectoryContentViewHolder, folder: File) {
         when(folder) {
             Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) ->
-                    setPreviewImageToResource(viewHolder, R.drawable.ic_folder_download_white_48dp)
+                    setPreviewImageToResource(viewHolder, R.drawable.file_chooser_dialog_ic_folder_download)
             Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM),
             Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)->
-                setPreviewImageToResource(viewHolder, R.drawable.ic_folder_image_white_48dp)
+                setPreviewImageToResource(viewHolder, R.drawable.file_chooser_dialog_ic_folder_image)
             else ->
-                setPreviewImageToResource(viewHolder, R.drawable.ic_folder_white_48dp)
+                setPreviewImageToResource(viewHolder, R.drawable.file_chooser_dialog_ic_folder_default)
         }
     }
 
@@ -71,19 +71,19 @@ class PreviewImageService(private val thumbnailService: ThumbnailService, privat
 
     private fun getIconForFile(mimeType: String): Int {
         return when {
-            mimeTypeService.isImageFile(mimeType) -> R.drawable.ic_file_image_white_48dp
-            mimeTypeService.isAudioFile(mimeType) -> R.drawable.ic_file_music_white_48dp
-            mimeTypeService.isVideoFile(mimeType) -> R.drawable.ic_file_video_white_48dp
-            mimeTypeService.isPdfFile(mimeType) -> R.drawable.ic_file_pdf_white_48dp
+            mimeTypeService.isImageFile(mimeType) -> R.drawable.file_chooser_dialog_ic_file_image
+            mimeTypeService.isAudioFile(mimeType) -> R.drawable.file_chooser_dialog_ic_file_music
+            mimeTypeService.isVideoFile(mimeType) -> R.drawable.file_chooser_dialog_ic_file_video
+            mimeTypeService.isPdfFile(mimeType) -> R.drawable.file_chooser_dialog_ic_file_pdf
             mimeTypeService.isMicrosoftWordFile(mimeType) || mimeTypeService.isOpenOfficeWriterFile(mimeType)
-                -> R.drawable.ic_file_word_white_48dp
+                -> R.drawable.file_chooser_dialog_ic_file_word
             mimeTypeService.isMicrosoftExcelFile(mimeType) || mimeTypeService.isOpenOfficeCalcFile(mimeType)
-                -> R.drawable.ic_file_excel_white_48dp
+                -> R.drawable.file_chooser_dialog_ic_file_excel
             mimeTypeService.isMicrosoftPowerPointFile(mimeType) || mimeTypeService.isOpenOfficeImpressFile(mimeType)
-                -> R.drawable.ic_file_powerpoint_white_48dp
-            mimeTypeService.isMarkUpFile(mimeType) -> R.drawable.ic_file_xml_white_48dp
-            mimeTypeService.isDocument(mimeType) -> R.drawable.ic_file_document_white_48dp
-            else -> R.drawable.ic_insert_drive_file_white_48dp
+                -> R.drawable.file_chooser_dialog_ic_file_powerpoint
+            mimeTypeService.isMarkUpFile(mimeType) -> R.drawable.file_chooser_dialog_ic_file_xml
+            mimeTypeService.isDocument(mimeType) -> R.drawable.file_chooser_dialog_ic_file_document
+            else -> R.drawable.file_chooser_dialog_ic_file_default
         }
     }
 
