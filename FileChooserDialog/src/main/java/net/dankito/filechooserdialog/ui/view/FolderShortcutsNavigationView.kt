@@ -68,8 +68,13 @@ class FolderShortcutsNavigationView @JvmOverloads constructor(
     }
 
     private fun getActivity(): Activity {
-        (context as? ContextThemeWrapper)?.let { contextThemeWrapper ->
-            return contextThemeWrapper.baseContext as Activity
+        var contextThemeWrapper = context as? ContextThemeWrapper
+        while(contextThemeWrapper != null) {
+            if(contextThemeWrapper.baseContext is Activity) {
+                return contextThemeWrapper.baseContext as Activity
+            }
+
+            contextThemeWrapper = contextThemeWrapper.baseContext as? ContextThemeWrapper
         }
 
         return context as Activity
