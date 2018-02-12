@@ -104,9 +104,8 @@ class FileChooserDialog : DialogFragment() {
         this.selectMultipleFilesCallback = selectMultipleFilesCallback
 
 
-        if(fullscreen) {
-            setStyle(DialogFragment.STYLE_NORMAL, R.style.FullscreenDialogWithStatusBar)
-        }
+        val style = if(fullscreen) R.style.FullscreenDialogWithStatusBar else R.style.Dialog
+        setStyle(DialogFragment.STYLE_NORMAL, style)
 
         show(activity.supportFragmentManager, DialogTag)
     }
