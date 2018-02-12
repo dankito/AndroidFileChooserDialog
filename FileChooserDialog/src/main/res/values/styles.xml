@@ -49,7 +49,7 @@
 
 
     <style name="parent_directory_text_style" parent="TextAppearance.AppCompat.Small">
-        <item name="android:textColor">@color/file_chooser_dialog_toolbar_text_color</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
         <!-- textSize of TextAppearance.AppCompat.Small is 14sp, which i think is a bit too small, raised it therefore a bit -->
         <item name="android:textSize">@dimen/file_chooser_dialog_view_parent_directory_text_size</item>
         <item name="android:gravity">center</item>
