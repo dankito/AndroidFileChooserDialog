@@ -81,7 +81,7 @@ class DirectoryContentView @JvmOverloads constructor(
         }
         else {
             permissionsService?.let { permissionsManager ->
-                permissionsManager.checkPermission(Manifest.permission.READ_EXTERNAL_STORAGE, R.string.rationale_permission_to_read_external_storage_message) { _, isGranted ->
+                permissionsManager.checkPermission(Manifest.permission.READ_EXTERNAL_STORAGE, config.permissionToReadExternalStorageRationaleResourceId) { _, isGranted ->
                     if(isGranted) {
                         showContentOfDirectoryWithPermissionGranted(currentDirectory, previousDirectory)
                     }
