@@ -1,4 +1,4 @@
-package net.dankito.filechooserdialog.ui.dialog
+package net.dankito.filechooserdialog
 
 import android.content.DialogInterface
 import android.os.Bundle
@@ -9,7 +9,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import net.dankito.deepthought.android.service.permissions.IPermissionsManager
-import net.dankito.filechooserdialog.R
 import net.dankito.filechooserdialog.model.FileChooserDialogConfig
 import net.dankito.filechooserdialog.model.FileChooserDialogType
 import net.dankito.filechooserdialog.ui.view.FileChooserView
