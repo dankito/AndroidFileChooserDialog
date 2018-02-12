@@ -15,7 +15,7 @@ import net.dankito.filechooserdialog.ui.adapter.DirectoryContentAdapter
 
 class MainActivity : AppCompatActivity() {
 
-    private val permissionsManager = PermissionsManager(this)
+    private val permissionsManager = PermissionsService(this)
 
     private val mimeTypeService = MimeTypeService()
 

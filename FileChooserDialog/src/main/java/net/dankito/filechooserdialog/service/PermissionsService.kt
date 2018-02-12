@@ -14,7 +14,7 @@ import java.util.concurrent.CountDownLatch
 import kotlin.concurrent.thread
 
 
-class PermissionsManager(private val activity: Activity) : IPermissionsManager {
+class PermissionsService(private val activity: Activity) : IPermissionsService {
 
     companion object {
         /**

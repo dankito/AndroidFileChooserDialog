@@ -37,7 +37,7 @@ class DirectoryContentView @JvmOverloads constructor(
 
     private lateinit var selectedFilesManager: SelectedFilesManager
 
-    private var permissionsManager: IPermissionsManager? = null
+    private var permissionsService: IPermissionsService? = null
 
     private lateinit var config: FileChooserDialogConfig
 
@@ -51,9 +51,9 @@ class DirectoryContentView @JvmOverloads constructor(
         layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
     }
 
-    fun setupView(selectedFilesManager: SelectedFilesManager, permissionsManager: IPermissionsManager?, config: FileChooserDialogConfig) {
+    fun setupView(selectedFilesManager: SelectedFilesManager, permissionsService: IPermissionsService?, config: FileChooserDialogConfig) {
         this.selectedFilesManager = selectedFilesManager
-        this.permissionsManager = permissionsManager
+        this.permissionsService = permissionsService
         this.config = config
 
         contentAdapter = DirectoryContentAdapter(previewImageService, selectedFilesManager, config)
@@ -76,11 +76,11 @@ class DirectoryContentView @JvmOverloads constructor(
         val previousDirectory = this.currentDirectory
         this.currentDirectory = fileService.avoidDirectoriesWeAreNotAllowedToList(directory)
 
-        if(PermissionsManager.isPermissionGranted(context, Manifest.permission.READ_EXTERNAL_STORAGE)) {
+        if(PermissionsService.isPermissionGranted(context, Manifest.permission.READ_EXTERNAL_STORAGE)) {
             showContentOfDirectoryWithPermissionGranted(currentDirectory, previousDirectory)
         }
         else {
-            permissionsManager?.let {   permissionsManager ->
+            permissionsService?.let { permissionsManager ->
                 permissionsManager.checkPermission(Manifest.permission.READ_EXTERNAL_STORAGE, R.string.rationale_permission_to_read_external_storage_message) { _, isGranted ->
                     if(isGranted) {
                         showContentOfDirectoryWithPermissionGranted(currentDirectory, previousDirectory)
@@ -90,7 +90,7 @@ class DirectoryContentView @JvmOverloads constructor(
                     }
             } }
 
-            if(permissionsManager == null) {
+            if(permissionsService == null) {
                 showDoNotHavePermissionToReadStorageMessage()
             }
         }

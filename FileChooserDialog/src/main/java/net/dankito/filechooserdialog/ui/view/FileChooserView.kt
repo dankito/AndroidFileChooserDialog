@@ -7,7 +7,7 @@ import kotlinx.android.synthetic.main.file_chooser_dialog_dialog_file_chooser.vi
 import net.dankito.filechooserdialog.model.FileChooserDialogConfig
 import net.dankito.filechooserdialog.model.FileChooserDialogType
 import net.dankito.filechooserdialog.service.BackStack
-import net.dankito.filechooserdialog.service.IPermissionsManager
+import net.dankito.filechooserdialog.service.IPermissionsService
 import net.dankito.filechooserdialog.service.SelectedFilesManager
 import java.io.File
 
@@ -34,7 +34,7 @@ class FileChooserView {
     private val backStack = BackStack()
 
 
-    fun setup(rootView: View, dialogType: FileChooserDialogType, permissionsManager: IPermissionsManager?, config: FileChooserDialogConfig,
+    fun setup(rootView: View, dialogType: FileChooserDialogType, permissionsService: IPermissionsService?, config: FileChooserDialogConfig,
               selectFilesCallback: (didUserSelectFiles: Boolean, List<File>?) -> Unit) {
         this.config = config
         this.selectFilesCallback = selectFilesCallback
@@ -49,7 +49,7 @@ class FileChooserView {
         parentDirectoriesView.parentDirectorySelectedListener = { setCurrentDirectory(it) }
 
         directoryContentView = rootView.directoryContentView
-        directoryContentView.setupView(selectedFilesManager, permissionsManager, config)
+        directoryContentView.setupView(selectedFilesManager, permissionsService, config)
         directoryContentView.currentDirectoryChangedListener = { currentDirectoryChanged(it) }
 
         rootView.btnCancel.setOnClickListener { cancelSelectingFiles() }

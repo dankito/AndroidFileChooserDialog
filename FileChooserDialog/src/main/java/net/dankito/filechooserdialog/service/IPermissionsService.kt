@@ -3,7 +3,7 @@ package net.dankito.filechooserdialog.service
 import android.Manifest
 
 
-interface IPermissionsManager {
+interface IPermissionsService {
 
     /**
      * To be called from the Activity passed as parameter to PermissionManager's constructor.
