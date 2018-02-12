@@ -10,11 +10,11 @@ import android.support.v4.view.GravityCompat
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBarDrawerToggle
 import android.util.AttributeSet
+import android.view.ContextThemeWrapper
 import android.view.MenuItem
 import android.view.View
 import kotlinx.android.synthetic.main.dialog_file_chooser.view.*
 import net.dankito.filechooserdialog.R
-import net.dankito.filechooserdialog.service.UsbMassStorageService
 import net.dankito.filechooserdialog.ui.extensions.setItemsTintColor
 import java.io.File
 
@@ -135,10 +135,20 @@ class FolderShortcutsNavigationView @JvmOverloads constructor(
     private fun setupDrawerLayout() {
         drawerLayout = parent as DrawerLayout
 
+        val activity = getActivity()
+
         val toggle = ActionBarDrawerToggle(
-                context as Activity, drawerLayout, drawerLayout.toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+                activity, drawerLayout, drawerLayout.toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
+    }
+
+    private fun getActivity(): Activity {
+        (context as? ContextThemeWrapper)?.let { contextThemeWrapper ->
+            return contextThemeWrapper.baseContext as Activity
+        }
+
+        return context as Activity
     }
 
 
