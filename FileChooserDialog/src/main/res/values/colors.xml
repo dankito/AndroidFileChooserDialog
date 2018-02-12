@@ -12,7 +12,6 @@
 
     <color name="file_chooser_dialog_file_icon_tint_color">@color/colorAccent</color>
     <color name="file_chooser_dialog_file_is_selected_check_mark_tint_color">@color/colorAccent</color>
-    <color name="file_chooser_dialog_dialog_buttons_text_color">@color/colorAccent</color>
     <color name="file_chooser_dialog_navigation_menu_items_icon_tint_color">@color/colorAccent</color>
 
 </resources>
