@@ -12,7 +12,6 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.util.AttributeSet
 import android.view.ContextThemeWrapper
 import android.view.MenuItem
-import android.view.View
 import kotlinx.android.synthetic.main.dialog_file_chooser.view.*
 import net.dankito.filechooserdialog.R
 import net.dankito.filechooserdialog.ui.extensions.createColorStateList
@@ -51,6 +50,33 @@ class FolderShortcutsNavigationView @JvmOverloads constructor(
 
 //        this.menu?.let { UsbMassStorageService(context).setUsbDrivesMenuItems(it) } // disable USB mass storage drives for now, is now well tested
     }
+
+
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+
+        setupDrawerLayout() // now parent is set
+    }
+
+    private fun setupDrawerLayout() {
+        drawerLayout = parent as DrawerLayout
+
+        val activity = getActivity()
+
+        val toggle = ActionBarDrawerToggle(
+                activity, drawerLayout, drawerLayout.toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+        drawerLayout.addDrawerListener(toggle)
+        toggle.syncState()
+    }
+
+    private fun getActivity(): Activity {
+        (context as? ContextThemeWrapper)?.let { contextThemeWrapper ->
+            return contextThemeWrapper.baseContext as Activity
+        }
+
+        return context as Activity
+    }
+
 
     private fun setExternalStorageMenuItems() {
         val externalStorageDirectories = getExternalStorageDirectories()
@@ -124,32 +150,6 @@ class FolderShortcutsNavigationView @JvmOverloads constructor(
         }
 
         return null
-    }
-
-
-    override fun onAttachedToWindow() {
-        super.onAttachedToWindow()
-
-        setupDrawerLayout() // now parent is set
-    }
-
-    private fun setupDrawerLayout() {
-        drawerLayout = parent as DrawerLayout
-
-        val activity = getActivity()
-
-        val toggle = ActionBarDrawerToggle(
-                activity, drawerLayout, drawerLayout.toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
-        drawerLayout.addDrawerListener(toggle)
-        toggle.syncState()
-    }
-
-    private fun getActivity(): Activity {
-        (context as? ContextThemeWrapper)?.let { contextThemeWrapper ->
-            return contextThemeWrapper.baseContext as Activity
-        }
-
-        return context as Activity
     }
 
 
