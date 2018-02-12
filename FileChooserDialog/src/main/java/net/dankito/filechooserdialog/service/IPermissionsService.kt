@@ -57,6 +57,4 @@ interface IPermissionsService {
      */
     fun isPermissionGranted(permission: String): Boolean
 
-    fun requestPermission(permission: String, rationaleToShowToUser: String, callback: (String, Boolean) -> Unit)
-
 }
