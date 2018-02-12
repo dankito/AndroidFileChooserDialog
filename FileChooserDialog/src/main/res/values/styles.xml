@@ -48,7 +48,7 @@
     </style>
 
 
-    <style name="parent_directory_text_style">
+    <style name="parent_directory_text_style" parent="TextAppearance.AppCompat.Small">
         <item name="android:textColor">@color/file_chooser_dialog_toolbar_text_color</item>
         <item name="android:gravity">center</item>
         <item name="android:layout_gravity">center</item>
