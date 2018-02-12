@@ -15,7 +15,7 @@ class SelectedFilesManager(private var dialogType: FileChooserDialogType) {
         val isFileSelected = isFileSelected(file)
 
         if(dialogType != FileChooserDialogType.SelectMultipleFiles) {
-            clearSelectedFiles()
+            clearSelectedFilesWithoutCallingListeners()
         }
 
         if(isFileSelected) {
@@ -25,10 +25,16 @@ class SelectedFilesManager(private var dialogType: FileChooserDialogType) {
             (selectedFiles as MutableList).add(file)
         }
 
-        selectedFilesChangedListeners.forEach { it(selectedFiles) }
+        callSelectedFilesChangedListeners()
     }
 
-    private fun clearSelectedFiles() {
+    fun clearSelectedFiles() {
+        clearSelectedFilesWithoutCallingListeners()
+
+        callSelectedFilesChangedListeners()
+    }
+
+    private fun clearSelectedFilesWithoutCallingListeners() {
         (selectedFiles as MutableList).clear()
     }
 
@@ -40,6 +46,10 @@ class SelectedFilesManager(private var dialogType: FileChooserDialogType) {
 
     fun addSelectedFilesChangedListeners(listener: (List<File>) -> Unit) {
         selectedFilesChangedListeners.add(listener)
+    }
+
+    private fun callSelectedFilesChangedListeners() {
+        selectedFilesChangedListeners.forEach { it(selectedFiles) }
     }
 
 }

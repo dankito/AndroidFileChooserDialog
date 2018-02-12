@@ -102,6 +102,7 @@ class DirectoryContentView @JvmOverloads constructor(
         fileService.getFilesOfDirectorySorted(currentDirectory, config.extensionsFilters)?.let { files ->
             contentAdapter.items = files
 
+            selectedFilesManager.clearSelectedFiles()
             saveAndRestoreScrollPosition(currentDirectory, previousDirectory)
 
             currentDirectoryChangedListener?.invoke(currentDirectory)
