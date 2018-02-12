@@ -54,7 +54,7 @@ class PermissionsManager(private val activity: Activity) : IPermissionsManager {
         }
 
         callbacks?.let {
-            if(permissions.size > 0 && grantResults != null && grantResults.size > 0) {
+            if(permissions.size > 0 && grantResults.size > 0) {
                 val permissionGranted = grantResults[0] == PackageManager.PERMISSION_GRANTED
 
                 callbacks?.forEach { callback ->
@@ -213,7 +213,7 @@ class PermissionsManager(private val activity: Activity) : IPermissionsManager {
         AlertDialog.Builder(activity)
                 .setMessage(rationaleToShowToUser)
                 .setNegativeButton(android.R.string.no, null)
-                .setPositiveButton(android.R.string.yes) { dialog, which -> requestPermissionFromUser(permission, callback) }.show()
+                .setPositiveButton(android.R.string.yes) { _, _ -> requestPermissionFromUser(permission, callback) }.show()
     }
 
     /**
@@ -239,6 +239,8 @@ class PermissionsManager(private val activity: Activity) : IPermissionsManager {
                             requestCode)
                 }
             }
+
+            return // to make compiler happy
         }
     }
 
