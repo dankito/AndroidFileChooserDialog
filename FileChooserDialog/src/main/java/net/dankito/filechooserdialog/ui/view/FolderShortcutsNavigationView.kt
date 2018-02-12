@@ -86,6 +86,7 @@ class FolderShortcutsNavigationView @JvmOverloads constructor(
 
     private fun isMounted(directory: File): Boolean {
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT && Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            @Suppress("DEPRECATION")
             return Environment.getStorageState(directory) == Environment.MEDIA_MOUNTED
         }
         else if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {

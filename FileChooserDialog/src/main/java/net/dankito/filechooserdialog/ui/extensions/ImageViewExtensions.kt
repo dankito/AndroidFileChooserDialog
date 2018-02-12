@@ -10,6 +10,7 @@ fun ImageView.setTintColor(tintColorResourceId: Int) {
         setColorFilter(context.getColor(tintColorResourceId))
     }
     else {
+        @Suppress("DEPRECATION")
         setColorFilter(context.resources.getColor(tintColorResourceId))
     }
 }
