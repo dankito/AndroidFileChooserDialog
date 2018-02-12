@@ -26,6 +26,10 @@
         <item name="android:padding">0dp</item>
     </style>
 
+    <style name="FullscreenDialogWithStatusBar" parent="FullscreenDialog" >
+        <item name="android:windowFullscreen">false</item>
+    </style>
+
 
     <style name="ToolbarStyle" parent="AppTheme" >
         <item name="android:layout_width">match_parent</item>
