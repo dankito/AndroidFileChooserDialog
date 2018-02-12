@@ -116,15 +116,12 @@ class FileChooserDialog : DialogFragment() {
     }
 
 
-    private val keyEventListener = object : DialogInterface.OnKeyListener {
-        override fun onKey(dialog: DialogInterface?, keyCode: Int, keyEvent: KeyEvent?): Boolean {
-            if(keyEvent?.keyCode == KeyEvent.KEYCODE_BACK && keyEvent.action == KeyEvent.ACTION_UP) {
-                return handlesBackButtonPress()
-            }
-
-            return false
+    private val keyEventListener = DialogInterface.OnKeyListener { dialog, keyCode, keyEvent ->
+        if(keyEvent?.keyCode == KeyEvent.KEYCODE_BACK && keyEvent.action == KeyEvent.ACTION_UP) {
+            return@OnKeyListener handlesBackButtonPress()
         }
 
+        false
     }
 
 }
