@@ -10,6 +10,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 apply plugin: 'maven'
+apply plugin: 'signing'
 
 
 
@@ -32,6 +33,10 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+
+    configurations {
+        javadocDeps
     }
 
 }
@@ -60,7 +65,7 @@ task sourcesJar(type: Jar) {
 task javadoc(type: Javadoc) {
     source = android.sourceSets.main.java.srcDirs
     classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-//    classpath += configurations.javadocDeps
+    classpath += configurations.javadocDeps
     failOnError false
 }
 
@@ -73,9 +78,36 @@ artifacts {
     archives javadocJar, sourcesJar
 }
 
+
+def areSigningPropertiesSet = isPropertySet('signing.secretKeyRingFile') && isPropertySet('signing.keyId') && isPropertySet('signing.password')
+def areOssrhPropertiesSet = isPropertySet('ossrhUsername') && isPropertySet('ossrhPassword')
+
+def isPropertySet(propertyName) {
+    return properties[propertyName] != null &&  ! (properties[propertyName] as String).isEmpty()
+}
+
+
+if(areSigningPropertiesSet) {
+    signing {
+        sign configurations.archives
+    }
+}
+
 uploadArchives {
     repositories {
         mavenDeployer {
+
+            if(areOssrhPropertiesSet) {
+                beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+                repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+                    authentication(userName: ossrhUsername, password: ossrhPassword)
+                }
+
+                snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+                    authentication(userName: ossrhUsername, password: ossrhPassword)
+                }
+            }
 
             repository url: repositories.mavenLocal().url
 
