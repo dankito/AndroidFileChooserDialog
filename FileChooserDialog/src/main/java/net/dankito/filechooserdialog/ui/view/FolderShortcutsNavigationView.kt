@@ -47,8 +47,6 @@ class FolderShortcutsNavigationView @JvmOverloads constructor(
         this.setNavigationItemSelectedListener { navigationItemSelected(it) }
 
         setExternalStorageMenuItems()
-
-//        this.menu?.let { UsbMassStorageService(context).setUsbDrivesMenuItems(it) } // disable USB mass storage drives for now, is now well tested
     }
 
 
