@@ -26,7 +26,4 @@
     <dimen name="file_chooser_dialog_view_parent_directory_path_separator_margin_right">6dp</dimen>
     <dimen name="file_chooser_dialog_view_parent_directory_directory_name_margin_right">12dp</dimen>
 
-    <!-- in my opinion the default NavigationView menu items' icon size is too small, so raise it from 24dp to 36 dp -->
-    <dimen name="design_navigation_icon_size" tools:override="true">36dp</dimen>
-
 </resources>
