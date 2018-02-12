@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import android.widget.HorizontalScrollView
 import android.widget.LinearLayout
 import android.widget.ScrollView
-import kotlinx.android.synthetic.main.view_parent_directory.view.*
+import kotlinx.android.synthetic.main.file_chooser_dialog_view_parent_directory.view.*
 import net.dankito.filechooserdialog.R
 import java.io.File
 
@@ -58,7 +58,7 @@ class ParentDirectoriesView @JvmOverloads constructor(
     }
 
     private fun addParentDirectoryView(parent: File) {
-        val parentDirectoryView = layoutInflater.inflate(R.layout.view_parent_directory, null)
+        val parentDirectoryView = layoutInflater.inflate(R.layout.file_chooser_dialog_view_parent_directory, null)
         parentDirectoryView.txtDirectoryName.text = getFormattedFolderName(parent)
 
         parentDirectoriesLayout.addView(parentDirectoryView)

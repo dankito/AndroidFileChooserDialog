@@ -21,7 +21,7 @@ class DirectoryContentAdapter(private val previewImageService: PreviewImageServi
     }
 
 
-    override fun getListItemLayoutId() = R.layout.list_item_file
+    override fun getListItemLayoutId() = R.layout.file_chooser_dialog_list_item_file
 
     override fun createViewHolder(itemView: View): DirectoryContentViewHolder {
         return DirectoryContentViewHolder(itemView)

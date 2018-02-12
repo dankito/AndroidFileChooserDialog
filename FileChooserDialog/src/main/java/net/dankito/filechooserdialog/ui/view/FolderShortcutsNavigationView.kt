@@ -12,7 +12,7 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.util.AttributeSet
 import android.view.ContextThemeWrapper
 import android.view.MenuItem
-import kotlinx.android.synthetic.main.dialog_file_chooser.view.*
+import kotlinx.android.synthetic.main.file_chooser_dialog_dialog_file_chooser.view.*
 import net.dankito.filechooserdialog.R
 import net.dankito.filechooserdialog.ui.extensions.createColorStateList
 import java.io.File

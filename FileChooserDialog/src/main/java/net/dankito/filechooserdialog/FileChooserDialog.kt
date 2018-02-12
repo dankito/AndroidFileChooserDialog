@@ -36,7 +36,7 @@ class FileChooserDialog : DialogFragment() {
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val rootView = inflater.inflate(R.layout.dialog_file_chooser, container, false)
+        val rootView = inflater.inflate(R.layout.file_chooser_dialog_dialog_file_chooser, container, false)
 
         setupUI(rootView)
 

@@ -4,7 +4,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import kotlinx.android.synthetic.main.list_item_file.view.*
+import kotlinx.android.synthetic.main.file_chooser_dialog_list_item_file.view.*
 
 
 class DirectoryContentViewHolder(fileListItemView: View) : RecyclerView.ViewHolder(fileListItemView) {
