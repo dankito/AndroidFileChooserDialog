@@ -7,8 +7,6 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.AttributeSet
 import android.widget.Toast
-import net.dankito.deepthought.android.service.permissions.IPermissionsManager
-import net.dankito.deepthought.android.service.permissions.PermissionsManager
 import net.dankito.filechooserdialog.R
 import net.dankito.filechooserdialog.model.FileChooserDialogConfig
 import net.dankito.filechooserdialog.service.*

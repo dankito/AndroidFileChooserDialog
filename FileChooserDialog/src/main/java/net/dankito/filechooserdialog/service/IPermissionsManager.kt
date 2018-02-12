@@ -1,4 +1,4 @@
-package net.dankito.deepthought.android.service.permissions
+package net.dankito.filechooserdialog.service
 
 import android.Manifest
 

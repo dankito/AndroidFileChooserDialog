@@ -8,9 +8,9 @@ import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import net.dankito.deepthought.android.service.permissions.IPermissionsManager
 import net.dankito.filechooserdialog.model.FileChooserDialogConfig
 import net.dankito.filechooserdialog.model.FileChooserDialogType
+import net.dankito.filechooserdialog.service.IPermissionsManager
 import net.dankito.filechooserdialog.ui.view.FileChooserView
 import java.io.File
 

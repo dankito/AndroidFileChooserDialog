@@ -7,13 +7,9 @@ import android.support.v7.app.AppCompatActivity
 import android.view.WindowManager
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
-import net.dankito.deepthought.android.service.permissions.PermissionsManager
 import net.dankito.filechooserdialog.FileChooserDialog
 import net.dankito.filechooserdialog.model.FileChooserDialogType
-import net.dankito.filechooserdialog.service.MimeTypeService
-import net.dankito.filechooserdialog.service.PreviewImageService
-import net.dankito.filechooserdialog.service.SelectedFilesManager
-import net.dankito.filechooserdialog.service.ThumbnailService
+import net.dankito.filechooserdialog.service.*
 import net.dankito.filechooserdialog.ui.adapter.DirectoryContentAdapter
 
 
