@@ -1,8 +1,16 @@
+group 'net.dankito.filechooserdialog'
+version '1.0.0-SNAPSHOT'
+def mavenArtifactId = "filechooserdialog-android"
+
+
 apply plugin: 'com.android.library'
 
 apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
+
+apply plugin: 'maven'
+
 
 
 android {
@@ -39,4 +47,67 @@ dependencies {
 
     androidTestImplementation "com.android.support.test:runner:$androidTestRunnerVersion"
     androidTestImplementation "com.android.support.test.espresso:espresso-core:$espressoVersion"
+}
+
+
+/*          publish to maven central            */
+
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
+task javadoc(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+//    classpath += configurations.javadocDeps
+    failOnError false
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives javadocJar, sourcesJar
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+
+            repository url: repositories.mavenLocal().url
+
+            pom.project {
+                name mavenArtifactId
+                artifactId = mavenArtifactId
+                packaging 'jar'
+
+                description "Material Design File Chooser Dialog for Android."
+                url 'https://github.com/dankito/AndroidFileChooserDialog'
+
+                scm {
+                    connection 'scm:git:git://github.com/dankito/AndroidFileChooserDialog.git'
+                    developerConnection 'scm:git:git@github.com:dankito/AndroidFileChooserDialog.git'
+                    url 'https://github.com/dankito/AndroidFileChooserDialog'
+                }
+
+                licenses {
+                    license {
+                        name 'The Apache License, Version 2.0'
+                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id 'dankito'
+                        name 'Christian Dankl'
+                        email 'maven@dankito.net'
+                    }
+                }
+            }
+        }
+    }
 }
