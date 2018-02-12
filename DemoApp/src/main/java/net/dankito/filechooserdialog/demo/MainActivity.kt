@@ -8,14 +8,13 @@ import android.view.WindowManager
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 import net.dankito.deepthought.android.service.permissions.PermissionsManager
-import net.dankito.filechooserdialog.FileChooserDialog
 import net.dankito.filechooserdialog.model.FileChooserDialogType
 import net.dankito.filechooserdialog.service.MimeTypeService
 import net.dankito.filechooserdialog.service.PreviewImageService
 import net.dankito.filechooserdialog.service.SelectedFilesManager
 import net.dankito.filechooserdialog.service.ThumbnailService
 import net.dankito.filechooserdialog.ui.adapter.DirectoryContentAdapter
-import net.dankito.filechooserdialog.ui.dialog.IFileChooserDialog
+import net.dankito.filechooserdialog.ui.dialog.FileChooserDialog
 
 
 class MainActivity : AppCompatActivity() {
@@ -35,8 +34,6 @@ class MainActivity : AppCompatActivity() {
     private val selectedSingleFileInFullscreenDialogAdapter = DirectoryContentAdapter(previewImageService, SelectedFilesManager(FileChooserDialogType.SelectSingleFile))
 
     private val selectedMultipleFilesInFullscreenDialogAdapter = DirectoryContentAdapter(previewImageService, SelectedFilesManager(FileChooserDialogType.SelectMultipleFiles))
-
-    private var fileChooserDialog: IFileChooserDialog? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,30 +59,26 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupShowFileChooserDialogButtons() {
         btnSelectSingleFile.setOnClickListener {
-            fileChooserDialog = FileChooserDialog.showOpenSingleFileDialog(this, permissionsManager) { didUserSelectFile, selectedFile ->
+            FileChooserDialog().showOpenSingleFileDialog(this, permissionsManager) { didUserSelectFile, selectedFile ->
                 selectedSingleFileAdapter.items = if (selectedFile != null) listOf(selectedFile) else listOf()
-                fileChooserDialog = null
             }
         }
 
         btnSelectMultipleFiles.setOnClickListener {
-            fileChooserDialog = FileChooserDialog.showOpenMultipleFilesDialog(this, permissionsManager) { didUserSelectFiles, selectedFiles ->
+            FileChooserDialog().showOpenMultipleFilesDialog(this, permissionsManager) { didUserSelectFiles, selectedFiles ->
                 selectedMultipleFilesAdapter.items = selectedFiles ?: listOf()
-                fileChooserDialog = null
             }
         }
 
         btnSelectSingleFileInFullscreenDialog.setOnClickListener {
-            fileChooserDialog = FileChooserDialog.showOpenSingleFileDialogInFullscreen(this, permissionsManager) { didUserSelectFile, selectedFile ->
+            FileChooserDialog().showOpenSingleFileFullscreenDialog(this, permissionsManager) { didUserSelectFile, selectedFile ->
                 selectedSingleFileInFullscreenDialogAdapter.items = if (selectedFile != null) listOf(selectedFile) else listOf()
-                fileChooserDialog = null
             }
         }
 
         btnSelectMultipleFilesInFullscreenDialog.setOnClickListener {
-            fileChooserDialog = FileChooserDialog.showOpenMultipleFilesDialogInFullscreen(this, permissionsManager) { didUserSelectFiles, selectedFiles ->
+            FileChooserDialog().showOpenMultipleFilesFullscreenDialog(this, permissionsManager) { didUserSelectFiles, selectedFiles ->
                 selectedMultipleFilesInFullscreenDialogAdapter.items = selectedFiles ?: listOf()
-                fileChooserDialog = null
             }
         }
     }
