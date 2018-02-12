@@ -7,7 +7,8 @@ import java.io.File
 class MimeTypeService {
 
     fun getMimeType(file: File): String? {
-        file.extension?.let { extension ->
+        val extension = file.extension
+        if(extension.isNotBlank()) {
             return MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension.toLowerCase())
         }
 
