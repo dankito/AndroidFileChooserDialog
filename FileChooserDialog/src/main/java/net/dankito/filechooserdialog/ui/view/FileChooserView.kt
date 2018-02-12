@@ -1,7 +1,6 @@
 package net.dankito.filechooserdialog.ui.view
 
 import android.os.Environment
-import android.support.v7.widget.Toolbar
 import android.view.View
 import android.widget.Button
 import kotlinx.android.synthetic.main.dialog_file_chooser.view.*
@@ -58,15 +57,7 @@ class FileChooserView {
         btnSelect = rootView.btnSelect
         btnSelect.setOnClickListener { selectingFilesDone() }
 
-        rootView.toolbar?.let {
-            customizeToolbar(rootView, it)
-        }
-
         setCurrentDirectory(Environment.getExternalStorageDirectory())
-    }
-
-    private fun customizeToolbar(rootView: View, toolbar: Toolbar) {
-        toolbar.setNavigationOnClickListener(null)
     }
 
 
