@@ -97,6 +97,8 @@ uploadArchives {
     repositories {
         mavenDeployer {
 
+            repository url: repositories.mavenLocal().url
+
             if(areOssrhPropertiesSet) {
                 beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
 
@@ -108,8 +110,6 @@ uploadArchives {
                     authentication(userName: ossrhUsername, password: ossrhPassword)
                 }
             }
-
-            repository url: repositories.mavenLocal().url
 
             pom.project {
                 name mavenArtifactId
