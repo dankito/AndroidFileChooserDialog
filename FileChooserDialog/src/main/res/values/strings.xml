@@ -13,13 +13,9 @@
     <string name="folder_shortcut_music">Music</string>
     <string name="folder_shortcut_movies">Movies</string>
     <string name="folder_shortcut_documents">Documents</string>
-    <string name="folder_shortcut_usb_device_menu_item_title">USB %d</string>
-    <string name="folder_shortcut_usb_device_with_product_name_menu_item_title">USB %d (%s)</string>
 
     <string name="does_not_have_permission_to_read_external_storage_message">Cannot list files as app does not have permission to read storage.</string>
     <string name="rationale_permission_to_read_external_storage_message">To display files  permission to read storage is required.</string>
-
-    <string name="mount_usb_mass_storage_error">Sorry, we cannot mount your USB device. Currently only Fat32 file system is supported.</string>
 
     <string name="view_parent_directory_path_separator">/</string>
 

@@ -13,13 +13,9 @@
     <string name="folder_shortcut_music">Musik</string>
     <string name="folder_shortcut_movies">Filme</string>
     <string name="folder_shortcut_documents">Dokumente</string>
-    <string name="folder_shortcut_usb_device_menu_item_title">USB %d</string>
-    <string name="folder_shortcut_usb_device_with_product_name_menu_item_title">USB %d (%s)</string>
 
     <string name="does_not_have_permission_to_read_external_storage_message">Dateien können nicht angezeigt werden da App Berechtigung zum Lesen von Dateien nicht hat.</string>
     <string name="rationale_permission_to_read_external_storage_message">Zum Anzeigen von Dateien wird die Berechtigung zum Lesen von Dateien benötigt.</string>
-
-    <string name="mount_usb_mass_storage_error">USB Stick konnte nicht gemountet werden. Gegenwärtig wird nur Fat32 unterstützt.</string>
 
     <string name="view_parent_directory_path_separator">/</string>
 
