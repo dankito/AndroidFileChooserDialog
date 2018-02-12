@@ -71,22 +71,26 @@ class FileChooserDialog : DialogFragment() {
     }
 
 
-    fun showOpenSingleFileDialog(activity: FragmentActivity, permissionsManager: IPermissionsManager? = null, config: FileChooserDialogConfig,
+    @JvmOverloads
+    fun showOpenSingleFileDialog(activity: FragmentActivity, permissionsManager: IPermissionsManager? = null, config: FileChooserDialogConfig = FileChooserDialogConfig(),
                                  selectSingleFileCallback: (didUserSelectFile: Boolean, File?) -> Unit) {
         showDialog(activity, false, FileChooserDialogType.SelectSingleFile, permissionsManager, config, selectSingleFileCallback, null)
     }
 
-    fun showOpenMultipleFilesDialog(activity: FragmentActivity, permissionsManager: IPermissionsManager? = null, config: FileChooserDialogConfig,
+    @JvmOverloads
+    fun showOpenMultipleFilesDialog(activity: FragmentActivity, permissionsManager: IPermissionsManager? = null, config: FileChooserDialogConfig = FileChooserDialogConfig(),
                                     selectMultipleFilesCallback: (didUserSelectFiles: Boolean, List<File>?) -> Unit) {
         showDialog(activity, false, FileChooserDialogType.SelectMultipleFiles, permissionsManager, config, null, selectMultipleFilesCallback)
     }
 
-    fun showOpenSingleFileFullscreenDialog(activity: FragmentActivity, permissionsManager: IPermissionsManager? = null, config: FileChooserDialogConfig,
+    @JvmOverloads
+    fun showOpenSingleFileFullscreenDialog(activity: FragmentActivity, permissionsManager: IPermissionsManager? = null, config: FileChooserDialogConfig = FileChooserDialogConfig(),
                                  selectSingleFileCallback: (didUserSelectFile: Boolean, File?) -> Unit) {
         showDialog(activity, true, FileChooserDialogType.SelectSingleFile, permissionsManager, config, selectSingleFileCallback, null)
     }
 
-    fun showOpenMultipleFilesFullscreenDialog(activity: FragmentActivity, permissionsManager: IPermissionsManager? = null, config: FileChooserDialogConfig,
+    @JvmOverloads
+    fun showOpenMultipleFilesFullscreenDialog(activity: FragmentActivity, permissionsManager: IPermissionsManager? = null, config: FileChooserDialogConfig = FileChooserDialogConfig(),
                                     selectMultipleFilesCallback: (didUserSelectFiles: Boolean, List<File>?) -> Unit) {
         showDialog(activity, true, FileChooserDialogType.SelectMultipleFiles, permissionsManager, config, null, selectMultipleFilesCallback)
     }
