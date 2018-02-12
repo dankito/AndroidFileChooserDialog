@@ -177,7 +177,7 @@ class PermissionsService(private val activity: Activity) : IPermissionsService {
      * @param rationaleToShowToUser The rationale shown to User before re-requesting permission.
      * @param callback The callback being called when determined if permission is granted or not.
      */
-    override fun requestPermission(permission: String, rationaleToShowToUser: String, callback: (String, Boolean) -> Unit) {
+    private fun requestPermission(permission: String, rationaleToShowToUser: String, callback: (String, Boolean) -> Unit) {
         if(ActivityCompat.shouldShowRequestPermissionRationale(activity, permission)) {
             // Provide an additional rationale to the user if the permission was not granted
             // and the user would benefit from additional context for the use of the permission.
