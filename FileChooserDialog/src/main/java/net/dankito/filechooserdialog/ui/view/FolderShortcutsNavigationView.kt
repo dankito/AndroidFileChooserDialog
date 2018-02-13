@@ -172,7 +172,7 @@ class FolderShortcutsNavigationView @JvmOverloads constructor(
             R.id.navFolderShortcutInternalStorage -> folderShortcutSelected(Environment.getExternalStorageDirectory())
             R.id.navFolderShortcutSdCard -> sdCardDirectory?.let { folderShortcutSelected(it) }
             R.id.navFolderShortcutDownloads -> folderShortcutSelected(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS))
-            R.id.navFolderShortcutCameraPhotos -> folderShortcutSelected(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM))
+            R.id.navFolderShortcutCameraPhotos -> folderShortcutSelected(getCameraPhotosDirectory())
             R.id.navFolderShortcutPictures -> folderShortcutSelected(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES))
             R.id.navFolderShortcutMusic -> folderShortcutSelected(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC))
             R.id.navFolderShortcutMovies -> folderShortcutSelected(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES))
@@ -182,6 +182,30 @@ class FolderShortcutsNavigationView @JvmOverloads constructor(
 
         closeDrawerLayout()
         return true
+    }
+
+    /**
+     * Tries to find Camera folder in DCIM dir
+     */
+    private fun getCameraPhotosDirectory(): File {
+        val dcimDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM)
+
+        var cameraInDcimDirTry = File(dcimDir, "Camera")
+        if(cameraInDcimDirTry.exists()) {
+            return cameraInDcimDirTry
+        }
+
+        cameraInDcimDirTry = File(dcimDir, "CAMERA")
+        if(cameraInDcimDirTry.exists()) {
+            return cameraInDcimDirTry
+        }
+
+        cameraInDcimDirTry = File(dcimDir, "camera")
+        if(cameraInDcimDirTry.exists()) {
+            return cameraInDcimDirTry
+        }
+
+        return dcimDir
     }
 
     private fun folderShortcutSelected(directory: File) {
