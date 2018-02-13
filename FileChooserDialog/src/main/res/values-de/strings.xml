@@ -1,6 +1,7 @@
 <resources>
 
     <string name="select">Auswählen</string>
+    <string name="cancel">Abbrechen</string>
 
     <string name="navigation_drawer_open">Ordnerschnellzugriff öffnen</string>
     <string name="navigation_drawer_close">Ordnerschnellzugriff schließen</string>
