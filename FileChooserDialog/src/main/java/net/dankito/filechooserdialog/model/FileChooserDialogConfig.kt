@@ -8,5 +8,8 @@ data class FileChooserDialogConfig @JvmOverloads constructor(
         val showHorizontalItemDividers: Boolean = true,
         val showCheckMarkForSelectedItems: Boolean = true,
         val showSelectedItemsInItemSelectedBackgroundColor: Boolean = true,
+        val tryToLoadThumbnailForImageFiles: Boolean = true,
+        val tryToLoadThumbnailForVideoFiles: Boolean = true,
+        val tryToLoadAlbumArtForAudioFiles: Boolean = true,
         val permissionToReadExternalStorageRationaleResourceId: Int = R.string.rationale_permission_to_read_external_storage_message
 )

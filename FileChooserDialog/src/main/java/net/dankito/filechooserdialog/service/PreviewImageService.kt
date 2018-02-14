@@ -4,6 +4,7 @@ import android.os.Environment
 import android.support.v7.widget.RecyclerView
 import android.widget.ImageView
 import net.dankito.filechooserdialog.R
+import net.dankito.filechooserdialog.model.FileChooserDialogConfig
 import net.dankito.filechooserdialog.ui.extensions.setTintColor
 import net.dankito.filechooserdialog.ui.util.LoadThumbnailTask
 import net.dankito.filechooserdialog.ui.util.PreviewImageCache
@@ -19,7 +20,7 @@ class PreviewImageService(private val thumbnailService: ThumbnailService, privat
     private val previewImageCache = PreviewImageCache()
 
 
-    fun setPreviewImage(viewHolder: RecyclerView.ViewHolder, imageView: ImageView, file: File) {
+    fun setPreviewImage(viewHolder: RecyclerView.ViewHolder, imageView: ImageView, file: File, config: FileChooserDialogConfig) {
         imageView.clearColorFilter()
         val cachedPreviewImage = previewImageCache.getCachedPreviewImage(file)
 
@@ -29,11 +30,11 @@ class PreviewImageService(private val thumbnailService: ThumbnailService, privat
         else {
             imageView.setImageBitmap(null) // reset preview image (don't wait till preview image is calculated to show it, as otherwise it may show previous file's preview image
 
-            getPreviewImageForFile(viewHolder, imageView, file)
+            getPreviewImageForFile(viewHolder, imageView, file, config)
         }
     }
 
-    private fun getPreviewImageForFile(viewHolder: RecyclerView.ViewHolder, imageView: ImageView, file: File) {
+    private fun getPreviewImageForFile(viewHolder: RecyclerView.ViewHolder, imageView: ImageView, file: File, config: FileChooserDialogConfig) {
         val mimeType = mimeTypePicker.getBestPick(mimeTypeDetector, file)
 
         if(mimeType == null) {
@@ -45,7 +46,7 @@ class PreviewImageService(private val thumbnailService: ThumbnailService, privat
             }
         }
         else {
-            setPreviewImageForFile(viewHolder, imageView, file, mimeType)
+            setPreviewImageForFile(viewHolder, imageView, file, mimeType, config)
         }
     }
 
@@ -61,10 +62,10 @@ class PreviewImageService(private val thumbnailService: ThumbnailService, privat
         }
     }
 
-    private fun setPreviewImageForFile(viewHolder: RecyclerView.ViewHolder, imageView: ImageView, file: File, mimeType: String) {
+    private fun setPreviewImageForFile(viewHolder: RecyclerView.ViewHolder, imageView: ImageView, file: File, mimeType: String, config: FileChooserDialogConfig) {
         setPreviewImageToResource(imageView, getIconForFile(mimeType)) // first set default file icon ...
 
-        if(canLoadThumbnailForFile(mimeType)) {
+        if(shouldTryToLoadThumbnailForFile(mimeType, config)) {
             LoadThumbnailTask(viewHolder, imageView, file, mimeType, thumbnailService, previewImageCache).execute() // ... then check if may a thumbnail can be loaded
         }
     }
@@ -93,8 +94,10 @@ class PreviewImageService(private val thumbnailService: ThumbnailService, privat
         imageView.setTintColor(R.color.file_chooser_dialog_file_icon_tint_color)
     }
 
-    private fun canLoadThumbnailForFile(mimeType: String): Boolean {
-        return mimeTypeCategorizer.isImageFile(mimeType) || mimeTypeCategorizer.isVideoFile(mimeType) || mimeTypeCategorizer.isAudioFile(mimeType)
+    private fun shouldTryToLoadThumbnailForFile(mimeType: String, config: FileChooserDialogConfig): Boolean {
+        return (config.tryToLoadThumbnailForImageFiles && mimeTypeCategorizer.isImageFile(mimeType))
+                || (config.tryToLoadThumbnailForVideoFiles && mimeTypeCategorizer.isVideoFile(mimeType))
+                || (config.tryToLoadAlbumArtForAudioFiles && mimeTypeCategorizer.isAudioFile(mimeType))
     }
 
 }

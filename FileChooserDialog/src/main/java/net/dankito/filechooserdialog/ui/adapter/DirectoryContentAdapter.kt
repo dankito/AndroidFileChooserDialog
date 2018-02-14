@@ -30,7 +30,7 @@ class DirectoryContentAdapter(private val previewImageService: PreviewImageServi
     override fun bindItemToView(viewHolder: DirectoryContentViewHolder, item: File) {
         viewHolder.txtFilename.text = item.name
 
-        previewImageService.setPreviewImage(viewHolder, viewHolder.imgPreviewImage, item)
+        previewImageService.setPreviewImage(viewHolder, viewHolder.imgPreviewImage, item, config)
 
         val isSelected = selectedFilesManager.isFileSelected(item)
         viewHolder.itemView.isActivated = isSelected && config.showSelectedItemsInItemSelectedBackgroundColor
