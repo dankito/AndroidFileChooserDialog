@@ -1,8 +1,9 @@
 package net.dankito.filechooserdialog.service
 
 import android.os.Environment
+import android.support.v7.widget.RecyclerView
+import android.widget.ImageView
 import net.dankito.filechooserdialog.R
-import net.dankito.filechooserdialog.ui.adapter.viewholder.DirectoryContentViewHolder
 import net.dankito.filechooserdialog.ui.extensions.setTintColor
 import net.dankito.filechooserdialog.ui.util.LoadThumbnailTask
 import net.dankito.filechooserdialog.ui.util.PreviewImageCache
@@ -18,53 +19,53 @@ class PreviewImageService(private val thumbnailService: ThumbnailService, privat
     private val previewImageCache = PreviewImageCache()
 
 
-    fun setPreviewImage(viewHolder: DirectoryContentViewHolder, file: File) {
-        viewHolder.imgPreviewImage.clearColorFilter()
+    fun setPreviewImage(viewHolder: RecyclerView.ViewHolder, imageView: ImageView, file: File) {
+        imageView.clearColorFilter()
         val cachedPreviewImage = previewImageCache.getCachedPreviewImage(file)
 
         if(cachedPreviewImage != null) {
-            viewHolder.imgPreviewImage.setImageBitmap(cachedPreviewImage)
+            imageView.setImageBitmap(cachedPreviewImage)
         }
         else {
-            viewHolder.imgPreviewImage.setImageBitmap(null) // reset preview image (don't wait till preview image is calculated to show it, as otherwise it may show previous file's preview image
+            imageView.setImageBitmap(null) // reset preview image (don't wait till preview image is calculated to show it, as otherwise it may show previous file's preview image
 
-            getPreviewImageForFile(viewHolder, file)
+            getPreviewImageForFile(viewHolder, imageView, file)
         }
     }
 
-    private fun getPreviewImageForFile(viewHolder: DirectoryContentViewHolder, file: File) {
+    private fun getPreviewImageForFile(viewHolder: RecyclerView.ViewHolder, imageView: ImageView, file: File) {
         val mimeType = mimeTypePicker.getBestPick(mimeTypeDetector, file)
 
         if(mimeType == null) {
             if(file.isDirectory) {
-                setPreviewImageForFolder(viewHolder, file)
+                setPreviewImageForFolder(imageView, file)
             }
             else { // fallback
-                setPreviewImageToResource(viewHolder, R.drawable.file_chooser_dialog_ic_file_default)
+                setPreviewImageToResource(imageView, R.drawable.file_chooser_dialog_ic_file_default)
             }
         }
         else {
-            setPreviewImageForFile(viewHolder, file, mimeType)
+            setPreviewImageForFile(viewHolder, imageView, file, mimeType)
         }
     }
 
-    private fun setPreviewImageForFolder(viewHolder: DirectoryContentViewHolder, folder: File) {
+    private fun setPreviewImageForFolder(imageView: ImageView, folder: File) {
         when(folder) {
             Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) ->
-                    setPreviewImageToResource(viewHolder, R.drawable.file_chooser_dialog_ic_folder_download)
+                    setPreviewImageToResource(imageView, R.drawable.file_chooser_dialog_ic_folder_download)
             Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM),
             Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)->
-                setPreviewImageToResource(viewHolder, R.drawable.file_chooser_dialog_ic_folder_image)
+                setPreviewImageToResource(imageView, R.drawable.file_chooser_dialog_ic_folder_image)
             else ->
-                setPreviewImageToResource(viewHolder, R.drawable.file_chooser_dialog_ic_folder_default)
+                setPreviewImageToResource(imageView, R.drawable.file_chooser_dialog_ic_folder_default)
         }
     }
 
-    private fun setPreviewImageForFile(viewHolder: DirectoryContentViewHolder, file: File, mimeType: String) {
-        setPreviewImageToResource(viewHolder, getIconForFile(mimeType)) // first set default file icon ...
+    private fun setPreviewImageForFile(viewHolder: RecyclerView.ViewHolder, imageView: ImageView, file: File, mimeType: String) {
+        setPreviewImageToResource(imageView, getIconForFile(mimeType)) // first set default file icon ...
 
         if(canLoadThumbnailForFile(mimeType)) {
-            LoadThumbnailTask(viewHolder, file, mimeType, thumbnailService, previewImageCache).execute() // ... then check if may a thumbnail can be loaded
+            LoadThumbnailTask(viewHolder, imageView, file, mimeType, thumbnailService, previewImageCache).execute() // ... then check if may a thumbnail can be loaded
         }
     }
 
@@ -86,10 +87,10 @@ class PreviewImageService(private val thumbnailService: ThumbnailService, privat
         }
     }
 
-    private fun setPreviewImageToResource(viewHolder: DirectoryContentViewHolder, imageResourceId: Int) {
-        viewHolder.imgPreviewImage.setImageResource(imageResourceId)
+    private fun setPreviewImageToResource(imageView: ImageView, imageResourceId: Int) {
+        imageView.setImageResource(imageResourceId)
 
-        viewHolder.imgPreviewImage.setTintColor(R.color.file_chooser_dialog_file_icon_tint_color)
+        imageView.setTintColor(R.color.file_chooser_dialog_file_icon_tint_color)
     }
 
     private fun canLoadThumbnailForFile(mimeType: String): Boolean {

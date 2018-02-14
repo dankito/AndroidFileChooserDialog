@@ -2,12 +2,14 @@ package net.dankito.filechooserdialog.ui.util
 
 import android.graphics.Bitmap
 import android.os.AsyncTask
+import android.support.v7.widget.RecyclerView
+import android.widget.ImageView
 import net.dankito.filechooserdialog.service.ThumbnailService
-import net.dankito.filechooserdialog.ui.adapter.viewholder.DirectoryContentViewHolder
 import java.io.File
 
 
-class LoadThumbnailTask(private val viewHolder: DirectoryContentViewHolder, private val file: File, private val mimeType: String, private val thumbnailService: ThumbnailService,
+class LoadThumbnailTask(private val viewHolder: RecyclerView.ViewHolder, private val imageView: ImageView, private val file: File, private val mimeType: String,
+                        private val thumbnailService: ThumbnailService,
                         private val previewImageCache: PreviewImageCache) : AsyncTask<Void, Void, Bitmap?>() {
 
     private val adapterPosition = viewHolder.adapterPosition
@@ -22,8 +24,8 @@ class LoadThumbnailTask(private val viewHolder: DirectoryContentViewHolder, priv
 
         if(result != null) {
             if(viewHolder.adapterPosition == adapterPosition) { // viewHolder still holds the same file
-                viewHolder.imgPreviewImage.clearColorFilter()
-                viewHolder.imgPreviewImage.setImageBitmap(result)
+                imageView.clearColorFilter()
+                imageView.setImageBitmap(result)
             }
 
             previewImageCache.cachePreviewImage(file, result)
