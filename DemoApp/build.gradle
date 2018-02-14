@@ -29,7 +29,7 @@ android {
 dependencies {
     implementation project(':FileChooserDialog')
 
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
 
     implementation "com.android.support:appcompat-v7:$appCompatVersion"
     implementation "com.android.support:design:$appCompatVersion"
