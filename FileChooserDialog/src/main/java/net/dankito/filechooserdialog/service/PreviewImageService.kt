@@ -6,10 +6,14 @@ import net.dankito.filechooserdialog.ui.adapter.viewholder.DirectoryContentViewH
 import net.dankito.filechooserdialog.ui.extensions.setTintColor
 import net.dankito.filechooserdialog.ui.util.LoadThumbnailTask
 import net.dankito.filechooserdialog.ui.util.PreviewImageCache
+import net.dankito.mime.MimeTypeCategorizer
+import net.dankito.mime.MimeTypeDetector
+import net.dankito.mime.MimeTypePicker
 import java.io.File
 
 
-class PreviewImageService(private val thumbnailService: ThumbnailService, private val mimeTypeService: MimeTypeService) {
+class PreviewImageService(private val thumbnailService: ThumbnailService, private val mimeTypeDetector: MimeTypeDetector, private val mimeTypePicker: MimeTypePicker,
+                          private val mimeTypeCategorizer: MimeTypeCategorizer) {
 
     private val previewImageCache = PreviewImageCache()
 
@@ -29,7 +33,7 @@ class PreviewImageService(private val thumbnailService: ThumbnailService, privat
     }
 
     private fun getPreviewImageForFile(viewHolder: DirectoryContentViewHolder, file: File) {
-        val mimeType = mimeTypeService.getMimeType(file)
+        val mimeType = mimeTypePicker.getBestPick(mimeTypeDetector, file)
 
         if(mimeType == null) {
             if(file.isDirectory) {
@@ -63,7 +67,7 @@ class PreviewImageService(private val thumbnailService: ThumbnailService, privat
         else {
             setPreviewImageToResource(viewHolder, getIconForFile(mimeType))
 
-            if(mimeTypeService.isAudioFile(mimeType)) { // set default icon for audio files above as fallback
+            if(mimeTypeCategorizer.isAudioFile(mimeType)) { // set default icon for audio files above as fallback
                 LoadThumbnailTask(viewHolder, file, mimeType, thumbnailService, previewImageCache).execute() // then check if audio file's album art can be loaded from MediaStore
             }
         }
@@ -71,18 +75,18 @@ class PreviewImageService(private val thumbnailService: ThumbnailService, privat
 
     private fun getIconForFile(mimeType: String): Int {
         return when {
-            mimeTypeService.isImageFile(mimeType) -> R.drawable.file_chooser_dialog_ic_file_image
-            mimeTypeService.isAudioFile(mimeType) -> R.drawable.file_chooser_dialog_ic_file_music
-            mimeTypeService.isVideoFile(mimeType) -> R.drawable.file_chooser_dialog_ic_file_video
-            mimeTypeService.isPdfFile(mimeType) -> R.drawable.file_chooser_dialog_ic_file_pdf
-            mimeTypeService.isMicrosoftWordFile(mimeType) || mimeTypeService.isOpenOfficeWriterFile(mimeType)
+            mimeTypeCategorizer.isImageFile(mimeType) -> R.drawable.file_chooser_dialog_ic_file_image
+            mimeTypeCategorizer.isAudioFile(mimeType) -> R.drawable.file_chooser_dialog_ic_file_music
+            mimeTypeCategorizer.isVideoFile(mimeType) -> R.drawable.file_chooser_dialog_ic_file_video
+            mimeTypeCategorizer.isPdfFile(mimeType) -> R.drawable.file_chooser_dialog_ic_file_pdf
+            mimeTypeCategorizer.isMicrosoftWordFile(mimeType) || mimeTypeCategorizer.isOpenOfficeWriterFile(mimeType)
                 -> R.drawable.file_chooser_dialog_ic_file_word
-            mimeTypeService.isMicrosoftExcelFile(mimeType) || mimeTypeService.isOpenOfficeCalcFile(mimeType)
+            mimeTypeCategorizer.isMicrosoftExcelFile(mimeType) || mimeTypeCategorizer.isOpenOfficeCalcFile(mimeType)
                 -> R.drawable.file_chooser_dialog_ic_file_excel
-            mimeTypeService.isMicrosoftPowerPointFile(mimeType) || mimeTypeService.isOpenOfficeImpressFile(mimeType)
+            mimeTypeCategorizer.isMicrosoftPowerPointFile(mimeType) || mimeTypeCategorizer.isOpenOfficeImpressFile(mimeType)
                 -> R.drawable.file_chooser_dialog_ic_file_powerpoint
-            mimeTypeService.isMarkUpFile(mimeType) -> R.drawable.file_chooser_dialog_ic_file_xml
-            mimeTypeService.isDocument(mimeType) -> R.drawable.file_chooser_dialog_ic_file_document
+            mimeTypeCategorizer.isMarkUpFile(mimeType) -> R.drawable.file_chooser_dialog_ic_file_xml
+            mimeTypeCategorizer.isDocument(mimeType) -> R.drawable.file_chooser_dialog_ic_file_document
             else -> R.drawable.file_chooser_dialog_ic_file_default
         }
     }
@@ -94,7 +98,7 @@ class PreviewImageService(private val thumbnailService: ThumbnailService, privat
     }
 
     private fun canLoadThumbnailForFile(mimeType: String): Boolean {
-        return mimeTypeService.isImageFile(mimeType) || mimeTypeService.isVideoFile(mimeType)
+        return mimeTypeCategorizer.isImageFile(mimeType) || mimeTypeCategorizer.isVideoFile(mimeType)
     }
 
 }

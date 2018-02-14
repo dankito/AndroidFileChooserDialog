@@ -8,17 +8,21 @@ import android.graphics.BitmapFactory
 import android.media.ThumbnailUtils
 import android.net.Uri
 import android.provider.MediaStore
+import net.dankito.mime.MimeTypeCategorizer
+import net.dankito.mime.MimeTypeDetector
+import net.dankito.mime.MimeTypePicker
 import java.io.File
 
 
-class ThumbnailService(private val context: Context, private val mimeTypeService: MimeTypeService) {
+class ThumbnailService(private val context: Context, private val mimeTypeDetector: MimeTypeDetector, private val mimeTypePicker: MimeTypePicker,
+                       private val mimeTypeCategorizer: MimeTypeCategorizer) {
 
     /**
      * Parameters prefWidth and prefHeight will only be used if there's no system thumbnail from MediaStorage and
      *  a thumbnail therefore gets created.
      */
     fun getThumbnail(file: File, prefWidth: Int, prefHeight: Int): Bitmap? {
-        mimeTypeService.getMimeType(file)?.let { mimeType ->
+        mimeTypePicker.getBestPick(mimeTypeDetector, file)?.let { mimeType ->
             return getThumbnail(file, mimeType, prefWidth, prefHeight)
         }
 
@@ -30,19 +34,19 @@ class ThumbnailService(private val context: Context, private val mimeTypeService
      *  a thumbnail therefore gets created.
      */
     fun getThumbnail(file: File, mimeType: String, prefWidth: Int, prefHeight: Int): Bitmap? {
-        if(mimeTypeService.isImageFile(mimeType)) {
+        if(mimeTypeCategorizer.isImageFile(mimeType)) {
             getImageThumbnailFromMediaStore(file)?.let { return it }
 
             // then create one ...
             return ThumbnailUtils.extractThumbnail(BitmapFactory.decodeFile(file.absolutePath), prefWidth, prefHeight, ThumbnailUtils.OPTIONS_RECYCLE_INPUT)
         }
-        else if(mimeTypeService.isVideoFile(mimeType)) {
+        else if(mimeTypeCategorizer.isVideoFile(mimeType)) {
             getVideoThumbnailFromMediaStore(file)?.let { return it }
 
             // then create one ...
             return ThumbnailUtils.createVideoThumbnail(file.absolutePath, MediaStore.Video.Thumbnails.MICRO_KIND)
         }
-        else if(mimeTypeService.isAudioFile(mimeType)) {
+        else if(mimeTypeCategorizer.isAudioFile(mimeType)) {
             return getAlbumCoverFromMediaStore(file)
         }
 

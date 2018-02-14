@@ -11,6 +11,9 @@ import net.dankito.filechooserdialog.R
 import net.dankito.filechooserdialog.model.FileChooserDialogConfig
 import net.dankito.filechooserdialog.service.*
 import net.dankito.filechooserdialog.ui.adapter.DirectoryContentAdapter
+import net.dankito.mime.MimeTypeCategorizer
+import net.dankito.mime.MimeTypeDetector
+import net.dankito.mime.MimeTypePicker
 import java.io.File
 
 
@@ -26,11 +29,15 @@ class DirectoryContentView @JvmOverloads constructor(
     var currentDirectoryChangedListener: ((currentDirectory: File) -> Unit)? = null
 
 
-    private val mimeTypeService = MimeTypeService()
+    private val mimeTypeDetector = MimeTypeDetector()
 
-    private val thumbnailService = ThumbnailService(context, mimeTypeService)
+    private val mimeTypePicker = MimeTypePicker()
 
-    private val previewImageService = PreviewImageService(thumbnailService, mimeTypeService)
+    private val mimeTypeCategorizer = MimeTypeCategorizer()
+
+    private val thumbnailService = ThumbnailService(context, mimeTypeDetector, mimeTypePicker, mimeTypeCategorizer)
+
+    private val previewImageService = PreviewImageService(thumbnailService, mimeTypeDetector, mimeTypePicker, mimeTypeCategorizer)
 
     private val fileService = FilesService()
 

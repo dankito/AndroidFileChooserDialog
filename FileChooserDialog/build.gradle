@@ -59,6 +59,13 @@ android {
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlinVersion"
 
+    implementation "net.dankito.mime:mime-utils:$mimeUtilsVersion", {
+        exclude group: 'org.jetbrains.kotlin', module: 'kotlin-stdlib-jre7:'
+        exclude group: 'org.slf4j', module: 'slf4j-api'
+        exclude group: 'com.squareup.okhttp3', module: 'okhttp'
+        exclude group: 'org.jsoup', module: 'jsoup'
+    }
+
     implementation "com.android.support:appcompat-v7:$appCompatVersion"
     implementation "com.android.support:design:$appCompatVersion"
     implementation "com.android.support.constraint:constraint-layout:$constraintLayoutVersion"
