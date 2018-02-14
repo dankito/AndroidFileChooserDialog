@@ -10,11 +10,10 @@ import net.dankito.filechooserdialog.ui.util.LoadThumbnailTask
 import net.dankito.filechooserdialog.ui.util.PreviewImageCache
 import net.dankito.mime.MimeTypeCategorizer
 import net.dankito.mime.MimeTypeDetector
-import net.dankito.mime.MimeTypePicker
 import java.io.File
 
 
-class PreviewImageService(private val thumbnailService: ThumbnailService, private val mimeTypeDetector: MimeTypeDetector, private val mimeTypePicker: MimeTypePicker,
+class PreviewImageService(private val thumbnailService: ThumbnailService, private val mimeTypeDetector: MimeTypeDetector,
                           private val mimeTypeCategorizer: MimeTypeCategorizer) {
 
     private val previewImageCache = PreviewImageCache()
@@ -35,7 +34,7 @@ class PreviewImageService(private val thumbnailService: ThumbnailService, privat
     }
 
     private fun getPreviewImageForFile(viewHolder: RecyclerView.ViewHolder, imageView: ImageView, file: File, config: FileChooserDialogConfig) {
-        val mimeType = mimeTypePicker.getBestPick(mimeTypeDetector, file)
+        val mimeType = mimeTypeDetector.getBestPickForFile(file)
 
         if(mimeType == null) {
             if(file.isDirectory) {

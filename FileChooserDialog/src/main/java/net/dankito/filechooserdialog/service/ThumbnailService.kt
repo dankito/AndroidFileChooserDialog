@@ -10,19 +10,17 @@ import android.net.Uri
 import android.provider.MediaStore
 import net.dankito.mime.MimeTypeCategorizer
 import net.dankito.mime.MimeTypeDetector
-import net.dankito.mime.MimeTypePicker
 import java.io.File
 
 
-class ThumbnailService(private val context: Context, private val mimeTypeDetector: MimeTypeDetector, private val mimeTypePicker: MimeTypePicker,
-                       private val mimeTypeCategorizer: MimeTypeCategorizer) {
+class ThumbnailService(private val context: Context, private val mimeTypeDetector: MimeTypeDetector, private val mimeTypeCategorizer: MimeTypeCategorizer) {
 
     /**
      * Parameters prefWidth and prefHeight will only be used if there's no system thumbnail from MediaStorage and
      *  a thumbnail therefore gets created.
      */
     fun getThumbnail(file: File, prefWidth: Int, prefHeight: Int): Bitmap? {
-        mimeTypePicker.getBestPick(mimeTypeDetector, file)?.let { mimeType ->
+        mimeTypeDetector.getBestPickForFile(file)?.let { mimeType ->
             return getThumbnail(file, mimeType, prefWidth, prefHeight)
         }
 

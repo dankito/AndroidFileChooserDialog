@@ -9,11 +9,13 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 import net.dankito.filechooserdialog.FileChooserDialog
 import net.dankito.filechooserdialog.model.FileChooserDialogType
-import net.dankito.filechooserdialog.service.*
+import net.dankito.filechooserdialog.service.PermissionsService
+import net.dankito.filechooserdialog.service.PreviewImageService
+import net.dankito.filechooserdialog.service.SelectedFilesManager
+import net.dankito.filechooserdialog.service.ThumbnailService
 import net.dankito.filechooserdialog.ui.adapter.DirectoryContentAdapter
 import net.dankito.mime.MimeTypeCategorizer
 import net.dankito.mime.MimeTypeDetector
-import net.dankito.mime.MimeTypePicker
 
 
 class MainActivity : AppCompatActivity() {
@@ -22,13 +24,11 @@ class MainActivity : AppCompatActivity() {
 
     private val mimeTypeDetector = MimeTypeDetector()
 
-    private val mimeTypePicker = MimeTypePicker()
-
     private val mimeTypeCategorizer = MimeTypeCategorizer()
 
-    private val thumbnailService = ThumbnailService(this, mimeTypeDetector, mimeTypePicker, mimeTypeCategorizer)
+    private val thumbnailService = ThumbnailService(this, mimeTypeDetector, mimeTypeCategorizer)
 
-    private val previewImageService = PreviewImageService(thumbnailService, mimeTypeDetector, mimeTypePicker, mimeTypeCategorizer)
+    private val previewImageService = PreviewImageService(thumbnailService, mimeTypeDetector, mimeTypeCategorizer)
 
     private val selectedSingleFileAdapter = DirectoryContentAdapter(previewImageService, SelectedFilesManager(FileChooserDialogType.SelectSingleFile))
 
