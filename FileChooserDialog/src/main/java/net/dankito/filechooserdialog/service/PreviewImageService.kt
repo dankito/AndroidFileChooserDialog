@@ -61,15 +61,10 @@ class PreviewImageService(private val thumbnailService: ThumbnailService, privat
     }
 
     private fun setPreviewImageForFile(viewHolder: DirectoryContentViewHolder, file: File, mimeType: String) {
-        if(canLoadThumbnailForFile(mimeType)) {
-            LoadThumbnailTask(viewHolder, file, mimeType, thumbnailService, previewImageCache).execute()
-        }
-        else {
-            setPreviewImageToResource(viewHolder, getIconForFile(mimeType))
+        setPreviewImageToResource(viewHolder, getIconForFile(mimeType)) // first set default file icon ...
 
-            if(mimeTypeCategorizer.isAudioFile(mimeType)) { // set default icon for audio files above as fallback
-                LoadThumbnailTask(viewHolder, file, mimeType, thumbnailService, previewImageCache).execute() // then check if audio file's album art can be loaded from MediaStore
-            }
+        if(canLoadThumbnailForFile(mimeType)) {
+            LoadThumbnailTask(viewHolder, file, mimeType, thumbnailService, previewImageCache).execute() // ... then check if may a thumbnail can be loaded
         }
     }
 
@@ -98,7 +93,7 @@ class PreviewImageService(private val thumbnailService: ThumbnailService, privat
     }
 
     private fun canLoadThumbnailForFile(mimeType: String): Boolean {
-        return mimeTypeCategorizer.isImageFile(mimeType) || mimeTypeCategorizer.isVideoFile(mimeType)
+        return mimeTypeCategorizer.isImageFile(mimeType) || mimeTypeCategorizer.isVideoFile(mimeType) || mimeTypeCategorizer.isAudioFile(mimeType)
     }
 
 }
