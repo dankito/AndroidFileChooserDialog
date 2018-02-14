@@ -11,6 +11,8 @@ buildscript {
 
         kotlinVersion = '1.2.21'
 
+        mimeUtilsVersion = '1.0.0-SNAPSHOT'
+
         appCompatVersion = '26.1.0'
         constraintLayoutVersion = '1.0.2'
 
@@ -37,6 +39,7 @@ allprojects {
     repositories {
         google()
         jcenter()
+        mavenLocal()
     }
 }
 
