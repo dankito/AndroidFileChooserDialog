@@ -1,5 +1,5 @@
 group 'net.dankito.filechooserdialog'
-version '1.0.1'
+version VersionName
 def mavenArtifactId = "filechooserdialog-android"
 
 
