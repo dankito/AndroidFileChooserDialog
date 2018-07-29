@@ -24,12 +24,16 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    lintOptions {
+        abortOnError false
+    }
 }
 
 dependencies {
     implementation project(':FileChooserDialog')
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlinVersion"
 
     implementation "net.dankito.mime:mime-utils:$mimeUtilsVersion", {
         exclude group: 'org.jetbrains.kotlin', module: 'kotlin-stdlib-jre7:'

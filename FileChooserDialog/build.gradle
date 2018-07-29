@@ -54,6 +54,10 @@ android {
         javadocDeps
     }
 
+    lintOptions {
+        abortOnError false
+    }
+
 }
 
 dependencies {
