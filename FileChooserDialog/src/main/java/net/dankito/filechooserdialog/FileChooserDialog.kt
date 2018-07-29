@@ -116,7 +116,7 @@ class FileChooserDialog : DialogFragment() {
     }
 
 
-    private val keyEventListener = DialogInterface.OnKeyListener { dialog, keyCode, keyEvent ->
+    private val keyEventListener = DialogInterface.OnKeyListener { _, _, keyEvent ->
         if(keyEvent?.keyCode == KeyEvent.KEYCODE_BACK && keyEvent.action == KeyEvent.ACTION_UP) {
             return@OnKeyListener handlesBackButtonPress()
         }
