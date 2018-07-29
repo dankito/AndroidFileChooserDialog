@@ -62,25 +62,25 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupShowFileChooserDialogButtons() {
         btnSelectSingleFile.setOnClickListener {
-            FileChooserDialog().showOpenSingleFileDialog(this, permissionsManager) { didUserSelectFile, selectedFile ->
+            FileChooserDialog().showOpenSingleFileDialog(this, permissionsManager) { _, selectedFile ->
                 selectedSingleFileAdapter.items = if (selectedFile != null) listOf(selectedFile) else listOf()
             }
         }
 
         btnSelectMultipleFiles.setOnClickListener {
-            FileChooserDialog().showOpenMultipleFilesDialog(this, permissionsManager) { didUserSelectFiles, selectedFiles ->
+            FileChooserDialog().showOpenMultipleFilesDialog(this, permissionsManager) { _, selectedFiles ->
                 selectedMultipleFilesAdapter.items = selectedFiles ?: listOf()
             }
         }
 
         btnSelectSingleFileInFullscreenDialog.setOnClickListener {
-            FileChooserDialog().showOpenSingleFileFullscreenDialog(this, permissionsManager) { didUserSelectFile, selectedFile ->
+            FileChooserDialog().showOpenSingleFileFullscreenDialog(this, permissionsManager) { _, selectedFile ->
                 selectedSingleFileInFullscreenDialogAdapter.items = if (selectedFile != null) listOf(selectedFile) else listOf()
             }
         }
 
         btnSelectMultipleFilesInFullscreenDialog.setOnClickListener {
-            FileChooserDialog().showOpenMultipleFilesFullscreenDialog(this, permissionsManager) { didUserSelectFiles, selectedFiles ->
+            FileChooserDialog().showOpenMultipleFilesFullscreenDialog(this, permissionsManager) { _, selectedFiles ->
                 selectedMultipleFilesInFullscreenDialogAdapter.items = selectedFiles ?: listOf()
             }
         }
