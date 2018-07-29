@@ -40,7 +40,7 @@ class FolderUtils(private val context: Context) {
         externalStorageDirectories.forEach { directory ->
             if(isMounted(directory)) {
                 if(isSdCard(directory)) {
-                    return findSdCardDirectory()
+                    return directory
                 }
             }
         }
