@@ -20,7 +20,7 @@ import net.dankito.mime.MimeTypeDetector
 
 class MainActivity : AppCompatActivity() {
 
-    private val permissionsManager = PermissionsService(this)
+    private val permissionsService = PermissionsService(this)
 
     private val mimeTypeDetector = MimeTypeDetector()
 
@@ -62,25 +62,25 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupShowFileChooserDialogButtons() {
         btnSelectSingleFile.setOnClickListener {
-            FileChooserDialog().showOpenSingleFileDialog(this, permissionsManager) { _, selectedFile ->
+            FileChooserDialog().showOpenSingleFileDialog(this, permissionsService) { _, selectedFile ->
                 selectedSingleFileAdapter.items = if (selectedFile != null) listOf(selectedFile) else listOf()
             }
         }
 
         btnSelectMultipleFiles.setOnClickListener {
-            FileChooserDialog().showOpenMultipleFilesDialog(this, permissionsManager) { _, selectedFiles ->
+            FileChooserDialog().showOpenMultipleFilesDialog(this, permissionsService) { _, selectedFiles ->
                 selectedMultipleFilesAdapter.items = selectedFiles ?: listOf()
             }
         }
 
         btnSelectSingleFileInFullscreenDialog.setOnClickListener {
-            FileChooserDialog().showOpenSingleFileFullscreenDialog(this, permissionsManager) { _, selectedFile ->
+            FileChooserDialog().showOpenSingleFileFullscreenDialog(this, permissionsService) { _, selectedFile ->
                 selectedSingleFileInFullscreenDialogAdapter.items = if (selectedFile != null) listOf(selectedFile) else listOf()
             }
         }
 
         btnSelectMultipleFilesInFullscreenDialog.setOnClickListener {
-            FileChooserDialog().showOpenMultipleFilesFullscreenDialog(this, permissionsManager) { _, selectedFiles ->
+            FileChooserDialog().showOpenMultipleFilesFullscreenDialog(this, permissionsService) { _, selectedFiles ->
                 selectedMultipleFilesInFullscreenDialogAdapter.items = selectedFiles ?: listOf()
             }
         }
@@ -88,7 +88,7 @@ class MainActivity : AppCompatActivity() {
 
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
-        permissionsManager.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        permissionsService.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
