@@ -57,7 +57,8 @@ class FileChooserView {
         btnSelect = rootView.btnSelect
         btnSelect.setOnClickListener { selectingFilesDone() }
 
-        setCurrentDirectory(Environment.getExternalStorageDirectory())
+        val initialDir = config.initialDirectory ?: Environment.getExternalStorageDirectory()
+        setCurrentDirectory(initialDir)
     }
 
 
