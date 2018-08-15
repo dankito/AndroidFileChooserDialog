@@ -18,16 +18,18 @@ class FilesService {
     }
 
 
-    fun getFilesOfDirectorySorted(directory: File, extensionsFilters: List<String> = emptyList()): List<File>? {
-        getFilesOfDirectory(directory, extensionsFilters)?.let { files ->
+    fun getFilesOfDirectorySorted(directory: File, returnOnlyDirectories: Boolean = false, extensionsFilters: List<String> = emptyList()): List<File>? {
+        getFilesOfDirectory(directory, returnOnlyDirectories, extensionsFilters)?.let { files ->
             return files.sortedWith(fileComparator)
         }
 
         return null
     }
 
-    fun getFilesOfDirectory(directory: File, extensionsFilters: List<String> = emptyList()): List<File>? {
-        if(extensionsFilters.isEmpty()) {
+    fun getFilesOfDirectory(directory: File, returnOnlyDirectories: Boolean = false, extensionsFilters: List<String> = emptyList()): List<File>? {
+        val alsoReturnFiles = ! returnOnlyDirectories
+
+        if(extensionsFilters.isEmpty() && alsoReturnFiles) {
             return directory.listFiles()?.toList() // listFiles() can return null, e.g when not having rights to read this directory
         }
 
@@ -35,7 +37,8 @@ class FilesService {
             val normalizedExtensionsFilters = normalizeExtensionFilters(extensionsFilters)
 
             file?.let {
-                return@listFiles file.isDirectory || normalizedExtensionsFilters.contains(it.extension.toLowerCase())
+                return@listFiles file.isDirectory ||
+                        (alsoReturnFiles && normalizedExtensionsFilters.contains(it.extension.toLowerCase()))
             }
 
             false

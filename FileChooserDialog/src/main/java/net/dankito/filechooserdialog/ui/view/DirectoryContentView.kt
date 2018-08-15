@@ -9,6 +9,7 @@ import android.util.AttributeSet
 import android.widget.Toast
 import net.dankito.filechooserdialog.R
 import net.dankito.filechooserdialog.model.FileChooserDialogConfig
+import net.dankito.filechooserdialog.model.FileChooserDialogType
 import net.dankito.filechooserdialog.service.*
 import net.dankito.filechooserdialog.ui.adapter.DirectoryContentAdapter
 import net.dankito.mime.MimeTypeCategorizer
@@ -41,6 +42,8 @@ class DirectoryContentView @JvmOverloads constructor(
 
     private lateinit var selectedFilesManager: SelectedFilesManager
 
+    private lateinit var dialogType: FileChooserDialogType
+
     private var permissionsService: IPermissionsService? = null
 
     private lateinit var config: FileChooserDialogConfig
@@ -55,8 +58,9 @@ class DirectoryContentView @JvmOverloads constructor(
         layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
     }
 
-    fun setupView(selectedFilesManager: SelectedFilesManager, permissionsService: IPermissionsService?, config: FileChooserDialogConfig) {
+    fun setupView(selectedFilesManager: SelectedFilesManager, dialogType: FileChooserDialogType, permissionsService: IPermissionsService?, config: FileChooserDialogConfig) {
         this.selectedFilesManager = selectedFilesManager
+        this.dialogType = dialogType
         this.permissionsService = permissionsService
         this.config = config
 
@@ -101,10 +105,16 @@ class DirectoryContentView @JvmOverloads constructor(
     }
 
     private fun showContentOfDirectoryWithPermissionGranted(currentDirectory: File, previousDirectory: File) {
-        fileService.getFilesOfDirectorySorted(currentDirectory, config.extensionsFilters)?.let { files ->
+        val returnOnlyDirectories = dialogType == FileChooserDialogType.SelectFolder
+
+        fileService.getFilesOfDirectorySorted(currentDirectory, returnOnlyDirectories, config.extensionsFilters)?.let { files ->
             contentAdapter.items = files
 
             selectedFilesManager.clearSelectedFiles()
+            if(dialogType == FileChooserDialogType.SelectFolder) {
+                selectedFilesManager.toggleFileIsSelected(currentDirectory)
+            }
+
             saveAndRestoreScrollPosition(currentDirectory, previousDirectory)
 
             currentDirectoryChangedListener?.invoke(currentDirectory)

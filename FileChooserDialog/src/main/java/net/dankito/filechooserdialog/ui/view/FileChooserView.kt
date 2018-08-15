@@ -49,7 +49,7 @@ class FileChooserView {
         parentDirectoriesView.parentDirectorySelectedListener = { setCurrentDirectory(it) }
 
         directoryContentView = rootView.directoryContentView
-        directoryContentView.setupView(selectedFilesManager, permissionsService, config)
+        directoryContentView.setupView(selectedFilesManager, dialogType, permissionsService, config)
         directoryContentView.currentDirectoryChangedListener = { currentDirectoryChanged(it) }
 
         rootView.btnCancel.setOnClickListener { cancelSelectingFiles() }

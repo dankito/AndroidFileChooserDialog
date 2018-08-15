@@ -58,7 +58,7 @@ class FileChooserDialog : DialogFragment() {
 
 
     private fun selectingFilesDone(didUserSelectFiles: Boolean, selectedFiles: List<File>?) {
-        if(dialogType == FileChooserDialogType.SelectSingleFile) {
+        if(dialogType == FileChooserDialogType.SelectSingleFile || dialogType == FileChooserDialogType.SelectFolder) {
             val selectedFile = if(selectedFiles?.isNotEmpty() == true) selectedFiles[0] else null
             selectSingleFileCallback?.invoke(didUserSelectFiles, selectedFile)
         }
@@ -83,6 +83,12 @@ class FileChooserDialog : DialogFragment() {
     }
 
     @JvmOverloads
+    fun showSelectFolderDialog(activity: FragmentActivity, permissionsService: IPermissionsService? = null, config: FileChooserDialogConfig = FileChooserDialogConfig(),
+                               selectFolderCallback: (didUserSelectFile: Boolean, File?) -> Unit) {
+        showDialog(activity, false, FileChooserDialogType.SelectFolder, permissionsService, config, selectFolderCallback, null)
+    }
+
+    @JvmOverloads
     fun showOpenSingleFileFullscreenDialog(activity: FragmentActivity, permissionsService: IPermissionsService? = null, config: FileChooserDialogConfig = FileChooserDialogConfig(),
                                  selectSingleFileCallback: (didUserSelectFile: Boolean, File?) -> Unit) {
         showDialog(activity, true, FileChooserDialogType.SelectSingleFile, permissionsService, config, selectSingleFileCallback, null)
@@ -92,6 +98,12 @@ class FileChooserDialog : DialogFragment() {
     fun showOpenMultipleFilesFullscreenDialog(activity: FragmentActivity, permissionsService: IPermissionsService? = null, config: FileChooserDialogConfig = FileChooserDialogConfig(),
                                     selectMultipleFilesCallback: (didUserSelectFiles: Boolean, List<File>?) -> Unit) {
         showDialog(activity, true, FileChooserDialogType.SelectMultipleFiles, permissionsService, config, null, selectMultipleFilesCallback)
+    }
+
+    @JvmOverloads
+    fun showSelectFolderFullscreenDialog(activity: FragmentActivity, permissionsService: IPermissionsService? = null, config: FileChooserDialogConfig = FileChooserDialogConfig(),
+                                         selectFolderCallback: (didUserSelectFile: Boolean, File?) -> Unit) {
+        showDialog(activity, true, FileChooserDialogType.SelectFolder, permissionsService, config, selectFolderCallback, null)
     }
 
     private fun showDialog(activity: FragmentActivity, fullscreen: Boolean, dialogType: FileChooserDialogType, permissionsService: IPermissionsService?, config: FileChooserDialogConfig,

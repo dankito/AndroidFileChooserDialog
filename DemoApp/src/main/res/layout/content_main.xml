@@ -65,6 +65,32 @@
         />
 
         <Button
+            android:id="@+id/btnSelectFolder"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/activity_main_show_file_chooser_buttons_height"
+            android:layout_marginTop="@dimen/activity_main_show_file_chooser_buttons_margin_top"
+            android:layout_marginLeft="@dimen/activity_main_show_file_chooser_buttons_margin_left_right"
+            android:layout_marginStart="@dimen/activity_main_show_file_chooser_buttons_margin_left_right"
+            android:layout_marginRight="@dimen/activity_main_show_file_chooser_buttons_margin_left_right"
+            android:layout_marginEnd="@dimen/activity_main_show_file_chooser_buttons_margin_left_right"
+            android:layout_marginBottom="@dimen/activity_main_show_file_chooser_buttons_margin_bottom"
+            android:text="@string/select_folder"
+        />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rcySelectedFolder"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/activity_main_recycler_view_select_single_file_height"
+            android:layout_marginLeft="@dimen/activity_main_recycler_views_margin_left_right"
+            android:layout_marginStart="@dimen/activity_main_recycler_views_margin_left_right"
+            android:layout_marginRight="@dimen/activity_main_recycler_views_margin_left_right"
+            android:layout_marginEnd="@dimen/activity_main_recycler_views_margin_left_right"
+            android:layout_marginBottom="@dimen/activity_main_recycler_view_select_single_file_margin_bottom"
+            app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+            android:scrollbars="vertical"
+        />
+
+        <Button
             android:id="@+id/btnSelectSingleFileInFullscreenDialog"
             android:layout_width="match_parent"
             android:layout_height="@dimen/activity_main_show_file_chooser_buttons_height"
@@ -112,6 +138,32 @@
             android:layout_marginEnd="@dimen/activity_main_recycler_views_margin_left_right"
             android:layout_marginBottom="@dimen/activity_main_recycler_view_select_multiple_files_margin_bottom"
             app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+        />
+
+        <Button
+            android:id="@+id/btnSelectFolderInFullscreenDialog"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/activity_main_show_file_chooser_buttons_height"
+            android:layout_marginTop="@dimen/activity_main_show_file_chooser_buttons_margin_top"
+            android:layout_marginLeft="@dimen/activity_main_show_file_chooser_buttons_margin_left_right"
+            android:layout_marginStart="@dimen/activity_main_show_file_chooser_buttons_margin_left_right"
+            android:layout_marginRight="@dimen/activity_main_show_file_chooser_buttons_margin_left_right"
+            android:layout_marginEnd="@dimen/activity_main_show_file_chooser_buttons_margin_left_right"
+            android:layout_marginBottom="@dimen/activity_main_show_file_chooser_buttons_margin_bottom"
+            android:text="@string/select_folder_in_fullscreen"
+        />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rcySelectedFolderInFullscreenDialog"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/activity_main_recycler_view_select_single_file_height"
+            android:layout_marginLeft="@dimen/activity_main_recycler_views_margin_left_right"
+            android:layout_marginStart="@dimen/activity_main_recycler_views_margin_left_right"
+            android:layout_marginRight="@dimen/activity_main_recycler_views_margin_left_right"
+            android:layout_marginEnd="@dimen/activity_main_recycler_views_margin_left_right"
+            android:layout_marginBottom="@dimen/activity_main_recycler_view_select_single_file_margin_bottom"
+            app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+            android:scrollbars="vertical"
         />
 
     </LinearLayout>
