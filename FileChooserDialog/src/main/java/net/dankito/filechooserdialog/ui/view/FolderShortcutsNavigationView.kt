@@ -13,8 +13,8 @@ import android.view.ContextThemeWrapper
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.file_chooser_dialog_dialog_file_chooser.view.*
 import net.dankito.filechooserdialog.R
-import net.dankito.filechooserdialog.ui.extensions.createColorStateList
-import net.dankito.filechooserdialog.ui.util.FolderUtils
+import net.dankito.utils.extensions.createColorStateList
+import net.dankito.utils.io.AndroidFolderUtils
 import java.io.File
 
 
@@ -29,7 +29,7 @@ class FolderShortcutsNavigationView @JvmOverloads constructor(
 
     private var sdCardDirectory: File? = null
 
-    private val folderUtils = FolderUtils(context)
+    private val folderUtils = AndroidFolderUtils(context)
 
 
     init {

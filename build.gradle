@@ -11,6 +11,7 @@ buildscript {
 
         kotlinVersion = '1.2.21'
 
+        androidUtilsVersion = '1.0.0'
         mimeUtilsVersion = '1.0.0'
 
         appCompatVersion = '26.1.0'

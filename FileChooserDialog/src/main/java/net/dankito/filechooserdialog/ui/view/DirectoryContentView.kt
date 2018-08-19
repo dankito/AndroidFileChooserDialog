@@ -10,10 +10,15 @@ import android.widget.Toast
 import net.dankito.filechooserdialog.R
 import net.dankito.filechooserdialog.model.FileChooserDialogConfig
 import net.dankito.filechooserdialog.model.FileChooserDialogType
-import net.dankito.filechooserdialog.service.*
+import net.dankito.filechooserdialog.service.FilesService
+import net.dankito.filechooserdialog.service.PreviewImageService
+import net.dankito.filechooserdialog.service.SelectedFilesManager
+import net.dankito.filechooserdialog.service.ThumbnailService
 import net.dankito.filechooserdialog.ui.adapter.DirectoryContentAdapter
 import net.dankito.mime.MimeTypeCategorizer
 import net.dankito.mime.MimeTypeDetector
+import net.dankito.utils.permissions.IPermissionsService
+import net.dankito.utils.permissions.PermissionsService
 import java.io.File
 
 

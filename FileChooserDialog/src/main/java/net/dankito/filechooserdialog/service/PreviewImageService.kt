@@ -5,11 +5,11 @@ import android.support.v7.widget.RecyclerView
 import android.widget.ImageView
 import net.dankito.filechooserdialog.R
 import net.dankito.filechooserdialog.model.FileChooserDialogConfig
-import net.dankito.filechooserdialog.ui.extensions.setTintColor
 import net.dankito.filechooserdialog.ui.util.LoadThumbnailTask
 import net.dankito.filechooserdialog.ui.util.PreviewImageCache
 import net.dankito.mime.MimeTypeCategorizer
 import net.dankito.mime.MimeTypeDetector
+import net.dankito.utils.extensions.setTintColor
 import java.io.File
 
 

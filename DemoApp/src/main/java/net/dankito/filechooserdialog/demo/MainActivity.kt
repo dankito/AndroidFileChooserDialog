@@ -9,7 +9,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 import net.dankito.filechooserdialog.FileChooserDialog
 import net.dankito.filechooserdialog.model.FileChooserDialogType
-import net.dankito.filechooserdialog.service.PermissionsService
+import net.dankito.utils.permissions.PermissionsService
 import net.dankito.filechooserdialog.service.PreviewImageService
 import net.dankito.filechooserdialog.service.SelectedFilesManager
 import net.dankito.filechooserdialog.service.ThumbnailService

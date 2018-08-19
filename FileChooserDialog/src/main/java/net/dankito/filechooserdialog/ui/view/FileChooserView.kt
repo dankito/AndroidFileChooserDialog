@@ -7,8 +7,8 @@ import kotlinx.android.synthetic.main.file_chooser_dialog_dialog_file_chooser.vi
 import net.dankito.filechooserdialog.model.FileChooserDialogConfig
 import net.dankito.filechooserdialog.model.FileChooserDialogType
 import net.dankito.filechooserdialog.service.BackStack
-import net.dankito.filechooserdialog.service.IPermissionsService
 import net.dankito.filechooserdialog.service.SelectedFilesManager
+import net.dankito.utils.permissions.IPermissionsService
 import java.io.File
 
 
