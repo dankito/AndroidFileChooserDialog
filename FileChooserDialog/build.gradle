@@ -83,6 +83,15 @@ dependencies {
 
 /*          publish to maven central            */
 
+def isReleaseVersion = !version.endsWith("SNAPSHOT")
+def areSigningPropertiesSet = isPropertySet('signing.secretKeyRingFile') && isPropertySet('signing.keyId') && isPropertySet('signing.password')
+def areOssrhPropertiesSet = isPropertySet('ossrhUsername') && isPropertySet('ossrhPassword')
+
+def isPropertySet(propertyName) {
+    return properties[propertyName] != null &&  ! (properties[propertyName] as String).isEmpty()
+}
+
+
 task sourcesJar(type: Jar) {
     from android.sourceSets.main.java.srcDirs
     classifier = 'sources'
@@ -105,18 +114,9 @@ artifacts {
 }
 
 
-def areSigningPropertiesSet = isPropertySet('signing.secretKeyRingFile') && isPropertySet('signing.keyId') && isPropertySet('signing.password')
-def areOssrhPropertiesSet = isPropertySet('ossrhUsername') && isPropertySet('ossrhPassword')
-
-def isPropertySet(propertyName) {
-    return properties[propertyName] != null &&  ! (properties[propertyName] as String).isEmpty()
-}
-
-
-if(areSigningPropertiesSet) {
-    signing {
-        sign configurations.archives
-    }
+signing {
+    required { isReleaseVersion && areSigningPropertiesSet && gradle.taskGraph.hasTask("uploadArchives") }
+    sign configurations.archives
 }
 
 uploadArchives {
@@ -125,9 +125,10 @@ uploadArchives {
 
             repository url: repositories.mavenLocal().url
 
-            if(areOssrhPropertiesSet) {
-                beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
 
+            // set ossrhUsername and ossrhPassword in your gradle.properties (in ~/.gradle/gradle.properties or project's gradle.properties)
+            if (areOssrhPropertiesSet) {
                 repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
                     authentication(userName: ossrhUsername, password: ossrhPassword)
                 }
