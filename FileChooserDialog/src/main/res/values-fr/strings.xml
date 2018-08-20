@@ -1,0 +1,23 @@
+<resources>
+
+    <string name="select">Sélectionner</string>
+    <string name="cancel">Annuler</string>
+
+    <string name="navigation_drawer_open">Ouvrir les raccourcis des dossiers</string>
+    <string name="navigation_drawer_close">Fermer les raccourcis des dossiers</string>
+
+    <string name="folder_shortcut_internal_storage">Stockage interne</string>
+    <string name="folder_shortcut_sd_card">Carte SD</string>
+    <string name="folder_shortcut_downloads">Téléchargements</string>
+    <string name="folder_shortcut_camera_photos">Appareil photo</string>
+    <string name="folder_shortcut_pictures">Images</string>
+    <string name="folder_shortcut_music">Musique</string>
+    <string name="folder_shortcut_movies">Vidéos</string>
+    <string name="folder_shortcut_documents">Documents</string>
+
+    <string name="does_not_have_permission_to_read_external_storage_message">Les fichiers ne peuvent pas être affichés car l\' application n\'a pas l\'autorisation d\'accéder au stockage de cet appareil.</string>
+    <string name="rationale_permission_to_read_external_storage_message">Pour afficher les fichiers, l\'application doit accéder au stockage de cet appareil.</string>
+
+    <string name="view_parent_directory_path_separator">/</string>
+
+</resources>
