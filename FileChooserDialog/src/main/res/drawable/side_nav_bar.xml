@@ -1,9 +1,0 @@
-<shape xmlns:android="http://schemas.android.com/apk/res/android"
-       android:shape="rectangle">
-    <gradient
-        android:angle="135"
-        android:startColor="@color/file_chooser_dialog_navigation_bar_header_start_color"
-        android:centerColor="@color/file_chooser_dialog_navigation_bar_header_center_color"
-        android:endColor="@color/file_chooser_dialog_navigation_bar_header_end_color"
-        android:type="linear"/>
-</shape>
