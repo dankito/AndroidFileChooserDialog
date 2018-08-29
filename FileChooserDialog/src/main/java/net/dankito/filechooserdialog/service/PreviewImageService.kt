@@ -9,7 +9,7 @@ import net.dankito.filechooserdialog.ui.util.LoadThumbnailTask
 import net.dankito.filechooserdialog.ui.util.PreviewImageCache
 import net.dankito.mime.MimeTypeCategorizer
 import net.dankito.mime.MimeTypeDetector
-import net.dankito.utils.extensions.setTintColor
+import net.dankito.utils.android.extensions.setTintColor
 import java.io.File
 
 

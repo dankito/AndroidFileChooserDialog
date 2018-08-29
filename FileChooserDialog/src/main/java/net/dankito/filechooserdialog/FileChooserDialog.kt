@@ -11,7 +11,7 @@ import android.view.ViewGroup
 import net.dankito.filechooserdialog.model.FileChooserDialogConfig
 import net.dankito.filechooserdialog.model.FileChooserDialogType
 import net.dankito.filechooserdialog.ui.view.FileChooserView
-import net.dankito.utils.permissions.IPermissionsService
+import net.dankito.utils.android.permissions.IPermissionsService
 import java.io.File
 
 

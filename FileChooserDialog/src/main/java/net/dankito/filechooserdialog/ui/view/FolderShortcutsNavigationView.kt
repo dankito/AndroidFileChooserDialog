@@ -13,8 +13,8 @@ import android.view.ContextThemeWrapper
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.file_chooser_dialog_dialog_file_chooser.view.*
 import net.dankito.filechooserdialog.R
-import net.dankito.utils.extensions.createColorStateList
-import net.dankito.utils.io.AndroidFolderUtils
+import net.dankito.utils.android.extensions.createColorStateList
+import net.dankito.utils.android.io.AndroidFolderUtils
 import java.io.File
 
 
