@@ -10,15 +10,16 @@ import android.widget.Toast
 import net.dankito.filechooserdialog.R
 import net.dankito.filechooserdialog.model.FileChooserDialogConfig
 import net.dankito.filechooserdialog.model.FileChooserDialogType
-import net.dankito.filechooserdialog.service.FilesService
 import net.dankito.filechooserdialog.service.PreviewImageService
 import net.dankito.filechooserdialog.service.SelectedFilesManager
 import net.dankito.filechooserdialog.service.ThumbnailService
 import net.dankito.filechooserdialog.ui.adapter.DirectoryContentAdapter
 import net.dankito.mime.MimeTypeCategorizer
 import net.dankito.mime.MimeTypeDetector
-import net.dankito.utils.permissions.IPermissionsService
-import net.dankito.utils.permissions.PermissionsService
+import net.dankito.utils.android.io.AndroidFolderUtils
+import net.dankito.utils.android.permissions.IPermissionsService
+import net.dankito.utils.android.permissions.PermissionsService
+import net.dankito.utils.io.FilesUtils
 import java.io.File
 
 
@@ -42,7 +43,9 @@ class DirectoryContentView @JvmOverloads constructor(
 
     private val previewImageService = PreviewImageService(thumbnailService, mimeTypeDetector, mimeTypeCategorizer)
 
-    private val fileService = FilesService()
+    private val filesUtils = FilesUtils()
+
+    private val folderUtils = AndroidFolderUtils(context)
 
 
     private lateinit var selectedFilesManager: SelectedFilesManager
@@ -87,7 +90,7 @@ class DirectoryContentView @JvmOverloads constructor(
 
     fun showContentOfDirectory(directory: File) {
         val previousDirectory = this.currentDirectory
-        this.currentDirectory = fileService.avoidDirectoriesWeAreNotAllowedToList(directory)
+        this.currentDirectory = folderUtils.avoidDirectoriesWeAreNotAllowedToList(directory)
 
         if(PermissionsService.isPermissionGranted(context, Manifest.permission.READ_EXTERNAL_STORAGE)) {
             showContentOfDirectoryWithPermissionGranted(currentDirectory, previousDirectory)
@@ -112,7 +115,7 @@ class DirectoryContentView @JvmOverloads constructor(
     private fun showContentOfDirectoryWithPermissionGranted(currentDirectory: File, previousDirectory: File) {
         val returnOnlyDirectories = dialogType == FileChooserDialogType.SelectFolder
 
-        fileService.getFilesOfDirectorySorted(currentDirectory, returnOnlyDirectories, config.extensionsFilters)?.let { files ->
+        filesUtils.getFilesOfDirectorySorted(currentDirectory, returnOnlyDirectories, config.extensionsFilters)?.let { files ->
             contentAdapter.items = files
 
             selectedFilesManager.clearSelectedFiles()
