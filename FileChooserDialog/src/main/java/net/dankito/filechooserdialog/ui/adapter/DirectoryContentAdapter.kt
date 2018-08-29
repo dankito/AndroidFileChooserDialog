@@ -6,6 +6,7 @@ import net.dankito.filechooserdialog.model.FileChooserDialogConfig
 import net.dankito.filechooserdialog.service.PreviewImageService
 import net.dankito.filechooserdialog.service.SelectedFilesManager
 import net.dankito.filechooserdialog.ui.adapter.viewholder.DirectoryContentViewHolder
+import net.dankito.utils.android.ui.adapter.ListRecyclerAdapter
 import java.io.File
 
 
