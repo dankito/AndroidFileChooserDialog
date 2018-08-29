@@ -7,10 +7,12 @@
     android:background="@drawable/side_nav_bar"
     android:gravity="bottom"
     android:orientation="vertical"
-    android:paddingBottom="@dimen/file_chooser_dialog_navigation_header_vertical_margin"
-    android:paddingLeft="@dimen/file_chooser_dialog_navigation_header_horizontal_margin"
-    android:paddingRight="@dimen/file_chooser_dialog_navigation_header_horizontal_margin"
-    android:paddingTop="@dimen/file_chooser_dialog_navigation_header_vertical_margin"
+    android:paddingBottom="@dimen/navigation_header_vertical_margin"
+    android:paddingLeft="@dimen/navigation_header_horizontal_margin"
+    android:paddingStart="@dimen/navigation_header_horizontal_margin"
+    android:paddingRight="@dimen/navigation_header_horizontal_margin"
+    android:paddingEnd="@dimen/navigation_header_horizontal_margin"
+    android:paddingTop="@dimen/navigation_header_vertical_margin"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
 </LinearLayout>

@@ -1,53 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-    </style>
-
-    <style name="AppTheme.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
-
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
-
-
-    <style name="Dialog" parent="AppTheme" >
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowFullscreen">false</item>
-        <item name="android:windowIsFloating">true</item>
-    </style>
-
-    <style name="FullscreenDialogWithStatusBar" parent="Dialog" >
-        <item name="android:windowIsFloating">false</item>
-        <item name="android:padding">0dp</item>
-    </style>
-
-    <style name="FullscreenDialog" parent="FullscreenDialogWithStatusBar" >
-        <item name="android:windowFullscreen">true</item>
-    </style>
-
-
-    <style name="ToolbarStyle" parent="AppTheme" >
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">@dimen/file_chooser_dialog_toolbar_height</item>
-        <item name="android:background">@color/file_chooser_dialog_toolbar_background</item>
-        <!-- remove space between close button and title text view -->
-        <item name="titleMarginStart">0dp</item>
-        <item name="contentInsetLeft">0dp</item>
-        <item name="contentInsetStart">0dp</item>
-        <item name="contentInsetStartWithNavigation">0dp</item>
-        <item name="popupTheme">@style/AppTheme.PopupOverlay</item>
-        <item name="android:theme">@style/AppTheme.AppBarOverlay</item>
-    </style>
-
-
     <style name="parent_directory_text_style" parent="TextAppearance.AppCompat.Small">
         <item name="android:textColor">?android:attr/textColorPrimary</item>
         <!-- textSize of TextAppearance.AppCompat.Small is 14sp, which i think is a bit too small, raised it therefore a bit -->

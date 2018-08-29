@@ -1,13 +1,11 @@
 <resources>
 
-    <dimen name="file_chooser_dialog_toolbar_height">40dp</dimen>
-
     <dimen name="file_chooser_dialog_dialog_buttons_width">120dp</dimen>
 
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="file_chooser_dialog_navigation_header_horizontal_margin">16dp</dimen>
     <dimen name="file_chooser_dialog_navigation_header_vertical_margin">16dp</dimen>
-    <dimen name="file_chooser_dialog_navigation_header_height">@dimen/file_chooser_dialog_toolbar_height</dimen>
+    <dimen name="file_chooser_dialog_navigation_header_height">@dimen/toolbar_height</dimen>
 
     <dimen name="file_chooser_dialog_list_item_file_height">68dp</dimen>
     <dimen name="file_chooser_dialog_list_item_file_thumbnail_height">56dp</dimen>
