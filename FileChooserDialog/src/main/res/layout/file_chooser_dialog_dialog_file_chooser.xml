@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<net.dankito.filechooserdialog.ui.view.FixMeasurementBugDrawerLayout
+<net.dankito.utils.android.ui.view.FixMeasurementBugDrawerLayout
     android:id="@+id/folderShortcutsDrawerLayout"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -82,4 +82,4 @@
     />
 
 
-</net.dankito.filechooserdialog.ui.view.FixMeasurementBugDrawerLayout>
+</net.dankito.utils.android.ui.view.FixMeasurementBugDrawerLayout>
