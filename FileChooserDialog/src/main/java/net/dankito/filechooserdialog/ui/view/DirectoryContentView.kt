@@ -19,7 +19,8 @@ import net.dankito.mime.MimeTypeDetector
 import net.dankito.utils.android.io.AndroidFolderUtils
 import net.dankito.utils.android.permissions.IPermissionsService
 import net.dankito.utils.android.permissions.PermissionsService
-import net.dankito.utils.io.FilesUtils
+import net.dankito.utils.io.FileUtils
+import net.dankito.utils.io.ListDirectory
 import java.io.File
 
 
@@ -43,7 +44,7 @@ class DirectoryContentView @JvmOverloads constructor(
 
     private val previewImageService = PreviewImageService(thumbnailService, mimeTypeDetector, mimeTypeCategorizer)
 
-    private val filesUtils = FilesUtils()
+    private val fileUtils = FileUtils()
 
     private val folderUtils = AndroidFolderUtils(context)
 
@@ -113,9 +114,9 @@ class DirectoryContentView @JvmOverloads constructor(
     }
 
     private fun showContentOfDirectoryWithPermissionGranted(currentDirectory: File, previousDirectory: File) {
-        val returnOnlyDirectories = dialogType == FileChooserDialogType.SelectFolder
+        val listDirectory = if (dialogType == FileChooserDialogType.SelectFolder) ListDirectory.DirectoriesOnly else ListDirectory.DirectoriesAndFiles
 
-        filesUtils.getFilesOfDirectorySorted(currentDirectory, returnOnlyDirectories, config.extensionsFilters)?.let { files ->
+        fileUtils.getFilesOfDirectorySorted(currentDirectory, listDirectory, 1, config.extensionsFilters)?.let { files ->
             contentAdapter.items = files
 
             selectedFilesManager.clearSelectedFiles()
