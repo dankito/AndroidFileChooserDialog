@@ -71,7 +71,7 @@ class FileChooserView {
 
 
     fun handlesBackButtonPress(): Boolean {
-        if(folderShortcutsNavigationView.handlesBackButtonPress()) {
+        if(config.showFolderShortcutsView && folderShortcutsNavigationView.handlesBackButtonPress()) {
 
         }
         else if(backStack.canNavigateBack()) {
