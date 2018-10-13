@@ -10,16 +10,13 @@ import android.widget.Toast
 import net.dankito.filechooserdialog.R
 import net.dankito.filechooserdialog.model.FileChooserDialogConfig
 import net.dankito.filechooserdialog.model.FileChooserDialogType
-import net.dankito.filechooserdialog.service.PreviewImageService
-import net.dankito.filechooserdialog.service.SelectedFilesManager
-import net.dankito.filechooserdialog.service.ThumbnailService
+import net.dankito.filechooserdialog.service.*
 import net.dankito.filechooserdialog.ui.adapter.DirectoryContentAdapter
 import net.dankito.mime.MimeTypeCategorizer
 import net.dankito.mime.MimeTypeDetector
 import net.dankito.utils.android.io.AndroidFolderUtils
 import net.dankito.utils.android.permissions.IPermissionsService
 import net.dankito.utils.android.permissions.PermissionsService
-import net.dankito.utils.io.FileUtils
 import net.dankito.utils.io.ListDirectory
 import java.io.File
 
@@ -32,6 +29,8 @@ class DirectoryContentView @JvmOverloads constructor(
     var currentDirectory: File = File("/")
         private set
 
+    var directoryContentRetriever: IDirectoryContentRetriever = LocalFilesystemDirectoryContentRetriever()
+
 
     var currentDirectoryChangedListener: ((currentDirectory: File) -> Unit)? = null
 
@@ -43,8 +42,6 @@ class DirectoryContentView @JvmOverloads constructor(
     private val thumbnailService = ThumbnailService(context, mimeTypeDetector, mimeTypeCategorizer)
 
     private val previewImageService = PreviewImageService(thumbnailService, mimeTypeDetector, mimeTypeCategorizer)
-
-    private val fileUtils = FileUtils()
 
     private val folderUtils = AndroidFolderUtils(context)
 
@@ -116,7 +113,7 @@ class DirectoryContentView @JvmOverloads constructor(
     private fun showContentOfDirectoryWithPermissionGranted(currentDirectory: File, previousDirectory: File) {
         val listDirectory = if (dialogType == FileChooserDialogType.SelectFolder) ListDirectory.DirectoriesOnly else ListDirectory.DirectoriesAndFiles
 
-        fileUtils.getFilesOfDirectorySorted(currentDirectory, listDirectory, 1, config.extensionsFilters)?.let { files ->
+        directoryContentRetriever.getFilesOfDirectorySorted(currentDirectory, listDirectory, 1, config.extensionsFilters)?.let { files ->
             contentAdapter.items = files
 
             selectedFilesManager.clearSelectedFiles()

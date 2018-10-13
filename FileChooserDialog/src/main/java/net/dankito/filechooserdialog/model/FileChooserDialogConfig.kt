@@ -1,12 +1,15 @@
 package net.dankito.filechooserdialog.model
 
-import java.io.File
 import net.dankito.filechooserdialog.R
+import net.dankito.filechooserdialog.service.IDirectoryContentRetriever
+import net.dankito.filechooserdialog.service.LocalFilesystemDirectoryContentRetriever
+import java.io.File
 
 
 data class FileChooserDialogConfig @JvmOverloads constructor(
         val extensionsFilters: List<String> = listOf(),
         val initialDirectory: File? = null,
+        val directoryContentRetriever: IDirectoryContentRetriever = LocalFilesystemDirectoryContentRetriever(),
         val showHorizontalItemDividers: Boolean = true,
         val showCheckMarkForSelectedItems: Boolean = true,
         val showSelectedItemsInItemSelectedBackgroundColor: Boolean = true,
