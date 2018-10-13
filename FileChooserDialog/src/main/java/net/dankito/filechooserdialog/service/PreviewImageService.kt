@@ -34,7 +34,8 @@ class PreviewImageService(private val thumbnailService: ThumbnailService, privat
     }
 
     private fun getPreviewImageForFile(viewHolder: RecyclerView.ViewHolder, imageView: ImageView, file: File, config: FileChooserDialogConfig) {
-        val mimeType = mimeTypeDetector.getBestPickForFile(file)
+        // TODO: fix this bug in MimeTypeDetector that it doesn't check if it's a directory (e. g. it thinks of '.AndroidStudio3.2' '.2' is a file extension)
+        val mimeType = if (file.isDirectory) null else mimeTypeDetector.getBestPickForFile(file)
 
         if(mimeType == null) {
             if(file.isDirectory) {
