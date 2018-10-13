@@ -13,6 +13,7 @@ data class FileChooserDialogConfig @JvmOverloads constructor(
         val showHorizontalItemDividers: Boolean = true,
         val showCheckMarkForSelectedItems: Boolean = true,
         val showSelectedItemsInItemSelectedBackgroundColor: Boolean = true,
+        val showFolderShortcutsView: Boolean = true,
         val tryToLoadThumbnailForImageFiles: Boolean = true,
         val tryToLoadThumbnailForVideoFiles: Boolean = true,
         val tryToLoadAlbumArtForAudioFiles: Boolean = true,
