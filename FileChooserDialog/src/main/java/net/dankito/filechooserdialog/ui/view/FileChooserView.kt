@@ -2,6 +2,7 @@ package net.dankito.filechooserdialog.ui.view
 
 import android.os.Environment
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Button
 import kotlinx.android.synthetic.main.file_chooser_dialog_dialog_file_chooser.view.*
 import net.dankito.filechooserdialog.model.FileChooserDialogConfig
@@ -59,6 +60,10 @@ class FileChooserView {
 
 
         directoryContentView.directoryContentRetriever = config.directoryContentRetriever
+
+        if (config.showFolderShortcutsView == false) {
+            (rootView as? ViewGroup)?.removeView(folderShortcutsNavigationView)
+        }
 
         val initialDir = config.initialDirectory ?: Environment.getExternalStorageDirectory()
         setCurrentDirectory(initialDir)
