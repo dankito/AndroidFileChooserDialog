@@ -113,17 +113,19 @@ class DirectoryContentView @JvmOverloads constructor(
     private fun showContentOfDirectoryWithPermissionGranted(currentDirectory: File, previousDirectory: File) {
         val listDirectory = if (dialogType == FileChooserDialogType.SelectFolder) ListDirectory.DirectoriesOnly else ListDirectory.DirectoriesAndFiles
 
-        directoryContentRetriever.getFilesOfDirectorySorted(currentDirectory, listDirectory, 1, config.extensionsFilters)?.let { files ->
-            contentAdapter.items = files
+        directoryContentRetriever.getFilesOfDirectorySorted(currentDirectory, listDirectory, 1, config.extensionsFilters) { files ->
+            files?.let {
+                contentAdapter.items = files
 
-            selectedFilesManager.clearSelectedFiles()
-            if(dialogType == FileChooserDialogType.SelectFolder) {
-                selectedFilesManager.toggleFileIsSelected(currentDirectory)
+                selectedFilesManager.clearSelectedFiles()
+                if(dialogType == FileChooserDialogType.SelectFolder) {
+                    selectedFilesManager.toggleFileIsSelected(currentDirectory)
+                }
+
+                saveAndRestoreScrollPosition(currentDirectory, previousDirectory)
+
+                currentDirectoryChangedListener?.invoke(currentDirectory)
             }
-
-            saveAndRestoreScrollPosition(currentDirectory, previousDirectory)
-
-            currentDirectoryChangedListener?.invoke(currentDirectory)
         }
     }
 

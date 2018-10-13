@@ -10,8 +10,8 @@ class LocalFilesystemDirectoryContentRetriever : IDirectoryContentRetriever {
     private val fileUtils = FileUtils()
 
 
-    override fun getFilesOfDirectorySorted(directory: File, listDirectory: ListDirectory, folderDepth: Int, extensionsFilters: List<String>): List<File>? {
-        return fileUtils.getFilesOfDirectorySorted(directory, listDirectory, folderDepth, extensionsFilters)
+    override fun getFilesOfDirectorySorted(directory: File, listDirectory: ListDirectory, folderDepth: Int, extensionsFilters: List<String>, callback: (List<File>?) -> Unit) {
+        callback(fileUtils.getFilesOfDirectorySorted(directory, listDirectory, folderDepth, extensionsFilters))
     }
 
 }

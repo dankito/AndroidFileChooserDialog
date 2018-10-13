@@ -6,6 +6,6 @@ import java.io.File
 
 interface IDirectoryContentRetriever {
 
-    fun getFilesOfDirectorySorted(directory: File, listDirectory: ListDirectory, folderDepth: Int, extensionsFilters: List<String>): List<File>?
+    fun getFilesOfDirectorySorted(directory: File, listDirectory: ListDirectory, folderDepth: Int, extensionsFilters: List<String>, callback: (List<File>?) -> Unit)
 
 }
