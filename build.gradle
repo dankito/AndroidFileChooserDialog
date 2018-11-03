@@ -12,7 +12,7 @@ buildscript {
         kotlinVersion = '1.2.21'
 
         javaUtilsVersion = '1.0.3-SNAPSHOT'
-        androidUtilsVersion = '1.0.1'
+        androidUtilsVersion = '1.0.5'
         mimeUtilsVersion = '1.0.0'
 
         appCompatVersion = '26.1.0'

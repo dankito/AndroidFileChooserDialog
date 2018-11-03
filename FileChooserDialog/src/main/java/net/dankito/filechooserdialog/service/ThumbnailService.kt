@@ -10,10 +10,14 @@ import android.net.Uri
 import android.provider.MediaStore
 import net.dankito.mime.MimeTypeCategorizer
 import net.dankito.mime.MimeTypeDetector
+import net.dankito.utils.android.image.AndroidImageUtils
 import java.io.File
 
 
 class ThumbnailService(private val context: Context, private val mimeTypeDetector: MimeTypeDetector, private val mimeTypeCategorizer: MimeTypeCategorizer) {
+
+    private val imageUtils = AndroidImageUtils()
+
 
     /**
      * Parameters prefWidth and prefHeight will only be used if there's no system thumbnail from MediaStorage and
@@ -36,7 +40,7 @@ class ThumbnailService(private val context: Context, private val mimeTypeDetecto
             getImageThumbnailFromMediaStore(file)?.let { return it }
 
             // then create one ...
-            return ThumbnailUtils.extractThumbnail(BitmapFactory.decodeFile(file.absolutePath), prefWidth, prefHeight, ThumbnailUtils.OPTIONS_RECYCLE_INPUT)
+            return ThumbnailUtils.extractThumbnail(imageUtils.getCorrectlyRotatedBitmap(file), prefWidth, prefHeight, ThumbnailUtils.OPTIONS_RECYCLE_INPUT)
         }
         else if(mimeTypeCategorizer.isVideoFile(mimeType)) {
             getVideoThumbnailFromMediaStore(file)?.let { return it }
@@ -62,7 +66,8 @@ class ThumbnailService(private val context: Context, private val mimeTypeDetecto
             if(cursor != null && cursor.moveToFirst()) {
                 val id = cursor.getInt(cursor.getColumnIndex(MediaStore.MediaColumns._ID))
 
-                return MediaStore.Images.Thumbnails.getThumbnail(contentResolver, id.toLong(), MediaStore.Images.Thumbnails.MICRO_KIND, null)
+                val thumbnail = MediaStore.Images.Thumbnails.getThumbnail(contentResolver, id.toLong(), MediaStore.Images.Thumbnails.MICRO_KIND, null)
+                return imageUtils.correctOrientationIfNeeded(thumbnail, file.absolutePath)
             }
         } catch(e: Exception) {
             // TODO: log error
