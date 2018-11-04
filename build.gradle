@@ -5,9 +5,9 @@ buildscript {
         VersionCode = 9
         VersionName = '1.1.4'
 
-        CompileSdkVersion = 26
+        CompileSdkVersion = 27
         MinSdkVersion = 15
-        TargetSdkVersion = 26
+        TargetSdkVersion = 27
 
         kotlinVersion = '1.2.21'
 
@@ -15,7 +15,7 @@ buildscript {
         androidUtilsVersion = '1.0.5'
         mimeUtilsVersion = '1.0.0'
 
-        appCompatVersion = '26.1.0'
+        appCompatVersion = '27.1.1'
         constraintLayoutVersion = '1.0.2'
 
         junitVersion = '4.12'
