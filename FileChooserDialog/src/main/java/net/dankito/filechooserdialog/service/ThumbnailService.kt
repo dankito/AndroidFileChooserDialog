@@ -4,7 +4,6 @@ import android.content.ContentUris
 import android.content.Context
 import android.database.Cursor
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.media.ThumbnailUtils
 import android.net.Uri
 import android.provider.MediaStore
@@ -40,7 +39,9 @@ class ThumbnailService(private val context: Context, private val mimeTypeDetecto
             getImageThumbnailFromMediaStore(file)?.let { return it }
 
             // then create one ...
-            return ThumbnailUtils.extractThumbnail(imageUtils.getCorrectlyRotatedBitmap(file), prefWidth, prefHeight, ThumbnailUtils.OPTIONS_RECYCLE_INPUT)
+            imageUtils.getCorrectlyRotatedBitmap(file)?.let { bitmap ->
+                return ThumbnailUtils.extractThumbnail(bitmap, prefWidth, prefHeight, ThumbnailUtils.OPTIONS_RECYCLE_INPUT)
+            }
         }
         else if(mimeTypeCategorizer.isVideoFile(mimeType)) {
             getVideoThumbnailFromMediaStore(file)?.let { return it }
