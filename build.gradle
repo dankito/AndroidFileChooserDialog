@@ -2,8 +2,8 @@
 
 buildscript {
     ext {
-        VersionCode = 9
-        VersionName = '1.1.4'
+        VersionCode = 10
+        VersionName = '1.1.5-SNAPSHOT'
 
         CompileSdkVersion = 27
         MinSdkVersion = 15
