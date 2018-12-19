@@ -1,6 +1,7 @@
 package net.dankito.filechooserdialog.ui.adapter
 
 import android.view.View
+import android.widget.ImageView
 import net.dankito.filechooserdialog.R
 import net.dankito.filechooserdialog.model.FileChooserDialogConfig
 import net.dankito.filechooserdialog.service.PreviewImageService
@@ -41,8 +42,12 @@ class DirectoryContentAdapter(private val previewImageService: PreviewImageServi
         viewHolder.imgIsSelected.apply {
             visibility = if (isSelected && config.showCheckMarkForSelectedItems) View.VISIBLE else View.INVISIBLE
 
-            setTintColor(context.getResourceIdForAttributeId(R.attr.FileChooserDialogFileIconTintColor, R.color.colorAccent))
+            setTintColor(getIsSelectedCheckMarkTintColorId())
         }
+    }
+
+    private fun ImageView.getIsSelectedCheckMarkTintColorId(): Int {
+        return context.getResourceIdForAttributeId(R.attr.FileChooserDialogFileIconTintColor, R.color.colorAccent)
     }
 
 }
