@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/file_chooser_dialog_list_item_file_height"
-                android:background="?attr/ListItemBackground"
+                android:background="?attr/listItemBackground"
 >
 
     <ImageView
