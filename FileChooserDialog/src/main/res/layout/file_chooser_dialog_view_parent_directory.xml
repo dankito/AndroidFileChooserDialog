@@ -11,7 +11,7 @@
         android:layout_height="match_parent"
         android:layout_marginRight="@dimen/file_chooser_dialog_view_parent_directory_path_separator_margin_right"
         android:layout_marginEnd="@dimen/file_chooser_dialog_view_parent_directory_path_separator_margin_right"
-        style="@style/parent_directory_text_style"
+        style="@style/ParentDirectoryTextStyle"
         android:text="@string/view_parent_directory_path_separator"
     />
 
@@ -22,7 +22,7 @@
         android:minWidth="@dimen/file_chooser_dialog_view_parent_directory_min_width"
         android:layout_marginRight="@dimen/file_chooser_dialog_view_parent_directory_directory_name_margin_right"
         android:layout_marginEnd="@dimen/file_chooser_dialog_view_parent_directory_directory_name_margin_right"
-        style="@style/parent_directory_text_style"
+        style="@style/ParentDirectoryTextStyle"
     />
 
 </LinearLayout>
