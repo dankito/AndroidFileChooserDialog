@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="FileChooserDialog">
+
+        <attr name="FileChooserDialogFileIconTintColor" format="color"/>
+        <attr name="FileChooserDialogFileIsSelectedCheckMarkTintColor" format="color"/>
+        <attr name="FileChooserDialogNavigationMenuItemsIconTintColor" format="color"/>
+
+    </declare-styleable>
+
+</resources>

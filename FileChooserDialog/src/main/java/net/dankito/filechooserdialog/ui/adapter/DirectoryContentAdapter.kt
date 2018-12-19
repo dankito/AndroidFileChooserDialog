@@ -6,6 +6,8 @@ import net.dankito.filechooserdialog.model.FileChooserDialogConfig
 import net.dankito.filechooserdialog.service.PreviewImageService
 import net.dankito.filechooserdialog.service.SelectedFilesManager
 import net.dankito.filechooserdialog.ui.adapter.viewholder.DirectoryContentViewHolder
+import net.dankito.utils.android.extensions.getResourceIdForAttributeId
+import net.dankito.utils.android.extensions.setTintColor
 import net.dankito.utils.android.ui.adapter.ListRecyclerAdapter
 import java.io.File
 
@@ -35,7 +37,12 @@ class DirectoryContentAdapter(private val previewImageService: PreviewImageServi
 
         val isSelected = selectedFilesManager.isFileSelected(item)
         viewHolder.itemView.isActivated = isSelected && config.showSelectedItemsInItemSelectedBackgroundColor
-        viewHolder.imgIsSelected.visibility = if(isSelected && config.showCheckMarkForSelectedItems) View.VISIBLE else View.INVISIBLE
+
+        viewHolder.imgIsSelected.apply {
+            visibility = if (isSelected && config.showCheckMarkForSelectedItems) View.VISIBLE else View.INVISIBLE
+
+            setTintColor(context.getResourceIdForAttributeId(R.attr.FileChooserDialogFileIconTintColor, R.color.colorAccent))
+        }
     }
 
 }

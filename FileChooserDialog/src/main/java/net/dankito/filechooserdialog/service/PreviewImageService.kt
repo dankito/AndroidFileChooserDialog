@@ -1,5 +1,6 @@
 package net.dankito.filechooserdialog.service
 
+import android.content.Context
 import android.os.Environment
 import android.support.v7.widget.RecyclerView
 import android.widget.ImageView
@@ -9,6 +10,7 @@ import net.dankito.filechooserdialog.ui.util.LoadThumbnailTask
 import net.dankito.filechooserdialog.ui.util.PreviewImageCache
 import net.dankito.mime.MimeTypeCategorizer
 import net.dankito.mime.MimeTypeDetector
+import net.dankito.utils.android.extensions.getResourceIdForAttributeId
 import net.dankito.utils.android.extensions.setTintColor
 import java.io.File
 
@@ -90,7 +92,11 @@ class PreviewImageService(private val thumbnailService: ThumbnailService, privat
     private fun setPreviewImageToResource(imageView: ImageView, imageResourceId: Int) {
         imageView.setImageResource(imageResourceId)
 
-        imageView.setTintColor(R.color.file_chooser_dialog_file_icon_tint_color)
+        imageView.setTintColor(getFileIconTintColorId(imageView.context))
+    }
+
+    private fun getFileIconTintColorId(context: Context): Int {
+        return context.getResourceIdForAttributeId(R.attr.FileChooserDialogFileIconTintColor, R.color.colorAccent)
     }
 
     private fun shouldTryToLoadThumbnailForFile(mimeType: String, config: FileChooserDialogConfig): Boolean {

@@ -13,6 +13,7 @@ import kotlinx.android.synthetic.main.file_chooser_dialog_dialog_file_chooser.vi
 import net.dankito.filechooserdialog.R
 import net.dankito.utils.android.extensions.asActivity
 import net.dankito.utils.android.extensions.createColorStateList
+import net.dankito.utils.android.extensions.getResourceIdForAttributeId
 import net.dankito.utils.android.io.AndroidFolderUtils
 import java.io.File
 
@@ -41,13 +42,17 @@ class FolderShortcutsNavigationView @JvmOverloads constructor(
     }
 
     private fun setupNavigationMenu() {
-        this.itemIconTintList = context.createColorStateList(R.color.file_chooser_dialog_navigation_menu_items_icon_tint_color)
+        this.itemIconTintList = context.createColorStateList(getIconsTintColorId())
 
         this.menu?.findItem(R.id.navFolderShortcutDocuments)?.isVisible = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT // Documents folder is only available on KitKat and newer
 
         this.setNavigationItemSelectedListener { navigationItemSelected(it) }
 
         setExternalStorageMenuItems()
+    }
+
+    private fun getIconsTintColorId(): Int {
+        return context.getResourceIdForAttributeId(R.attr.FileChooserDialogNavigationMenuItemsIconTintColor, R.color.colorAccent)
     }
 
 

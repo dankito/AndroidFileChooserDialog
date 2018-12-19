@@ -2,7 +2,13 @@
 <resources>
 
     <style name="AppTheme" parent="AppThemeLightBase">
+
+        <item name="FileChooserDialogFileIconTintColor">@color/fileChooserDialogFileIconTintColor_Light</item>
+        <item name="FileChooserDialogFileIsSelectedCheckMarkTintColor">@color/fileChooserDialogFileIsSelectedCheckMarkTintColor_Light</item>
+        <item name="FileChooserDialogNavigationMenuItemsIconTintColor">@color/fileChooserDialogNavigationMenuItemsIconTintColor_Light</item>
+
     </style>
+
 
     <style name="ParentDirectoryTextStyle" parent="TextAppearance.AppCompat.Small">
         <!-- textSize of TextAppearance.AppCompat.Small is 14sp, which i think is a bit too small, raised it therefore a bit -->

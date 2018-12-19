@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/file_chooser_dialog_list_item_file_height"
-                android:background="@drawable/list_item_background"
+                android:background="?attr/ListItemBackground"
 >
 
     <ImageView
@@ -46,7 +46,6 @@
         android:layout_marginStart="@dimen/file_chooser_dialog_list_item_file_is_selected_icon_margin_left"
         android:layout_marginRight="@dimen/file_chooser_dialog_list_item_file_is_selected_icon_margin_right"
         android:layout_marginEnd="@dimen/file_chooser_dialog_list_item_file_is_selected_icon_margin_right"
-        android:tint="@color/file_chooser_dialog_file_is_selected_check_mark_tint_color"
         android:scaleType="center"
         android:src="@drawable/file_chooser_dialog_ic_file_selected_check_mark"
         android:visibility="invisible"

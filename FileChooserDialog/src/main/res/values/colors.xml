@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="file_chooser_dialog_file_icon_tint_color">@color/colorAccent</color>
-    <color name="file_chooser_dialog_file_is_selected_check_mark_tint_color">@color/colorAccent</color>
-    <color name="file_chooser_dialog_navigation_menu_items_icon_tint_color">@color/colorAccent</color>
+    <color name="fileChooserDialogFileIconTintColor_Light">@color/colorAccent</color>
+    <color name="fileChooserDialogFileIconTintColor_Dark">@color/colorAccent_Dark</color>
 
-    <color name="file_chooser_dialog_navigation_bar_header_start_color">@color/colorPrimary</color>
-    <color name="file_chooser_dialog_navigation_bar_header_center_color">@null</color>
-    <color name="file_chooser_dialog_navigation_bar_header_end_color">@color/colorPrimaryDark</color>
+    <color name="fileChooserDialogFileIsSelectedCheckMarkTintColor_Light">@color/colorAccent</color>
+    <color name="fileChooserDialogFileIsSelectedCheckMarkTintColor_Dark">@color/colorAccent_Dark</color>
+
+    <color name="fileChooserDialogNavigationMenuItemsIconTintColor_Light">@color/colorAccent</color>
+    <color name="fileChooserDialogNavigationMenuItemsIconTintColor_Dark">@color/colorAccent_Dark</color>
 
 </resources>
