@@ -15,12 +15,13 @@ import net.dankito.utils.android.extensions.asActivity
 import net.dankito.utils.android.extensions.createColorStateList
 import net.dankito.utils.android.extensions.getResourceIdForAttributeId
 import net.dankito.utils.android.io.AndroidFolderUtils
+import net.dankito.utils.android.ui.view.IHandlesBackButtonPress
 import java.io.File
 
 
 class FolderShortcutsNavigationView @JvmOverloads constructor(
         context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
-) : NavigationView(context, attrs, defStyleAttr) {
+) : NavigationView(context, attrs, defStyleAttr), IHandlesBackButtonPress {
 
     var folderShortcutSelectedListener: ((File) -> Unit)? = null
 
@@ -82,7 +83,7 @@ class FolderShortcutsNavigationView @JvmOverloads constructor(
     }
 
 
-    fun handlesBackButtonPress(): Boolean {
+    override fun handlesBackButtonPress(): Boolean {
         if(drawerLayout.isDrawerOpen(GravityCompat.START)) {
             closeDrawerLayout()
 

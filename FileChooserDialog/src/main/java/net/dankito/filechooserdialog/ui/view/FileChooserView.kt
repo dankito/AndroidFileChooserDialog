@@ -10,10 +10,11 @@ import net.dankito.filechooserdialog.model.FileChooserDialogType
 import net.dankito.filechooserdialog.service.BackStack
 import net.dankito.filechooserdialog.service.SelectedFilesManager
 import net.dankito.utils.android.permissions.IPermissionsService
+import net.dankito.utils.android.ui.view.IHandlesBackButtonPress
 import java.io.File
 
 
-class FileChooserView {
+class FileChooserView : IHandlesBackButtonPress {
 
 
     private lateinit var folderShortcutsNavigationView: FolderShortcutsNavigationView
@@ -70,7 +71,7 @@ class FileChooserView {
     }
 
 
-    fun handlesBackButtonPress(): Boolean {
+    override fun handlesBackButtonPress(): Boolean {
         if(config.showFolderShortcutsView && folderShortcutsNavigationView.handlesBackButtonPress()) {
 
         }
