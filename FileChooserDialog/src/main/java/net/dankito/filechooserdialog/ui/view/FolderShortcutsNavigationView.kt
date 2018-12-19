@@ -1,6 +1,5 @@
 package net.dankito.filechooserdialog.ui.view
 
-import android.app.Activity
 import android.content.Context
 import android.os.Build
 import android.os.Environment
@@ -9,10 +8,10 @@ import android.support.v4.view.GravityCompat
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBarDrawerToggle
 import android.util.AttributeSet
-import android.view.ContextThemeWrapper
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.file_chooser_dialog_dialog_file_chooser.view.*
 import net.dankito.filechooserdialog.R
+import net.dankito.utils.android.extensions.asActivity
 import net.dankito.utils.android.extensions.createColorStateList
 import net.dankito.utils.android.io.AndroidFolderUtils
 import java.io.File
@@ -61,25 +60,12 @@ class FolderShortcutsNavigationView @JvmOverloads constructor(
     private fun setupDrawerLayout() {
         drawerLayout = parent as DrawerLayout
 
-        val activity = getActivity()
-
-        val toggle = ActionBarDrawerToggle(
-                activity, drawerLayout, drawerLayout.toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
-        drawerLayout.addDrawerListener(toggle)
-        toggle.syncState()
-    }
-
-    private fun getActivity(): Activity {
-        var contextThemeWrapper = context as? ContextThemeWrapper
-        while(contextThemeWrapper != null) {
-            if(contextThemeWrapper.baseContext is Activity) {
-                return contextThemeWrapper.baseContext as Activity
-            }
-
-            contextThemeWrapper = contextThemeWrapper.baseContext as? ContextThemeWrapper
+        context.asActivity()?.let { activity ->
+            val toggle = ActionBarDrawerToggle(
+                    activity, drawerLayout, drawerLayout.toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+            drawerLayout.addDrawerListener(toggle)
+            toggle.syncState()
         }
-
-        return context as Activity
     }
 
 
