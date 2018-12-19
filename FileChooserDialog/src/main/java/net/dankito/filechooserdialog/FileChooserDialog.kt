@@ -15,7 +15,7 @@ import net.dankito.utils.android.permissions.IPermissionsService
 import java.io.File
 
 
-class FileChooserDialog : DialogFragment() {
+open class FileChooserDialog : DialogFragment() {
 
     companion object {
         const val DialogTag = "FileChooserDialog"
@@ -43,7 +43,7 @@ class FileChooserDialog : DialogFragment() {
         return rootView
     }
 
-    private fun setupUI(rootView: View) {
+    protected open fun setupUI(rootView: View) {
         fileChooserView.setup(rootView, dialogType, permissionsService, config) { didUserSelectFiles, selectedFiles ->
             selectingFilesDone(didUserSelectFiles, selectedFiles)
         }
@@ -52,12 +52,12 @@ class FileChooserDialog : DialogFragment() {
     }
 
 
-    private fun handlesBackButtonPress(): Boolean {
+    protected open fun handlesBackButtonPress(): Boolean {
         return fileChooserView.handlesBackButtonPress()
     }
 
 
-    private fun selectingFilesDone(didUserSelectFiles: Boolean, selectedFiles: List<File>?) {
+    protected open fun selectingFilesDone(didUserSelectFiles: Boolean, selectedFiles: List<File>?) {
         if(dialogType == FileChooserDialogType.SelectSingleFile || dialogType == FileChooserDialogType.SelectFolder) {
             val selectedFile = if(selectedFiles?.isNotEmpty() == true) selectedFiles[0] else null
             selectSingleFileCallback?.invoke(didUserSelectFiles, selectedFile)
@@ -71,42 +71,42 @@ class FileChooserDialog : DialogFragment() {
 
 
     @JvmOverloads
-    fun showOpenSingleFileDialog(activity: FragmentActivity, permissionsService: IPermissionsService? = null, config: FileChooserDialogConfig = FileChooserDialogConfig(),
+    open fun showOpenSingleFileDialog(activity: FragmentActivity, permissionsService: IPermissionsService? = null, config: FileChooserDialogConfig = FileChooserDialogConfig(),
                                  selectSingleFileCallback: (didUserSelectFile: Boolean, File?) -> Unit) {
         showDialog(activity, false, FileChooserDialogType.SelectSingleFile, permissionsService, config, selectSingleFileCallback, null)
     }
 
     @JvmOverloads
-    fun showOpenMultipleFilesDialog(activity: FragmentActivity, permissionsService: IPermissionsService? = null, config: FileChooserDialogConfig = FileChooserDialogConfig(),
+    open fun showOpenMultipleFilesDialog(activity: FragmentActivity, permissionsService: IPermissionsService? = null, config: FileChooserDialogConfig = FileChooserDialogConfig(),
                                     selectMultipleFilesCallback: (didUserSelectFiles: Boolean, List<File>?) -> Unit) {
         showDialog(activity, false, FileChooserDialogType.SelectMultipleFiles, permissionsService, config, null, selectMultipleFilesCallback)
     }
 
     @JvmOverloads
-    fun showSelectFolderDialog(activity: FragmentActivity, permissionsService: IPermissionsService? = null, config: FileChooserDialogConfig = FileChooserDialogConfig(),
+    open fun showSelectFolderDialog(activity: FragmentActivity, permissionsService: IPermissionsService? = null, config: FileChooserDialogConfig = FileChooserDialogConfig(),
                                selectFolderCallback: (didUserSelectFile: Boolean, File?) -> Unit) {
         showDialog(activity, false, FileChooserDialogType.SelectFolder, permissionsService, config, selectFolderCallback, null)
     }
 
     @JvmOverloads
-    fun showOpenSingleFileFullscreenDialog(activity: FragmentActivity, permissionsService: IPermissionsService? = null, config: FileChooserDialogConfig = FileChooserDialogConfig(),
+    open fun showOpenSingleFileFullscreenDialog(activity: FragmentActivity, permissionsService: IPermissionsService? = null, config: FileChooserDialogConfig = FileChooserDialogConfig(),
                                  selectSingleFileCallback: (didUserSelectFile: Boolean, File?) -> Unit) {
         showDialog(activity, true, FileChooserDialogType.SelectSingleFile, permissionsService, config, selectSingleFileCallback, null)
     }
 
     @JvmOverloads
-    fun showOpenMultipleFilesFullscreenDialog(activity: FragmentActivity, permissionsService: IPermissionsService? = null, config: FileChooserDialogConfig = FileChooserDialogConfig(),
+    open fun showOpenMultipleFilesFullscreenDialog(activity: FragmentActivity, permissionsService: IPermissionsService? = null, config: FileChooserDialogConfig = FileChooserDialogConfig(),
                                     selectMultipleFilesCallback: (didUserSelectFiles: Boolean, List<File>?) -> Unit) {
         showDialog(activity, true, FileChooserDialogType.SelectMultipleFiles, permissionsService, config, null, selectMultipleFilesCallback)
     }
 
     @JvmOverloads
-    fun showSelectFolderFullscreenDialog(activity: FragmentActivity, permissionsService: IPermissionsService? = null, config: FileChooserDialogConfig = FileChooserDialogConfig(),
+    open fun showSelectFolderFullscreenDialog(activity: FragmentActivity, permissionsService: IPermissionsService? = null, config: FileChooserDialogConfig = FileChooserDialogConfig(),
                                          selectFolderCallback: (didUserSelectFile: Boolean, File?) -> Unit) {
         showDialog(activity, true, FileChooserDialogType.SelectFolder, permissionsService, config, selectFolderCallback, null)
     }
 
-    private fun showDialog(activity: FragmentActivity, fullscreen: Boolean, dialogType: FileChooserDialogType, permissionsService: IPermissionsService?, config: FileChooserDialogConfig,
+    protected open fun showDialog(activity: FragmentActivity, fullscreen: Boolean, dialogType: FileChooserDialogType, permissionsService: IPermissionsService?, config: FileChooserDialogConfig,
                            selectSingleFileCallback: ((didUserSelectFile: Boolean, File?) -> Unit)?, selectMultipleFilesCallback: ((didUserSelectFiles: Boolean, List<File>?) -> Unit)?) {
         this.dialogType = dialogType
         this.permissionsService = permissionsService
@@ -123,12 +123,12 @@ class FileChooserDialog : DialogFragment() {
     }
 
 
-    private fun closeDialogOnUiThread() {
+    protected open fun closeDialogOnUiThread() {
         dismiss()
     }
 
 
-    private val keyEventListener = DialogInterface.OnKeyListener { _, _, keyEvent ->
+    protected val keyEventListener = DialogInterface.OnKeyListener { _, _, keyEvent ->
         if(keyEvent?.keyCode == KeyEvent.KEYCODE_BACK && keyEvent.action == KeyEvent.ACTION_UP) {
             return@OnKeyListener handlesBackButtonPress()
         }

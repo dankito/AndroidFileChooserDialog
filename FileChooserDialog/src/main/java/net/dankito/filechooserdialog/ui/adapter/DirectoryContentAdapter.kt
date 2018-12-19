@@ -13,7 +13,7 @@ import net.dankito.utils.android.ui.adapter.ListRecyclerAdapter
 import java.io.File
 
 
-class DirectoryContentAdapter(private val previewImageService: PreviewImageService, private val selectedFilesManager: SelectedFilesManager,
+open class DirectoryContentAdapter(private val previewImageService: PreviewImageService, private val selectedFilesManager: SelectedFilesManager,
                               private val config: FileChooserDialogConfig = FileChooserDialogConfig())
     : ListRecyclerAdapter<File, DirectoryContentViewHolder>() {
 
@@ -46,7 +46,7 @@ class DirectoryContentAdapter(private val previewImageService: PreviewImageServi
         }
     }
 
-    private fun ImageView.getIsSelectedCheckMarkTintColorId(): Int {
+    protected open fun ImageView.getIsSelectedCheckMarkTintColorId(): Int {
         return context.getResourceIdForAttributeId(R.attr.FileChooserDialogFileIconTintColor, R.color.colorAccent)
     }
 

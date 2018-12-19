@@ -14,7 +14,7 @@ import net.dankito.utils.android.ui.view.IHandlesBackButtonPress
 import java.io.File
 
 
-class FileChooserView : IHandlesBackButtonPress {
+open class FileChooserView : IHandlesBackButtonPress {
 
 
     private lateinit var folderShortcutsNavigationView: FolderShortcutsNavigationView
@@ -36,7 +36,7 @@ class FileChooserView : IHandlesBackButtonPress {
     private val backStack = BackStack()
 
 
-    fun setup(rootView: View, dialogType: FileChooserDialogType, permissionsService: IPermissionsService?, config: FileChooserDialogConfig,
+    open fun setup(rootView: View, dialogType: FileChooserDialogType, permissionsService: IPermissionsService?, config: FileChooserDialogConfig,
               selectFilesCallback: (didUserSelectFiles: Boolean, List<File>?) -> Unit) {
         this.config = config
         this.selectFilesCallback = selectFilesCallback
@@ -86,26 +86,26 @@ class FileChooserView : IHandlesBackButtonPress {
     }
 
 
-    private fun setCurrentDirectory(directory: File) {
+    protected open fun setCurrentDirectory(directory: File) {
         directoryContentView.showContentOfDirectory(directory)
     }
 
-    private fun currentDirectoryChanged(directory: File) {
+    protected open fun currentDirectoryChanged(directory: File) {
         backStack.add(directory)
 
         parentDirectoriesView.showParentDirectories(directory)
     }
 
 
-    private fun selectedFilesChanged(selectedFiles: List<File>) {
+    protected open fun selectedFilesChanged(selectedFiles: List<File>) {
         btnSelect.isEnabled = selectedFiles.isNotEmpty()
     }
 
-    private fun selectingFilesDone() {
+    protected open fun selectingFilesDone() {
         selectFilesCallback(true, selectedFilesManager.selectedFiles)
     }
 
-    private fun cancelSelectingFiles() {
+    protected open fun cancelSelectingFiles() {
         selectFilesCallback(false, null)
     }
 

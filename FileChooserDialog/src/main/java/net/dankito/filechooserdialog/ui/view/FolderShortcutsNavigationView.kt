@@ -19,7 +19,7 @@ import net.dankito.utils.android.ui.view.IHandlesBackButtonPress
 import java.io.File
 
 
-class FolderShortcutsNavigationView @JvmOverloads constructor(
+open class FolderShortcutsNavigationView @JvmOverloads constructor(
         context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : NavigationView(context, attrs, defStyleAttr), IHandlesBackButtonPress {
 
@@ -38,11 +38,11 @@ class FolderShortcutsNavigationView @JvmOverloads constructor(
     }
 
 
-    private fun setup() {
+    protected open fun setup() {
         setupNavigationMenu()
     }
 
-    private fun setupNavigationMenu() {
+    protected open fun setupNavigationMenu() {
         this.itemIconTintList = context.createColorStateList(getIconsTintColorId())
 
         this.menu?.findItem(R.id.navFolderShortcutDocuments)?.isVisible = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT // Documents folder is only available on KitKat and newer
@@ -52,7 +52,7 @@ class FolderShortcutsNavigationView @JvmOverloads constructor(
         setExternalStorageMenuItems()
     }
 
-    private fun getIconsTintColorId(): Int {
+    protected open fun getIconsTintColorId(): Int {
         return context.getResourceIdForAttributeId(R.attr.FileChooserDialogNavigationMenuItemsIconTintColor, R.color.colorAccent)
     }
 
@@ -63,7 +63,7 @@ class FolderShortcutsNavigationView @JvmOverloads constructor(
         setupDrawerLayout() // now parent is set
     }
 
-    private fun setupDrawerLayout() {
+    protected open fun setupDrawerLayout() {
         drawerLayout = parent as DrawerLayout
 
         context.asActivity()?.let { activity ->
@@ -75,7 +75,7 @@ class FolderShortcutsNavigationView @JvmOverloads constructor(
     }
 
 
-    private fun setExternalStorageMenuItems() {
+    protected open fun setExternalStorageMenuItems() {
         folderUtils.findSdCardDirectory()?.let {
             sdCardDirectory = it
             this.menu?.findItem(R.id.navFolderShortcutSdCard)?.isVisible = true
@@ -94,7 +94,7 @@ class FolderShortcutsNavigationView @JvmOverloads constructor(
     }
 
 
-    private fun navigationItemSelected(item: MenuItem): Boolean {
+    protected open fun navigationItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
             R.id.navFolderShortcutInternalStorage -> folderShortcutSelected(Environment.getExternalStorageDirectory())
             R.id.navFolderShortcutSdCard -> sdCardDirectory?.let { folderShortcutSelected(it) }
@@ -111,12 +111,12 @@ class FolderShortcutsNavigationView @JvmOverloads constructor(
         return true
     }
 
-    private fun folderShortcutSelected(directory: File) {
+    protected open fun folderShortcutSelected(directory: File) {
         folderShortcutSelectedListener?.invoke(directory)
     }
 
 
-    private fun closeDrawerLayout() {
+    protected open fun closeDrawerLayout() {
         drawerLayout.closeDrawer(GravityCompat.START)
     }
 
