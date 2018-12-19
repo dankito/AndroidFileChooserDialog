@@ -1,11 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="AppTheme" parent="AppThemeLightBase">
+    <!-- the theme name used throughout the app so you can easily switch between AppThemeLightBase and AppThemeDarkBase here -->
+    <style name="AppTheme" parent="FileChooserDialogAppThemeLight">
+
+    </style>
+
+
+    <style name="FileChooserDialogAppThemeLight" parent="AppThemeLightBase">
 
         <item name="FileChooserDialogFileIconTintColor">@color/fileChooserDialogFileIconTintColor_Light</item>
         <item name="FileChooserDialogFileIsSelectedCheckMarkTintColor">@color/fileChooserDialogFileIsSelectedCheckMarkTintColor_Light</item>
         <item name="FileChooserDialogNavigationMenuItemsIconTintColor">@color/fileChooserDialogNavigationMenuItemsIconTintColor_Light</item>
+
+    </style>
+
+    <style name="FileChooserDialogAppThemeDark" parent="AppThemeDarkBase">
+
+        <item name="FileChooserDialogFileIconTintColor">@color/fileChooserDialogFileIconTintColor_Dark</item>
+        <item name="FileChooserDialogFileIsSelectedCheckMarkTintColor">@color/fileChooserDialogFileIsSelectedCheckMarkTintColor_Dark</item>
+        <item name="FileChooserDialogNavigationMenuItemsIconTintColor">@color/fileChooserDialogNavigationMenuItemsIconTintColor_Dark</item>
 
     </style>
 
