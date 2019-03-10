@@ -78,7 +78,7 @@ dependencies {
         exclude group: 'org.jsoup', module: 'jsoup'
     }
 
-    implementation "org.slf4j:slf4j-android:1.7.25"
+    implementation "org.slf4j:slf4j-android:$slf4JVersion"
 
     implementation "com.android.support:appcompat-v7:$appCompatVersion"
     implementation "com.android.support:design:$appCompatVersion"
