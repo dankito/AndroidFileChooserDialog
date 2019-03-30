@@ -9,7 +9,7 @@ import net.dankito.filechooserdialog.service.SelectedFilesManager
 import net.dankito.filechooserdialog.ui.adapter.viewholder.DirectoryContentViewHolder
 import net.dankito.utils.android.extensions.getResourceIdForAttributeId
 import net.dankito.utils.android.extensions.setTintColor
-import net.dankito.utils.android.ui.adapter.ListRecyclerAdapter
+import net.dankito.utils.android.ui.view.recyclerview.ListRecyclerAdapter
 import java.io.File
 
 
