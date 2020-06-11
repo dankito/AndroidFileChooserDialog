@@ -3,12 +3,12 @@ package net.dankito.filechooserdialog.ui.view
 import android.content.Context
 import android.os.Build
 import android.os.Environment
-import android.support.design.widget.NavigationView
-import android.support.v4.view.GravityCompat
-import android.support.v4.widget.DrawerLayout
-import android.support.v7.app.ActionBarDrawerToggle
 import android.util.AttributeSet
 import android.view.MenuItem
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
+import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.file_chooser_dialog_dialog_file_chooser.view.*
 import net.dankito.filechooserdialog.R
 import net.dankito.utils.android.extensions.asActivity

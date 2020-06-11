@@ -2,12 +2,12 @@ package net.dankito.filechooserdialog
 
 import android.content.DialogInterface
 import android.os.Bundle
-import android.support.v4.app.DialogFragment
-import android.support.v4.app.FragmentActivity
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.FragmentActivity
 import net.dankito.filechooserdialog.model.FileChooserDialogConfig
 import net.dankito.filechooserdialog.model.FileChooserDialogType
 import net.dankito.filechooserdialog.ui.view.FileChooserView
@@ -48,7 +48,7 @@ open class FileChooserDialog : DialogFragment() {
             selectingFilesDone(didUserSelectFiles, selectedFiles)
         }
 
-        dialog.setOnKeyListener(keyEventListener)
+        dialog?.setOnKeyListener(keyEventListener)
     }
 
 
@@ -72,7 +72,7 @@ open class FileChooserDialog : DialogFragment() {
 
     @JvmOverloads
     open fun showOpenSingleFileDialog(activity: FragmentActivity, permissionsService: IPermissionsService? = null, config: FileChooserDialogConfig = FileChooserDialogConfig(),
-                                 selectSingleFileCallback: (didUserSelectFile: Boolean, File?) -> Unit) {
+                                      selectSingleFileCallback: (didUserSelectFile: Boolean, File?) -> Unit) {
         showDialog(activity, false, FileChooserDialogType.SelectSingleFile, permissionsService, config, selectSingleFileCallback, null)
     }
 

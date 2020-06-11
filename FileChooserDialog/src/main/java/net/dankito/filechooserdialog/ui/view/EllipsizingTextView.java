@@ -25,7 +25,6 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
-import android.support.annotation.NonNull;
 import android.text.Layout;
 import android.text.Layout.Alignment;
 import android.text.SpannableStringBuilder;
@@ -34,18 +33,20 @@ import android.text.StaticLayout;
 import android.text.TextUtils;
 import android.text.TextUtils.TruncateAt;
 import android.util.AttributeSet;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatTextView;
 
 /**
  * A {@link android.widget.TextView} that ellipsizes more intelligently.
  * This class supports ellipsizing multiline text through setting {@code android:ellipsize}
  * and {@code android:maxLines}.
  */
-public class EllipsizingTextView extends TextView {
+public class EllipsizingTextView extends AppCompatTextView {
     private static final CharSequence ELLIPSIS = "\u2026";
     private static final Pattern DEFAULT_END_PUNCTUATION
         = Pattern.compile("[\\.!?,;:\u2026]*$", Pattern.DOTALL);

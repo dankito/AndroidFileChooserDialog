@@ -2,8 +2,8 @@ package net.dankito.filechooserdialog.ui.util
 
 import android.graphics.Bitmap
 import android.os.AsyncTask
-import android.support.v7.widget.RecyclerView
 import android.widget.ImageView
+import androidx.recyclerview.widget.RecyclerView
 import net.dankito.filechooserdialog.service.ThumbnailService
 import java.io.File
 

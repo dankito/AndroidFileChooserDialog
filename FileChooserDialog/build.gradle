@@ -39,7 +39,7 @@ android {
         versionCode VersionCode
         versionName VersionName
 
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
     }
 
@@ -80,9 +80,12 @@ dependencies {
 
     implementation "org.slf4j:slf4j-android:$slf4JVersion"
 
-    implementation "com.android.support:appcompat-v7:$appCompatVersion"
-    implementation "com.android.support:design:$appCompatVersion"
-    implementation "com.android.support.constraint:constraint-layout:$constraintLayoutVersion"
+    implementation "androidx.appcompat:appcompat:$androidXVersion"
+    implementation "androidx.recyclerview:recyclerview:$androidXVersion"
+    implementation "androidx.annotation:annotation:$androidXVersion"
+    implementation "com.google.android.material:material:$materialComponentsVersion"
+    implementation "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion"
+
 
     testImplementation "junit:junit:$junitVersion"
 

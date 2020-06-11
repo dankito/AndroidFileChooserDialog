@@ -27,7 +27,7 @@
             android:text="@string/select_single_file"
         />
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rcySelectedSingleFile"
             android:layout_width="match_parent"
             android:layout_height="@dimen/activity_main_recycler_view_select_single_file_height"
@@ -36,7 +36,7 @@
             android:layout_marginRight="@dimen/activity_main_recycler_views_margin_left_right"
             android:layout_marginEnd="@dimen/activity_main_recycler_views_margin_left_right"
             android:layout_marginBottom="@dimen/activity_main_recycler_view_select_single_file_margin_bottom"
-            app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:scrollbars="vertical"
         />
 
@@ -52,7 +52,7 @@
             android:text="@string/select_multiple_files"
         />
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rcySelectedMultipleFiles"
             android:layout_width="match_parent"
             android:layout_height="@dimen/activity_main_recycler_view_select_multiple_files_height"
@@ -61,7 +61,7 @@
             android:layout_marginRight="@dimen/activity_main_recycler_views_margin_left_right"
             android:layout_marginEnd="@dimen/activity_main_recycler_views_margin_left_right"
             android:layout_marginBottom="@dimen/activity_main_recycler_view_select_multiple_files_margin_bottom"
-            app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         />
 
         <Button
@@ -77,7 +77,7 @@
             android:text="@string/select_folder"
         />
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rcySelectedFolder"
             android:layout_width="match_parent"
             android:layout_height="@dimen/activity_main_recycler_view_select_single_file_height"
@@ -86,7 +86,7 @@
             android:layout_marginRight="@dimen/activity_main_recycler_views_margin_left_right"
             android:layout_marginEnd="@dimen/activity_main_recycler_views_margin_left_right"
             android:layout_marginBottom="@dimen/activity_main_recycler_view_select_single_file_margin_bottom"
-            app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:scrollbars="vertical"
         />
 
@@ -103,7 +103,7 @@
             android:text="@string/select_single_file_in_fullscreen"
         />
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rcySelectedSingleFileInFullscreenDialog"
             android:layout_width="match_parent"
             android:layout_height="@dimen/activity_main_recycler_view_select_single_file_height"
@@ -112,7 +112,7 @@
             android:layout_marginRight="@dimen/activity_main_recycler_views_margin_left_right"
             android:layout_marginEnd="@dimen/activity_main_recycler_views_margin_left_right"
             android:layout_marginBottom="@dimen/activity_main_recycler_view_select_single_file_margin_bottom"
-            app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:scrollbars="vertical"
         />
 
@@ -128,7 +128,7 @@
             android:text="@string/select_multiple_files_in_fullscreen"
         />
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rcySelectedMultipleFilesInFullscreenDialog"
             android:layout_width="match_parent"
             android:layout_height="@dimen/activity_main_recycler_view_select_multiple_files_height"
@@ -137,7 +137,7 @@
             android:layout_marginRight="@dimen/activity_main_recycler_views_margin_left_right"
             android:layout_marginEnd="@dimen/activity_main_recycler_views_margin_left_right"
             android:layout_marginBottom="@dimen/activity_main_recycler_view_select_multiple_files_margin_bottom"
-            app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         />
 
         <Button
@@ -153,7 +153,7 @@
             android:text="@string/select_folder_in_fullscreen"
         />
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rcySelectedFolderInFullscreenDialog"
             android:layout_width="match_parent"
             android:layout_height="@dimen/activity_main_recycler_view_select_single_file_height"
@@ -162,7 +162,7 @@
             android:layout_marginRight="@dimen/activity_main_recycler_views_margin_left_right"
             android:layout_marginEnd="@dimen/activity_main_recycler_views_margin_left_right"
             android:layout_marginBottom="@dimen/activity_main_recycler_view_select_single_file_margin_bottom"
-            app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:scrollbars="vertical"
         />
 

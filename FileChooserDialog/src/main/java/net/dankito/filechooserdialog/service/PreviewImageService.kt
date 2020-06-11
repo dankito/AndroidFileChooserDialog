@@ -2,8 +2,8 @@ package net.dankito.filechooserdialog.service
 
 import android.content.Context
 import android.os.Environment
-import android.support.v7.widget.RecyclerView
 import android.widget.ImageView
+import androidx.recyclerview.widget.RecyclerView
 import net.dankito.filechooserdialog.R
 import net.dankito.filechooserdialog.model.FileChooserDialogConfig
 import net.dankito.filechooserdialog.ui.util.LoadThumbnailTask
