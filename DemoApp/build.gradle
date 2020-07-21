@@ -15,6 +15,9 @@ android {
 
         versionCode VersionCode
         versionName VersionName
+
+        multiDexEnabled true
+
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
@@ -45,6 +48,8 @@ dependencies {
     implementation "com.android.support:appcompat-v7:$appCompatVersion"
     implementation "com.android.support:design:$appCompatVersion"
     implementation "com.android.support.constraint:constraint-layout:$constraintLayoutVersion"
+
+    implementation "com.android.support:multidex:$multiDexVersion"
 
     testImplementation "junit:junit:$junitVersion"
 
