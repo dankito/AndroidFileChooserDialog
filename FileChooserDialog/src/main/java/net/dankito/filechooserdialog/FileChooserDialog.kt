@@ -8,6 +8,7 @@ import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import kotlinx.android.synthetic.main.file_chooser_dialog_dialog_file_chooser.*
 import net.dankito.filechooserdialog.model.FileChooserDialogConfig
 import net.dankito.filechooserdialog.model.FileChooserDialogType
 import net.dankito.filechooserdialog.ui.view.FileChooserView
@@ -58,8 +59,13 @@ open class FileChooserDialog : DialogFragment() {
 
 
     protected open fun selectingFilesDone(didUserSelectFiles: Boolean, selectedFiles: List<File>?) {
-        if(dialogType == FileChooserDialogType.SelectSingleFile || dialogType == FileChooserDialogType.SelectFolder) {
-            val selectedFile = if(selectedFiles?.isNotEmpty() == true) selectedFiles[0] else null
+        if(dialogType == FileChooserDialogType.SelectSingleFile || dialogType == FileChooserDialogType.SaveFile || dialogType == FileChooserDialogType.SelectFolder) {
+            var selectedFile = if(selectedFiles?.isNotEmpty() == true) selectedFiles[0] else null
+
+            if (dialogType == FileChooserDialogType.SaveFile) {
+                selectedFile = File(selectedFile, edtxtSetFilename.text.toString())
+            }
+
             selectSingleFileCallback?.invoke(didUserSelectFiles, selectedFile)
         }
         else {
@@ -98,6 +104,18 @@ open class FileChooserDialog : DialogFragment() {
     open fun showOpenMultipleFilesFullscreenDialog(activity: FragmentActivity, permissionsService: IPermissionsService? = null, config: FileChooserDialogConfig = FileChooserDialogConfig(),
                                     selectMultipleFilesCallback: (didUserSelectFiles: Boolean, List<File>?) -> Unit) {
         showDialog(activity, true, FileChooserDialogType.SelectMultipleFiles, permissionsService, config, null, selectMultipleFilesCallback)
+    }
+
+    @JvmOverloads
+    open fun showSaveFileDialog(activity: FragmentActivity, permissionsService: IPermissionsService? = null, config: FileChooserDialogConfig = FileChooserDialogConfig(),
+                                fileSelectedCallback: (didUserSelectFile: Boolean, File?) -> Unit) {
+        showDialog(activity, false, FileChooserDialogType.SaveFile, permissionsService, config, fileSelectedCallback, null)
+    }
+
+    @JvmOverloads
+    open fun showSaveFileInFullscreenDialog(activity: FragmentActivity, permissionsService: IPermissionsService? = null, config: FileChooserDialogConfig = FileChooserDialogConfig(),
+                                            fileSelectedCallback: (didUserSelectFile: Boolean, File?) -> Unit) {
+        showDialog(activity, true, FileChooserDialogType.SaveFile, permissionsService, config, fileSelectedCallback, null)
     }
 
     @JvmOverloads

@@ -34,11 +34,15 @@ class MainActivity : AppCompatActivity() {
 
     private val selectedMultipleFilesAdapter = DirectoryContentAdapter(previewImageService, SelectedFilesManager(FileChooserDialogType.SelectMultipleFiles))
 
+    private val saveFileAdapter = DirectoryContentAdapter(previewImageService, SelectedFilesManager(FileChooserDialogType.SaveFile))
+
     private val selectedFolderAdapter = DirectoryContentAdapter(previewImageService, SelectedFilesManager(FileChooserDialogType.SelectFolder))
 
     private val selectedSingleFileInFullscreenDialogAdapter = DirectoryContentAdapter(previewImageService, SelectedFilesManager(FileChooserDialogType.SelectSingleFile))
 
     private val selectedMultipleFilesInFullscreenDialogAdapter = DirectoryContentAdapter(previewImageService, SelectedFilesManager(FileChooserDialogType.SelectMultipleFiles))
+
+    private val saveFileInFullscreenAdapter = DirectoryContentAdapter(previewImageService, SelectedFilesManager(FileChooserDialogType.SaveFile))
 
     private val selectedFolderInFullscreenDialogAdapter = DirectoryContentAdapter(previewImageService, SelectedFilesManager(FileChooserDialogType.SelectFolder))
 
@@ -56,10 +60,12 @@ class MainActivity : AppCompatActivity() {
 
         rcySelectedSingleFile.adapter = selectedSingleFileAdapter
         rcySelectedMultipleFiles.adapter = selectedMultipleFilesAdapter
+        rcySaveFile.adapter = saveFileAdapter
         rcySelectedFolder.adapter = selectedFolderAdapter
 
         rcySelectedSingleFileInFullscreenDialog.adapter = selectedSingleFileInFullscreenDialogAdapter
         rcySelectedMultipleFilesInFullscreenDialog.adapter = selectedMultipleFilesInFullscreenDialogAdapter
+        rcySaveFileInFullscreenDialog.adapter = saveFileInFullscreenAdapter
         rcySelectedFolderInFullscreenDialog.adapter = selectedFolderInFullscreenDialogAdapter
 
 
@@ -79,6 +85,12 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        btnSaveFile.setOnClickListener {
+            FileChooserDialog().showSaveFileDialog(this, permissionsService) { _, selectedFile ->
+                saveFileAdapter.items = if (selectedFile != null) listOf(selectedFile) else listOf()
+            }
+        }
+
         btnSelectFolder.setOnClickListener {
             FileChooserDialog().showSelectFolderDialog(this, permissionsService) { _, selectedFile ->
                 selectedFolderAdapter.items = if (selectedFile != null) listOf(selectedFile) else listOf()
@@ -94,6 +106,12 @@ class MainActivity : AppCompatActivity() {
         btnSelectMultipleFilesInFullscreenDialog.setOnClickListener {
             FileChooserDialog().showOpenMultipleFilesFullscreenDialog(this, permissionsService) { _, selectedFiles ->
                 selectedMultipleFilesInFullscreenDialogAdapter.items = selectedFiles ?: listOf()
+            }
+        }
+
+        btnSaveFileInFullscreenDialog.setOnClickListener {
+            FileChooserDialog().showSaveFileInFullscreenDialog(this, permissionsService) { _, selectedFile ->
+                saveFileInFullscreenAdapter.items = if (selectedFile != null) listOf(selectedFile) else listOf()
             }
         }
 

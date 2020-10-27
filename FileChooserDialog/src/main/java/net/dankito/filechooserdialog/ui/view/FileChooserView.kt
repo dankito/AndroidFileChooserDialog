@@ -4,11 +4,13 @@ import android.os.Environment
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
 import kotlinx.android.synthetic.main.file_chooser_dialog_dialog_file_chooser.view.*
 import net.dankito.filechooserdialog.model.FileChooserDialogConfig
 import net.dankito.filechooserdialog.model.FileChooserDialogType
 import net.dankito.filechooserdialog.service.BackStack
 import net.dankito.filechooserdialog.service.SelectedFilesManager
+import net.dankito.utils.android.GenericTextWatcher
 import net.dankito.utils.android.permissions.IPermissionsService
 import net.dankito.utils.android.ui.view.IHandlesBackButtonPress
 import java.io.File
@@ -20,6 +22,10 @@ open class FileChooserView : IHandlesBackButtonPress {
     private lateinit var folderShortcutsNavigationView: FolderShortcutsNavigationView
 
     private lateinit var parentDirectoriesView: ParentDirectoriesView
+
+    private lateinit var lytSetFilename: ViewGroup
+
+    private lateinit var edtxtSetFilename: EditText
 
     private lateinit var directoryContentView: DirectoryContentView
 
@@ -49,6 +55,12 @@ open class FileChooserView : IHandlesBackButtonPress {
 
         parentDirectoriesView = rootView.parentDirectoriesView
         parentDirectoriesView.parentDirectorySelectedListener = { setCurrentDirectory(it) }
+
+        lytSetFilename = rootView.lytSetFilename
+        lytSetFilename.visibility = if (dialogType == FileChooserDialogType.SaveFile) View.VISIBLE else View.GONE
+
+        edtxtSetFilename = rootView.edtxtSetFilename
+        edtxtSetFilename.addTextChangedListener(GenericTextWatcher { selectedFilesChanged(selectedFilesManager.selectedFiles)}) // if select button is enabled depends on if a filename is set in SaveFile type
 
         directoryContentView = rootView.directoryContentView
         directoryContentView.setupView(selectedFilesManager, dialogType, permissionsService, config)
@@ -98,7 +110,8 @@ open class FileChooserView : IHandlesBackButtonPress {
 
 
     protected open fun selectedFilesChanged(selectedFiles: List<File>) {
-        btnSelect.isEnabled = selectedFiles.isNotEmpty()
+        btnSelect.isEnabled = selectedFiles.isNotEmpty() &&
+                (lytSetFilename.visibility != View.VISIBLE || edtxtSetFilename.text.toString().isNotBlank())
     }
 
     protected open fun selectingFilesDone() {

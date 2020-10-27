@@ -3,9 +3,11 @@
 
     <string name="select_single_file">Select single file</string>
     <string name="select_multiple_files">Select multiple files</string>
+    <string name="save_file">Save file</string>
     <string name="select_folder">Select folder</string>
     <string name="select_single_file_in_fullscreen">Select single file in fullscreen dialog</string>
     <string name="select_multiple_files_in_fullscreen">Select multiple files in fullscreen dialog</string>
+    <string name="save_file_in_fullscreen">Save file in fullscreen dialog</string>
     <string name="select_folder_in_fullscreen">Select folder in fullscreen dialog</string>
 
 </resources>

@@ -118,7 +118,7 @@ class DirectoryContentView @JvmOverloads constructor(
                 contentAdapter.items = files
 
                 selectedFilesManager.clearSelectedFiles()
-                if(dialogType == FileChooserDialogType.SelectFolder) {
+                if (dialogType == FileChooserDialogType.SelectFolder || dialogType == FileChooserDialogType.SaveFile) {
                     selectedFilesManager.toggleFileIsSelected(currentDirectory)
                 }
 

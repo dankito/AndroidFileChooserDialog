@@ -5,6 +5,7 @@ enum class FileChooserDialogType {
 
     SelectSingleFile,
     SelectMultipleFiles,
+    SaveFile,
     SelectFolder
 
 }

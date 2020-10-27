@@ -10,4 +10,6 @@
     <color name="fileChooserDialogNavigationMenuItemsIconTintColor_Light">@color/colorAccent</color>
     <color name="fileChooserDialogNavigationMenuItemsIconTintColor_Dark">@color/colorAccent_Dark</color>
 
+    <color name="fileChooserDialogSaveFileFilenameBackground">#e8e8e8</color>
+
 </resources>

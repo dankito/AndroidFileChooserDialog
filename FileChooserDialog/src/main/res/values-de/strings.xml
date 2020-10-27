@@ -20,4 +20,6 @@
 
     <string name="view_parent_directory_path_separator">/</string>
 
+    <string name="file_chooser_set_filename_label">Dateiname:</string>
+
 </resources>
