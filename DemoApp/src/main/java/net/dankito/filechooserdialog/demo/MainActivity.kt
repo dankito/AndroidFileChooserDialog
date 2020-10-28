@@ -8,6 +8,7 @@ import android.view.WindowManager
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 import net.dankito.filechooserdialog.FileChooserDialog
+import net.dankito.filechooserdialog.model.FileChooserDialogConfig
 import net.dankito.filechooserdialog.model.FileChooserDialogType
 import net.dankito.utils.android.permissions.PermissionsService
 import net.dankito.filechooserdialog.service.PreviewImageService
@@ -86,7 +87,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         btnSaveFile.setOnClickListener {
-            FileChooserDialog().showSaveFileDialog(this, permissionsService) { _, selectedFile ->
+            val config = FileChooserDialogConfig(suggestedFilenameForSaveFileDialog = "suggested file name.png")
+            FileChooserDialog().showSaveFileDialog(this, permissionsService, config) { _, selectedFile ->
                 saveFileAdapter.items = if (selectedFile != null) listOf(selectedFile) else listOf()
             }
         }

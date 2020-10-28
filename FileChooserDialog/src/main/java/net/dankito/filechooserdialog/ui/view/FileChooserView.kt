@@ -60,6 +60,10 @@ open class FileChooserView : IHandlesBackButtonPress {
         lytSetFilename.visibility = if (dialogType == FileChooserDialogType.SaveFile) View.VISIBLE else View.GONE
 
         edtxtSetFilename = rootView.edtxtSetFilename
+        if (dialogType == FileChooserDialogType.SaveFile && config.suggestedFilenameForSaveFileDialog != null) {
+            edtxtSetFilename.setText(config.suggestedFilenameForSaveFileDialog)
+        }
+
         edtxtSetFilename.addTextChangedListener(GenericTextWatcher { selectedFilesChanged(selectedFilesManager.selectedFiles)}) // if select button is enabled depends on if a filename is set in SaveFile type
 
         directoryContentView = rootView.directoryContentView
