@@ -2,8 +2,8 @@
 
 buildscript {
     ext {
-        VersionCode = 12
-        VersionName = '1.2.0-androidx'
+        VersionCode = 14
+        VersionName = '1.3.0-androidx'
 
         CompileSdkVersion = 28
         MinSdkVersion = 15
@@ -11,8 +11,8 @@ buildscript {
 
         kotlinVersion = '1.3.72'
 
-        javaUtilsVersion = '1.0.3'
-        androidUtilsVersion = '1.1.1-SNAPSHOT'
+        javaUtilsVersion = '1.0.16'
+        androidUtilsVersion = '1.1.1'
         mimeUtilsVersion = '1.0.2'
 
         slf4JVersion = '1.7.26'

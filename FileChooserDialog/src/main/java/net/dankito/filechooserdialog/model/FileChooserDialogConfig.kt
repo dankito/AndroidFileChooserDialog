@@ -9,6 +9,7 @@ import java.io.File
 data class FileChooserDialogConfig @JvmOverloads constructor(
         val extensionsFilters: List<String> = listOf(),
         val initialDirectory: File? = null,
+        val suggestedFilenameForSaveFileDialog: String? = null,
         val directoryContentRetriever: IDirectoryContentRetriever = LocalFilesystemDirectoryContentRetriever(),
         val showHorizontalItemDividers: Boolean = true,
         val showCheckMarkForSelectedItems: Boolean = true,

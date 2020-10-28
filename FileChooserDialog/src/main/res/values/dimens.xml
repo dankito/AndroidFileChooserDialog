@@ -22,4 +22,7 @@
     <dimen name="file_chooser_dialog_view_parent_directory_path_separator_margin_right">6dp</dimen>
     <dimen name="file_chooser_dialog_view_parent_directory_directory_name_margin_right">12dp</dimen>
 
+    <dimen name="file_chooser_dialog_set_filename_height">40dp</dimen>
+    <dimen name="file_chooser_dialog_set_filename_label_margin_end">6dp</dimen>
+
 </resources>

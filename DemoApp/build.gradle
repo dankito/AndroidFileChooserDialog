@@ -16,6 +16,8 @@ android {
         versionCode VersionCode
         versionName VersionName
 
+        multiDexEnabled true
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -48,6 +50,8 @@ dependencies {
     implementation "androidx.annotation:annotation:$androidXVersion"
     implementation "com.google.android.material:material:$materialComponentsVersion"
     implementation "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion"
+
+    implementation "com.android.support:multidex:$multiDexVersion"
 
     testImplementation "junit:junit:$junitVersion"
 

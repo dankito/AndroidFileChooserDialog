@@ -65,6 +65,32 @@
         />
 
         <Button
+            android:id="@+id/btnSaveFile"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/activity_main_show_file_chooser_buttons_height"
+            android:layout_marginTop="@dimen/activity_main_show_file_chooser_buttons_margin_top"
+            android:layout_marginLeft="@dimen/activity_main_show_file_chooser_buttons_margin_left_right"
+            android:layout_marginStart="@dimen/activity_main_show_file_chooser_buttons_margin_left_right"
+            android:layout_marginRight="@dimen/activity_main_show_file_chooser_buttons_margin_left_right"
+            android:layout_marginEnd="@dimen/activity_main_show_file_chooser_buttons_margin_left_right"
+            android:layout_marginBottom="@dimen/activity_main_show_file_chooser_buttons_margin_bottom"
+            android:text="@string/save_file"
+            />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rcySaveFile"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/activity_main_recycler_view_select_single_file_height"
+            android:layout_marginLeft="@dimen/activity_main_recycler_views_margin_left_right"
+            android:layout_marginStart="@dimen/activity_main_recycler_views_margin_left_right"
+            android:layout_marginRight="@dimen/activity_main_recycler_views_margin_left_right"
+            android:layout_marginEnd="@dimen/activity_main_recycler_views_margin_left_right"
+            android:layout_marginBottom="@dimen/activity_main_recycler_view_select_single_file_margin_bottom"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:scrollbars="vertical"
+            />
+
+        <Button
             android:id="@+id/btnSelectFolder"
             android:layout_width="match_parent"
             android:layout_height="@dimen/activity_main_show_file_chooser_buttons_height"
@@ -139,6 +165,32 @@
             android:layout_marginBottom="@dimen/activity_main_recycler_view_select_multiple_files_margin_bottom"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         />
+
+        <Button
+            android:id="@+id/btnSaveFileInFullscreenDialog"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/activity_main_show_file_chooser_buttons_height"
+            android:layout_marginTop="@dimen/activity_main_show_file_chooser_buttons_margin_top"
+            android:layout_marginLeft="@dimen/activity_main_show_file_chooser_buttons_margin_left_right"
+            android:layout_marginStart="@dimen/activity_main_show_file_chooser_buttons_margin_left_right"
+            android:layout_marginRight="@dimen/activity_main_show_file_chooser_buttons_margin_left_right"
+            android:layout_marginEnd="@dimen/activity_main_show_file_chooser_buttons_margin_left_right"
+            android:layout_marginBottom="@dimen/activity_main_show_file_chooser_buttons_margin_bottom"
+            android:text="@string/save_file_in_fullscreen"
+            />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rcySaveFileInFullscreenDialog"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/activity_main_recycler_view_select_single_file_height"
+            android:layout_marginLeft="@dimen/activity_main_recycler_views_margin_left_right"
+            android:layout_marginStart="@dimen/activity_main_recycler_views_margin_left_right"
+            android:layout_marginRight="@dimen/activity_main_recycler_views_margin_left_right"
+            android:layout_marginEnd="@dimen/activity_main_recycler_views_margin_left_right"
+            android:layout_marginBottom="@dimen/activity_main_recycler_view_select_single_file_margin_bottom"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:scrollbars="vertical"
+            />
 
         <Button
             android:id="@+id/btnSelectFolderInFullscreenDialog"

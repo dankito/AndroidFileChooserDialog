@@ -9,14 +9,14 @@
     tools:openDrawer="start">
 
 
-    <RelativeLayout
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
     >
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
-            android:layout_alignParentTop="true"
             style="@style/ToolbarStyle"
         >
 
@@ -32,17 +32,44 @@
         <net.dankito.filechooserdialog.ui.view.DirectoryContentView
             android:id="@+id/directoryContentView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/toolbar"
-            android:layout_above="@+id/lytButtonBar"
+            android:layout_height="0dp"
+            android:layout_weight="100"
             android:scrollbars="vertical"
         />
+
+        <LinearLayout
+            android:id="@+id/lytSetFilename"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/file_chooser_dialog_set_filename_height"
+            android:layout_gravity="center_vertical"
+            android:background="@color/fileChooserDialogSaveFileFilenameBackground"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginRight="@dimen/file_chooser_dialog_set_filename_label_margin_end"
+                android:layout_marginEnd="@dimen/file_chooser_dialog_set_filename_label_margin_end"
+                android:gravity="center_vertical"
+                android:textAlignment="gravity"
+                android:text="@string/file_chooser_set_filename_label"
+                />
+
+            <EditText
+                android:id="@+id/edtxtSetFilename"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="100"
+                android:inputType="textUri"
+                />
+
+        </LinearLayout>
 
         <RelativeLayout
             android:id="@+id/lytButtonBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
         >
 
             <Button
@@ -68,7 +95,7 @@
 
         </RelativeLayout>
 
-    </RelativeLayout>
+    </LinearLayout>
 
 
     <!-- place below base view, otherwise setNavigationItemSelectedListener() is not working, see https://stackoverflow.com/questions/31397792/navigationview-onnavigationitemselectedlistener-not-being-called -->
