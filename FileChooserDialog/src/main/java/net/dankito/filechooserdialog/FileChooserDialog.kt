@@ -62,7 +62,7 @@ open class FileChooserDialog : DialogFragment() {
         if(dialogType == FileChooserDialogType.SelectSingleFile || dialogType == FileChooserDialogType.SaveFile || dialogType == FileChooserDialogType.SelectFolder) {
             var selectedFile = if(selectedFiles?.isNotEmpty() == true) selectedFiles[0] else null
 
-            if (dialogType == FileChooserDialogType.SaveFile) {
+            if (dialogType == FileChooserDialogType.SaveFile && selectedFile != null) {
                 selectedFile = File(selectedFile, edtxtSetFilename.text.toString())
             }
 
